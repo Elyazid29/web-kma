@@ -1,12 +1,10 @@
 /* =========================================
    Responsive Style CSS - Master Full Version
-   - Hero Outline Buttons Restored to White Color
-   - Refined "MENUJU HARI-H" Text Balance
-   - Dropdown Arrow Fixed: Arrow Left Side (▶ Menu), Standby Right (▶) -> Active Down (▼)
-   - Modern Light & Clean Redesign for Highlights Section
-   - Redesigned Day Cards & Interactive Highlight Modal
-   - Mobile Nav Controls Responsive Overflow Fix
-   - Removed "Klik untuk detail rundown" on Location Card
+   - Wide Desktop Layout (Max-Width 1600px)
+   - Full-width Banner & 2-Column Desktop Grid
+   - Responsive Slide Deck Layout
+   - Interactive Modal & Navigation Controls
+   - Interactive 3D Parallax & Ripple Animations
 ========================================= */
 * {
   margin: 0;
@@ -59,11 +57,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Container Diperluas Maksimal untuk Desktop */
 .container {
   width: 100%;
-  max-width: 1320px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
 }
 
 a {
@@ -168,7 +167,7 @@ h4 {
 }
 
 /* =========================================
-   HEADER / NAVBAR & DROPDOWN ARROW FIX
+   HEADER / NAVBAR & DROPDOWN
 ========================================= */
 .header {
   background-color: rgba(255, 255, 255, 0.98);
@@ -246,16 +245,11 @@ h4 {
   background-color: rgba(0, 109, 100, 0.05);
 }
 
-/* Arrow di Kiri: Standby Menghadap Kanan (▶) -> Active/Hover Berputar ke Bawah (▼) */
 .dropbtn .arrow {
   display: inline-block;
   font-size: 0.6rem;
   transition: transform 0.3s ease;
   margin-right: 2px;
-}
-
-.dropdown:hover .dropbtn .arrow {
-  transform: rotate(90deg);
 }
 
 .dropdown-content {
@@ -290,10 +284,6 @@ h4 {
 .dropdown-content a:hover {
   background-color: rgba(0, 109, 100, 0.05);
   color: var(--primary-color);
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
 }
 
 /* =========================================
@@ -437,27 +427,33 @@ h4 {
 }
 
 /* =========================================
-   KEY HIGHLIGHTS SECTION
+   KEY HIGHLIGHTS SECTION (FULL-WIDTH BANNER)
 ========================================= */
 .kh-section {
-  padding: 24px 0 40px;
+  padding: 0 0 40px;
   background-color: #f8fafc;
 }
 
 .kh-banner {
+  width: 100%;
   position: relative;
   overflow: hidden;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 .kh-banner-container {
-  padding: 28px 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 32px 32px;
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .kh-banner-left {
@@ -557,7 +553,6 @@ h4 {
   flex-direction: column;
   gap: 20px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   cursor: pointer;
   z-index: 5;
@@ -567,11 +562,6 @@ h4 {
 
 .kh-card * {
   pointer-events: none;
-}
-
-.kh-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 .kh-card-text {
@@ -674,7 +664,6 @@ h4 {
   border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   position: relative;
   z-index: 5;
@@ -698,14 +687,8 @@ h4 {
   pointer-events: none;
 }
 
-/* HAPUS TEKS DETAIL RUNDOWN PADA KARTU LOKASI */
 .day-card.location-card::after {
   display: none !important;
-}
-
-.day-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 .day-card-img-header {
@@ -1376,7 +1359,6 @@ body.presentation-mode {
   padding-bottom: 120px !important;
 }
 
-/* FIX MOBILE OVERFLOW PADA NAV CONTROLS BAWAH */
 .slide-nav-controls {
   position: fixed;
   bottom: 16px;
@@ -1449,7 +1431,60 @@ body.presentation-mode {
   border-radius: 10px;
 }
 
-/* Responsive Styles */
+/* =========================================
+   ANIMASI INTERAKTIF
+========================================= */
+
+/* Parallax 3D Hover Effect Base */
+.kh-card,
+.day-card,
+.an-award-card {
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease !important;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Ripple Click Effect */
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 109, 100, 0.25);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Float Pulse Animation */
+.kh-location-badge,
+.hc-eyebrow {
+  animation: floatPulse 3s ease-in-out infinite;
+}
+
+@keyframes floatPulse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Responsive Media Queries */
 @media (min-width: 768px) {
   .container {
     padding: 0 32px;
@@ -1527,6 +1562,17 @@ body.presentation-mode {
 @media (min-width: 1024px) {
   .container {
     padding: 0 40px;
+  }
+
+  /* Grid 2 Kolom untuk Highlights di Desktop */
+  .kh-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .kh-card {
+    height: 100%;
   }
 
   .days-grid {

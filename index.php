@@ -10,8 +10,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/style.css?v=68">
+  <style>
+    /* Custom Override CSS untuk Banner Full Width */
+    #highlights.kh-section {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .kh-banner {
+      width: 100% !important;
+      border-radius: 0 !important;
+      border-left: none !important;
+      border-right: none !important;
+      margin: 0 0 30px 0 !important;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .kh-banner-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 30px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Integration Button Audio Minimalis di Navbar */
+    .nav-audio-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #64748b;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.25s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .nav-audio-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Status Aktif (Menyala Default) */
+    .nav-audio-btn.playing {
+      background: #006d64;
+      color: #ffffff;
+      border-color: #006d64;
+      box-shadow: 0 0 10px rgba(0, 109, 100, 0.3);
+    }
+
+    /* Tampilan Dropdown Toggle via Class Active */
+    .dropdown-content {
+      display: none;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block !important;
+    }
+
+    .dropdown.active .dropbtn .arrow {
+      transform: rotate(90deg);
+    }
+  </style>
 </head>
 <body class="presentation-mode">
+
+  <!-- Element Audio Update Path ke jingle.wav -->
+  <audio id="bgJingle" loop playsinline preload="auto">
+    <source src="assets/audio/jingle.wav" type="audio/wav">
+    <source src="assets/jingle.wav" type="audio/wav">
+    <source src="jingle.wav" type="audio/wav">
+  </audio>
 
   <!-- Header / Navbar -->
   <header class="header">
@@ -20,16 +96,27 @@
         <img src="assets/img/logo.kma.png" alt="Logo KMA" class="logo-img">
         <span class="logo-text">KMA XXV 2026</span>
       </div>
-      <nav class="nav">
-        <div class="dropdown">
-          <button class="dropbtn"><span class="arrow">▶</span> Menu</button>
+      <nav class="nav" style="display: flex; align-items: center; gap: 10px;">
+        
+        <!-- Tombol Audio Ringkas (Default Status ON / Class "playing") -->
+        <button id="audioToggleBtn" class="nav-audio-btn playing" onclick="toggleAudio(event)" title="Mute/Putar Musik">
+          <svg id="audioIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <span>Musik</span>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown" id="menuDropdown">
+          <button class="dropbtn" onclick="toggleDropdown(event)"><span class="arrow">▶</span> Menu</button>
           <div class="dropdown-content">
-            <a href="#" onclick="goToSlide(0); return false;">1. Beranda & Countdown</a>
-            <a href="#" onclick="goToSlide(1); return false;">2. Tentang KMA</a>
-            <a href="#" onclick="goToSlide(2); return false;">3. Key Highlights</a>
-            <a href="#" onclick="goToSlide(3); return false;">4. Penghargaan</a>
-            <a href="#" onclick="goToSlide(4); return false;">5. Rangkaian Kegiatan</a>
-            <a href="#" onclick="goToSlide(5); return false;">6. Lokasi & Kontak</a>
+            <a href="#" onclick="selectMenu(0); return false;">1. Beranda & Countdown</a>
+            <a href="#" onclick="selectMenu(1); return false;">2. Tentang KMA</a>
+            <a href="#" onclick="selectMenu(2); return false;">3. Key Highlights</a>
+            <a href="#" onclick="selectMenu(3); return false;">4. Penghargaan</a>
+            <a href="#" onclick="selectMenu(4); return false;">5. Rangkaian Kegiatan</a>
+            <a href="#" onclick="selectMenu(5); return false;">6. Lokasi & Kontak</a>
           </div>
         </div>
       </nav>
@@ -91,8 +178,55 @@
           </div>
           <div class="about-text animate-on-scroll">
             <p>Konvensi Mutu ANTAM (KMA) ke-XXV Tahun 2026 adalah ajang penghargaan dan selebrasi atas dedikasi Insan ANTAM dalam melahirkan inovasi dan perbaikan berkelanjutan. KMA menjadi wadah bagi seluruh unit bisnis untuk saling berbagi gagasan demi meningkatkan efisiensi dan nilai perusahaan.</p>
-            <p>Dengan tema <strong>"25 Years of Continuous Improvement: Powering Sustainable Growth, Transforming the Future"</strong>, acara ini menandai seperempat abad komitmen ANTAM terhadap budaya mutu. Perhelatan tahun ini turut dimeriahkan oleh kehadiran <strong>GOLNIX</strong>, maskot kristal emas dan nikel yang melambangkan inovasi, ketangguhan, serta arahan strategis masa depan.</p>
+            <p style="margin-bottom: 28px;">Dengan tema <strong>"25 Years of Continuous Improvement: Powering Sustainable Growth, Transforming the Future"</strong>, acara ini menandai seperempat abad komitmen ANTAM terhadap budaya mutu. Perhelatan tahun ini turut dimeriahkan oleh kehadiran <strong>GOLNIX</strong>, maskot kristal emas dan nikel yang melambangkan inovasi, ketangguhan, serta arahan strategis masa depan.</p>
           </div>
+
+          <!-- INTEGRASI DAFTAR PESERTA -->
+          <div class="animate-on-scroll delay-100" style="background: #ffffff; border-radius: 16px; padding: 24px; border: 1px solid #e2e8f0; box-shadow: 0 4px 16px rgba(0,0,0,0.03); margin-top: 20px;">
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: #006d64; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Daftar Unit & Anak Perusahaan Peserta
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px;">
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> Kantor Pusat
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> UBPP Logam Mulia
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> UBPE Pongkor
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> UBPB Tayan
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> Unit Geomin
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> PT Indonesia Chemical Alumina
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> UBP Nikel Sultra
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> UBP Nikel Konawe Utara
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> UBP Nikel Malut
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> PT GAG Nickel
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> PT Nusa Karya Arindo
+              </div>
+              <div style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.88rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 8px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #d97706; display: inline-block;"></span> PT Sumber Daya Arindo
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -100,32 +234,33 @@
     <!-- SLIDE 3 -->
     <section id="highlights" class="slide kh-section">
       <div class="slide-scroll-wrapper">
-        <div class="container">
-          <!-- Top Banner Header -->
-          <div class="kh-banner animate-on-scroll">
-            <div class="kh-banner-container">
-              <div class="kh-banner-left">
-                <div class="kh-sub-header">
-                  <span class="kh-sub-text">KEY HIGHLIGHTS OF</span>
-                  <span class="kh-diamond">◆</span>
-                  <span class="kh-line"></span>
-                </div>
-                <h2 class="kh-main-title">
-                  <span class="kh-title-green">KMA XXV</span><br>
-                  <span class="kh-title-gold">2026</span>
-                </h2>
-                <div class="kh-location-badge">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <span>KMA XXV – MALANG</span>
-                </div>
+        
+        <!-- BANNER FULL WIDTH -->
+        <div class="kh-banner animate-on-scroll">
+          <div class="kh-banner-container">
+            <div class="kh-banner-left">
+              <div class="kh-sub-header">
+                <span class="kh-sub-text">KEY HIGHLIGHTS OF</span>
+                <span class="kh-diamond">◆</span>
+                <span class="kh-line"></span>
               </div>
-              <div class="kh-banner-right">
-                <img src="assets/img/gunung2.png" alt="Gunung Malang KMA XXV" class="kh-gunung-img">
+              <h2 class="kh-main-title">
+                <span class="kh-title-green">KMA XXV</span><br>
+                <span class="kh-title-gold">2026</span>
+              </h2>
+              <div class="kh-location-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>KMA XXV – MALANG</span>
               </div>
             </div>
+            <div class="kh-banner-right">
+              <img src="assets/img/gunung2.png" alt="Gunung Malang KMA XXV" class="kh-gunung-img">
+            </div>
           </div>
+        </div>
 
-          <!-- Highlight Cards Wrapper -->
+        <!-- HIGHLIGHT CARDS (DESKTOP GRID 2 KOLOM) -->
+        <div class="container">
           <div class="kh-cards-wrapper">
 
             <!-- Point 1: Launching Buku -->
@@ -200,6 +335,7 @@
 
           </div>
         </div>
+
       </div>
     </section>
 
@@ -233,7 +369,6 @@
             </div>
 
             <div class="an-awards-grid animate-on-scroll delay-100">
-              <!-- 1 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -244,7 +379,6 @@
                 <h4 class="an-card-title">Best Presenter</h4>
                 <p class="an-card-desc">Individu terbaik dalam menyampaikan, menjelaskan, dan mempertahankan materi inovasi.</p>
               </div>
-              <!-- 2 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -255,7 +389,6 @@
                 <h4 class="an-card-title">Best Makalah</h4>
                 <p class="an-card-desc">Makalah dengan kualitas struktur, substansi, metodologi, dan penyajian terbaik.</p>
               </div>
-              <!-- 3 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -266,7 +399,6 @@
                 <h4 class="an-card-title">Best Visual Communication</h4>
                 <p class="an-card-desc">Tim dengan media presentasi paling efektif, kreatif, dan mudah dipahami.</p>
               </div>
-              <!-- 4 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -277,7 +409,6 @@
                 <h4 class="an-card-title">Best Safety Improvement</h4>
                 <p class="an-card-desc">Inovasi dengan peningkatan keselamatan kerja dan pengendalian risiko terbaik.</p>
               </div>
-              <!-- 5 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -288,7 +419,6 @@
                 <h4 class="an-card-title">Best Environment &amp; Sustainability</h4>
                 <p class="an-card-desc">Inovasi dengan dampak lingkungan dan keberlanjutan paling baik dan terukur.</p>
               </div>
-              <!-- 6 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -299,7 +429,6 @@
                 <h4 class="an-card-title">Best Technology &amp; Digital Innovation</h4>
                 <p class="an-card-desc">Pemanfaatan teknologi atau solusi digital yang paling tepat, efektif, dan relevan.</p>
               </div>
-              <!-- 7 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -310,7 +439,6 @@
                 <h4 class="an-card-title">Best Proven Financial Benefit</h4>
                 <p class="an-card-desc">Inovasi dengan manfaat finansial aktual terbesar, terukur, dan terverifikasi.</p>
               </div>
-              <!-- 8 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -321,7 +449,6 @@
                 <h4 class="an-card-title">Best Collaboration</h4>
                 <p class="an-card-desc">Kolaborasi lintas fungsi, unit, satker, atau anak perusahaan paling kuat.</p>
               </div>
-              <!-- 9 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -332,7 +459,6 @@
                 <h4 class="an-card-title">Best Transformation Behaviour</h4>
                 <p class="an-card-desc">Tim yang paling nyata mencerminkan 8 Key Behaviours Transformasi ANTAM.</p>
               </div>
-              <!-- 10 -->
               <div class="an-award-card">
                 <div class="an-card-icon-wrap">
                   <div class="an-card-icon">
@@ -409,16 +535,14 @@
       </div>
     </section>
 
-    <!-- SLIDE 5 (Jadwal & Interactive Modal Cards) -->
+    <!-- SLIDE 5 -->
     <section id="jadwal" class="slide section section-light">
       <div class="slide-scroll-wrapper">
         <div class="container">
           <div class="section-header animate-on-scroll">
             <h2 class="section-title">Rangkaian Kegiatan</h2>
             <div class="divider"></div>
-            <p class="section-desc">
-              Klik pada kartu hari di bawah ini untuk melihat rincian rundown lengkap.
-            </p>
+            <p class="section-desc">Klik pada kartu hari di bawah ini untuk melihat rincian rundown lengkap.</p>
           </div>
 
           <div class="days-grid">
@@ -453,7 +577,7 @@
             </div>
 
             <div class="day-card animate-on-scroll delay-200" onclick="openModal(3)">
-              <div class="day-card-img-header" style="background-image: url('assets/img/team.building.jpg');">
+              <div class="day-card-img-header" style="background-image: url('assets/img/team.building.png');">
                 <div class="day-badge">DAY 3</div>
               </div>
               <div class="day-card-content">
@@ -493,7 +617,6 @@
             <h2 class="section-title">Lokasi Acara</h2>
             <div class="divider"></div>
           </div>
-          <!-- TAMBAHKAN CLASS 'location-card' UNTUK MENGHAPUS TEKS RUNDOWN -->
           <div class="day-card location-card animate-on-scroll" style="cursor: default;">
             <div class="day-card-img-header" style="background-image: url('assets/img/mercure.mirama.jpg'); height: 220px;">
               <div class="day-badge">LOKASI</div>
@@ -510,7 +633,7 @@
           <div class="section-header animate-on-scroll">
             <h2 class="section-title">Kontak Panitia</h2>
             <div class="divider"></div>
-            <p class="section-desc">Punya pertanyaan seputar event KMA XXV?<br>Jangan ragu untuk menghubungi kami<br>melalui jalur di bawah ini.</p>
+            <p class="section-desc">Punya pertanyaan seputar event KMA XXV?<br>Jangan ragu untuk menghubungi kami melalui jalur di bawah ini.</p>
           </div>
 
           <div class="contact-list animate-on-scroll delay-100">
@@ -561,7 +684,7 @@
 
   <!-- Navigation Controls (Bottom Bar) -->
   <div class="slide-nav-controls">
-    <button class="nav-btn prev-btn" id="prevBtn" onclick="prevSlide()" disabled>
+    <button class="nav-btn prev-btn" id="prevBtn" onclick="prevSlide()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
       <span>Sebelumnya</span>
     </button>
@@ -615,11 +738,103 @@
   </div>
 
   <script>
+    /* -----------------------------------------
+       SYSTEM AUDIO PLAYER (AUTO-PLAY ON FIRST TOUCH/CLICK)
+    ----------------------------------------- */
+    const jingle = document.getElementById('bgJingle');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    const audioIcon = document.getElementById('audioIcon');
+    let isPlaying = false;
+
+    function enableAudioOnInteraction() {
+      if (!isPlaying) {
+        jingle.muted = false;
+        jingle.play().then(() => {
+          isPlaying = true;
+          audioBtn.classList.add('playing');
+          audioIcon.innerHTML = `
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          `;
+          removeAllAudioListeners();
+        }).catch(err => {
+          console.warn("Gagal memutar audio otomatis:", err);
+        });
+      }
+    }
+
+    function removeAllAudioListeners() {
+      document.removeEventListener('click', enableAudioOnInteraction);
+      document.removeEventListener('touchstart', enableAudioOnInteraction);
+      document.removeEventListener('keydown', enableAudioOnInteraction);
+      document.removeEventListener('scroll', enableAudioOnInteraction, true);
+    }
+
+    function toggleAudio(e) {
+      if (e) e.stopPropagation();
+
+      if (isPlaying && !jingle.paused) {
+        jingle.pause();
+        isPlaying = false;
+        audioBtn.classList.remove('playing');
+        audioIcon.innerHTML = `
+          <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        `;
+      } else {
+        jingle.muted = false;
+        jingle.play().then(() => {
+          isPlaying = true;
+          audioBtn.classList.add('playing');
+          audioIcon.innerHTML = `
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          `;
+          removeAllAudioListeners();
+        });
+      }
+    }
+
+    document.addEventListener('click', enableAudioOnInteraction);
+    document.addEventListener('touchstart', enableAudioOnInteraction);
+    document.addEventListener('keydown', enableAudioOnInteraction);
+    document.addEventListener('scroll', enableAudioOnInteraction, true);
+
+    /* -----------------------------------------
+       LOGIKA TOGGLE DROPDOWN MENU
+    ----------------------------------------- */
+    function toggleDropdown(e) {
+      if (e) e.stopPropagation();
+      const dropdown = document.getElementById('menuDropdown');
+      dropdown.classList.toggle('active');
+    }
+
+    function selectMenu(slideIndex) {
+      goToSlide(slideIndex);
+      const dropdown = document.getElementById('menuDropdown');
+      dropdown.classList.remove('active');
+    }
+
+    document.addEventListener('click', function(e) {
+      const dropdown = document.getElementById('menuDropdown');
+      if (dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+
+    /* -----------------------------------------
+       HIGHLIGHT MODAL DATA & FUNCTIONS
+    ----------------------------------------- */
     const highlightData = {
       1: {
         title: "Buku 25 Tahun Eksplorasi & Inovasi",
         category: "LAUNCHING BUKU RESMI",
         content: `
+          <blockquote style="margin: 0 0 16px 0; padding: 12px 16px; background: #f0fdfa; border-left: 4px solid #006d64; font-style: italic; color: #0f172a; font-size: 0.9rem; border-radius: 0 8px 8px 0;">
+            "Buku ini bukan sekadar catatan sejarah, melainkan bukti nyata komitmen dan rekam jejak aset intelektual insan ANTAM dalam menjaga budaya continuous improvement untuk meningkatkan efisiensi, produktivitas, dan nilai tambah operasional perusahaan."
+            <footer style="margin-top: 6px; font-weight: 700; font-style: normal; color: #006d64; font-size: 0.85rem;">— Abdul Bari <span style="font-weight: 500; color: #64748b;">(General Manager Unit Geomin PT ANTAM Tbk)</span></footer>
+          </blockquote>
           <p style="margin-bottom: 12px;"><strong>Buku 25 Tahun Eksplorasi & Inovasi ANTAM</strong> disusun khusus untuk memperingati seperempat abad komitmen perusahaan dalam menjaga budaya perbaikan mutu berkelanjutan <em>(continuous improvement)</em>.</p>
           <ul style="padding-left: 20px; margin-bottom: 16px;">
             <li><strong>Rekam Jejak Historis:</strong> Merangkum perjalanan inovasi dari seluruh unit bisnis dan anak perusahaan ANTAM.</li>
@@ -644,24 +859,79 @@
         title: "GOLNIX – Maskot KMA XXV",
         category: "FILOSOFI MASKOT RESMI",
         content: `
-          <p style="margin-bottom: 12px;"><strong>GOLNIX</strong> adalah karakter kristal emas & nikel antropomorfik modern yang menjadi ikon resmi KMA XXV 2026.</p>
-          <ul style="padding-left: 20px; margin-bottom: 16px;">
-            <li><strong>Helm Tambang & Kompas:</strong> Simbol keselamatan kerja serta penuntun arah transformasi masa depan ANTAM.</li>
-            <li><strong>Palu Geologi & Sayap:</strong> Melambangkan kekuatan teknis, ketegasan, serta akselerasi pertumbuhan berkelanjutan.</li>
-            <li><strong>Filosofi Warna:</strong> Paduan Emas (keunggulan/prestasi), Hijau Nikel (inovasi & keberlanjutan), serta Merah Bauksit (keberanian & pondasi industri).</li>
-          </ul>
+          <div style="text-align: center; margin-bottom: 20px;">
+            <img src="assets/img/filosofi.golnix.png" alt="Filosofi Maskot GOLNIX" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          </div>
+          <p style="margin-bottom: 16px;"><strong>GOLNIX</strong> adalah karakter antropomorfik modern yang dirancang sebagai simbol semangat inovasi dan representasi komoditas unggulan ANTAM.</p>
+          
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="background: #f8fafc; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #006d64;">
+              <h5 style="color: #006d64; font-size: 0.95rem; margin-bottom: 4px;">1. Bentuk Karakter</h5>
+              <p style="font-size: 0.88rem; color: #475569; margin: 0;">Karakter antropomorfik modern terinspirasi dari <strong>kristal nikel/emas</strong> sebagai representasi produk utama ANTAM, dipadukan dengan elemen futuristik teknologi.</p>
+            </div>
+
+            <div style="background: #f8fafc; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #d97706;">
+              <h5 style="color: #d97706; font-size: 0.95rem; margin-bottom: 4px;">2. Gaya Visual</h5>
+              <p style="font-size: 0.88rem; color: #475569; margin: 0;"><em>Friendly, energik,</em> dan <em>professional</em> — tidak kaku atau kekanakan, namun tetap <em>approachable</em> untuk semua generasi.</p>
+            </div>
+
+            <div style="background: #f8fafc; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #006d64;">
+              <h5 style="color: #006d64; font-size: 0.95rem; margin-bottom: 6px;">3. Simbolisme Bentuk</h5>
+              <ul style="padding-left: 18px; font-size: 0.88rem; color: #475569; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+                <li><strong>Kristal/Mineral:</strong> Melambangkan kekuatan dasar ANTAM.</li>
+                <li><strong>Kompas pada Tangan Kiri:</strong> Kompas transformasi.</li>
+                <li><strong>Kombinasi Hijau & Merah:</strong> Harmoni dua komoditas utama ANTAM (Nikel & Bauksit).
+                  <ul style="padding-left: 16px; margin-top: 2px;">
+                    <li><em>Hijau:</em> Masa depan, inovasi, energi bersih.</li>
+                    <li><em>Merah:</em> Kekuatan, keberanian, pondasi industri.</li>
+                  </ul>
+                </li>
+                <li><strong>Sayap:</strong> Transformasi berkelanjutan berbasis sumberdaya tambang.</li>
+              </ul>
+            </div>
+
+            <div style="background: #f8fafc; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #f5b041;">
+              <h5 style="color: #d97706; font-size: 0.95rem; margin-bottom: 6px;">4. Warna & Identitas Visual</h5>
+              <ul style="padding-left: 18px; font-size: 0.88rem; color: #475569; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+                <li><strong>Emas:</strong> Keunggulan, prestasi, <em>value creation</em>.</li>
+                <li><strong>Hijau:</strong> <em>Sustainability</em>, inovasi berkelanjutan, ramah lingkungan.</li>
+                <li><strong>Aksen Perak:</strong> Teknologi, profesionalisme, kredibilitas, dan transformasi modern.</li>
+              </ul>
+            </div>
+
+            <div style="background: #f8fafc; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #006d64;">
+              <h5 style="color: #006d64; font-size: 0.95rem; margin-bottom: 6px;">5. Kepribadian Maskot</h5>
+              <ul style="padding-left: 18px; font-size: 0.88rem; color: #475569; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+                <li><strong>Energik & Visioner:</strong> Selalu mengarah ke depan.</li>
+                <li><strong>Kolaboratif:</strong> Memegang kunci godam dan Kompas sebagai symbol arah transformasi.</li>
+                <li><strong>Optimis & Inovatif:</strong> Ekspresi ceria, penuh ide.</li>
+              </ul>
+            </div>
+          </div>
         `
       },
       4: {
         title: "Deep Dive Interview Juri",
         category: "SISTEM PENILAIAN INOVASI",
         content: `
-          <p style="margin-bottom: 12px;">Sesi verifikasi dan pendalaman intensif secara online sebelum gelaran konvensi utama di Malang.</p>
-          <ul style="padding-left: 20px; margin-bottom: 16px;">
-            <li><strong>Waktu Pelaksanaan:</strong> 27 Agustus 2026 melalui 4 Stream Paralel.</li>
-            <li><strong>Durasi Interview:</strong> 25 menit untuk GKM dan 20 menit untuk SS.</li>
-            <li><strong>Fokus Penilaian:</strong> Pembuktian metode PDCA, validitas data, ketepatan analisis akar masalah, serta dampak finansial & operasional aktual.</li>
-          </ul>
+          <p style="margin-bottom: 12px;">Sesi verifikasi dan pendalaman intensif secara online dalam satu hari berupa sesi tanya jawab antara juri dan peserta sebelum gelaran konvensi utama di Malang.</p>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+            <div style="background: #f8fafc; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #006d64;">
+              <h5 style="color: #006d64; font-size: 0.95rem; margin-bottom: 4px;">Waktu & Durasi</h5>
+              <p style="font-size: 0.88rem; color: #475569; margin: 0;">Dilaksanakan pada <strong>27 Agustus 2026</strong> melalui 4 Stream Paralel (25 menit untuk GKM dan 20 menit untuk SS).</p>
+            </div>
+
+            <div style="background: #f8fafc; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #d97706;">
+              <h5 style="color: #d97706; font-size: 0.95rem; margin-bottom: 6px;">Tujuan Sesi Deep Dive</h5>
+              <ul style="padding-left: 18px; font-size: 0.88rem; color: #475569; margin: 0; display: flex; flex-direction: column; gap: 6px;">
+                <li><strong>Verifikasi:</strong> Memastikan peserta memahami inovasi yang diajukan secara menyeluruh.</li>
+                <li><strong>Pendalaman:</strong> Menggali validitas masalah, akar masalah, metode, implementasi, dan penerapan PDCA.</li>
+                <li><strong>Penilaian:</strong> Menilai hasil, manfaat, dan dampak inovasi berdasarkan bukti yang dapat dipertanggungjawabkan.</li>
+                <li><strong>Penggalian:</strong> Menggali peran tim, proses pembelajaran, standarisasi, dan keberlanjutan inovasi.</li>
+              </ul>
+            </div>
+          </div>
         `
       },
       5: {
@@ -698,7 +968,9 @@
       }
     }
 
-    // Data Rundown Lengkap
+    /* -----------------------------------------
+       RUNDOWN MODAL DATA & FUNCTIONS
+    ----------------------------------------- */
     const rundownData = {
       1: {
         title: "DAY 1 - Kedatangan Peserta",
@@ -781,6 +1053,9 @@
       }
     }
 
+    /* -----------------------------------------
+       SLIDE DECK NAVIGATION & COUNTDOWN LOGIC
+    ----------------------------------------- */
     document.addEventListener("DOMContentLoaded", function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -820,8 +1095,8 @@
         const activeWrapper = slides[currentSlide].querySelector('.slide-scroll-wrapper');
         if (activeWrapper) activeWrapper.scrollTop = 0;
 
-        prevBtn.disabled = (currentSlide === 0);
-        nextBtn.disabled = (currentSlide === slides.length - 1);
+        if (prevBtn) prevBtn.disabled = (currentSlide === 0);
+        if (nextBtn) nextBtn.disabled = (currentSlide === slides.length - 1);
       }
 
       window.nextSlide = function() {
@@ -835,6 +1110,8 @@
       window.goToSlide = function(index) {
         updateSlide(index);
       };
+
+      updateSlide(0);
 
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -883,6 +1160,58 @@
 
       updateCountdown();
       setInterval(updateCountdown, 1000);
+
+      /* -----------------------------------------
+         ANIMASI INTERAKTIF: 3D PARALLAX HOVER & RIPPLE
+      ----------------------------------------- */
+      const interactiveCards = document.querySelectorAll('.kh-card, .day-card, .an-award-card');
+
+      interactiveCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+      });
+
+      // Ripple Click Effect pada Tombol & Kartu
+      const clickables = document.querySelectorAll('.kh-card, .day-card, .btn, .nav-btn');
+
+      clickables.forEach(element => {
+        element.classList.add('ripple-effect');
+        element.addEventListener('click', function(e) {
+          const rect = this.getBoundingClientRect();
+          const circle = document.createElement('span');
+          
+          const diameter = Math.max(rect.width, rect.height);
+          const radius = diameter / 2;
+
+          circle.style.width = circle.style.height = `${diameter}px`;
+          circle.style.left = `${e.clientX - rect.left - radius}px`;
+          circle.style.top = `${e.clientY - rect.top - radius}px`;
+          circle.classList.add('ripple-circle');
+
+          const ripple = this.querySelector('.ripple-circle');
+          if (ripple) {
+            ripple.remove();
+          }
+
+          this.appendChild(circle);
+        });
+      });
+
     });
   </script>
 </body>
