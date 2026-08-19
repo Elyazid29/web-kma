@@ -16,7 +16,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=75">
+  <link rel="stylesheet" href="assets/css/style.css?v=76">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -1096,11 +1096,15 @@ if (!isAuthenticated()) {
             <h2 class="section-title">Jadwal Presentasi</h2>
             <div class="divider"></div>
             <p class="section-desc">Jadwal presentasi akan diperbarui setelah data final dari panitia tersedia.</p>
+          </div>          <div class="presentation-intro animate-on-scroll delay-100">
+            <span class="presentation-kicker">PILIHAN FORMAT JADWAL</span>
+            <p>Klik salah satu panel untuk melihat jadwal presentasi. Untuk SS1 dan SS2 tersedia dua opsi tampilan: gambar referensi dan tabel corporate.</p>
           </div>
-          <div class="presentation-placeholder animate-on-scroll delay-100">
-            <div class="presentation-placeholder-icon">▦</div>
-            <h3>Jadwal Segera Hadir</h3>
-            <p>Informasi stream, urutan presentasi, dan waktu tampil akan dimasukkan di halaman ini.</p>
+          <div class="presentation-grid animate-on-scroll delay-200">
+            <button type="button" class="presentation-card" onclick="openPresentation('gkm1')"><span class="presentation-card-index">01</span><span class="presentation-card-label">GKM 1</span><strong>Jadwal Presentasi GKM 1</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
+            <button type="button" class="presentation-card" onclick="openPresentation('gkm2')"><span class="presentation-card-index">02</span><span class="presentation-card-label">GKM 2</span><strong>Jadwal Presentasi GKM 2</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
+            <button type="button" class="presentation-card presentation-card-featured" onclick="openPresentation('ss1')"><span class="presentation-card-index">03</span><span class="presentation-card-label">SS 1 · OPSI TABEL</span><strong>Jadwal Presentasi SS 1</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
+            <button type="button" class="presentation-card presentation-card-featured" onclick="openPresentation('ss2')"><span class="presentation-card-index">04</span><span class="presentation-card-label">SS 2 · OPSI TABEL</span><strong>Jadwal Presentasi SS 2</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
           </div>
         </div>
       </div>
@@ -1186,17 +1190,50 @@ if (!isAuthenticated()) {
     </div>
   </div>
 
-  <script>
-    /* -----------------------------------------
+    <!-- POPUP MODAL JADWAL PRESENTASI -->
+  <div class="modal-overlay" id="presentationModal" onclick="closePresentationOnOverlay(event)">
+    <div class="modal-container presentation-modal-container">
+      <div class="modal-header"><div class="modal-title-wrap"><h3 id="presentationModalTitle">Jadwal Presentasi</h3><p id="presentationModalCategory">AGENDA PRESENTASI KMA XXV</p></div><button class="modal-close" onclick="closePresentation()">&times;</button></div>
+      <div class="modal-body">
+        <div id="presentationModalSwitch" class="presentation-switch" hidden><button type="button" class="presentation-switch-btn active" data-view="image" onclick="setPresentationView('image')">Versi Gambar</button><button type="button" class="presentation-switch-btn" data-view="table" onclick="setPresentationView('table')">Versi Tabel</button></div>
+        <div id="presentationImageView" class="presentation-image-view"></div>
+        <div id="presentationTableView" class="presentation-table-view" hidden></div>
+      </div>
+    </div>
+  </div>
+<script>/* -----------------------------------------
+    const presentationData = {
+      gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.jpeg?v=20260819-1", category: "GKM 1", table: false },
+      gkm2: { title: "Jadwal Presentasi GKM 2", image: "assets/img/jadwal%20presentasi/GKM2.jpeg?v=20260819-1", category: "GKM 2", table: false },
+      ss1: { title: "Jadwal Presentasi SS 1", image: "assets/img/jadwal%20presentasi/SS1.jpeg?v=20260819-1", category: "SS 1 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["02","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["03","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["04","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"]] },
+      ss2: { title: "Jadwal Presentasi SS 2", image: "assets/img/jadwal%20presentasi/SS2.jpeg?v=20260819-1", category: "SS 2 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["02","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["03","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["04","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"]] }
+    };
+    function openPresentation(id) {
+      const data = presentationData[id];
+      if (!data) return;
+      document.getElementById("presentationModalTitle").textContent = data.title;
+      document.getElementById("presentationModalCategory").textContent = data.category;
+      document.getElementById("presentationModalSwitch").hidden = !data.table;
+      document.getElementById("presentationImageView").innerHTML = '<img class="presentation-schedule-image" src="' + data.image + '" alt="' + data.title + '">';
+      const rows = data.rows || [];
+      document.getElementById("presentationTableView").innerHTML = '<div class="presentation-table-note">Opsi tabel corporate untuk dibandingkan dengan versi gambar.</div><div class="deep-dive-table-scroll"><table class="presentation-schedule-table"><thead><tr><th>No.</th><th>Sesi / Kelompok</th><th>Catatan Jadwal</th></tr></thead><tbody>' + rows.map(function(row){ return '<tr><td>' + row[0] + '</td><td><strong>' + row[1] + '</strong></td><td>' + row[2] + '</td></tr>'; }).join('') + '</tbody></table></div>';
+      setPresentationView("image");
+      document.getElementById("presentationModal").classList.add("active");
+    }
+    function setPresentationView(view) {
+      document.getElementById("presentationImageView").hidden = view !== "image";
+      document.getElementById("presentationTableView").hidden = view !== "table";
+      document.querySelectorAll(".presentation-switch-btn").forEach(function(btn){ btn.classList.toggle("active", btn.dataset.view === view); });
+    }
+    function closePresentation() { document.getElementById("presentationModal").classList.remove("active"); }
+    function closePresentationOnOverlay(e) { if (e.target.id === "presentationModal") closePresentation(); }
        LOGIKA ACCORDION ANTAM BestMIND (SLIDE 2)
     ----------------------------------------- */
     function toggleBestmindAccordion(button) {
       button.classList.toggle('active');
       const content = document.getElementById('bestmindContent');
       content.classList.toggle('active');
-    }
-
-    /* -----------------------------------------
+    }/* -----------------------------------------
        SYSTEM AUDIO PLAYER
     ----------------------------------------- */
     const jingle = document.getElementById('bgJingle');
@@ -1257,9 +1294,7 @@ if (!isAuthenticated()) {
     document.addEventListener('click', enableAudioOnInteraction);
     document.addEventListener('touchstart', enableAudioOnInteraction);
     document.addEventListener('keydown', enableAudioOnInteraction);
-    document.addEventListener('scroll', enableAudioOnInteraction, true);
-
-    /* -----------------------------------------
+    document.addEventListener('scroll', enableAudioOnInteraction, true);/* -----------------------------------------
        LOGIKA TOGGLE DROPDOWN MENU
     ----------------------------------------- */
     function toggleDropdown(e) {
@@ -1279,9 +1314,7 @@ if (!isAuthenticated()) {
       if (dropdown && !dropdown.contains(e.target)) {
         dropdown.classList.remove('active');
       }
-    });
-
-    /* -----------------------------------------
+    });/* -----------------------------------------
        HIGHLIGHT MODAL DATA & FUNCTIONS
     ----------------------------------------- */
     const highlightData = {
@@ -1380,9 +1413,7 @@ if (!isAuthenticated()) {
       if (e.target.id === 'highlightModal') {
         closeHighlightModal();
       }
-    }
-
-    /* -----------------------------------------
+    }/* -----------------------------------------
        RUNDOWN MODAL DATA & FUNCTIONS
     ----------------------------------------- */
     const rundownData = {
@@ -1519,9 +1550,7 @@ if (!isAuthenticated()) {
       if (e.target.id === 'rundownModal') {
         closeModal();
       }
-    }
-
-    /* -----------------------------------------
+    }/* -----------------------------------------
        SLIDE DECK NAVIGATION & COUNTDOWN LOGIC
     ----------------------------------------- */
     const deepDiveData = [
@@ -1670,9 +1699,7 @@ if (!isAuthenticated()) {
       }
 
       updateCountdown();
-      setInterval(updateCountdown, 1000);
-
-      /* -----------------------------------------
+      setInterval(updateCountdown, 1000);/* -----------------------------------------
          ANIMASI INTERAKTIF: 3D PARALLAX HOVER & RIPPLE
       ----------------------------------------- */
       const interactiveCards = document.querySelectorAll('.kh-card, .day-card, .an-award-card');

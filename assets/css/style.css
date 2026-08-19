@@ -2465,3 +2465,36 @@ body.presentation-mode {
   .day-four .day-card-img-header { min-height:280px; }
 }
 .location-card a.btn { pointer-events: auto !important; position: relative; z-index: 20; }
+
+/* Corporate presentation schedule */
+.presentation-intro { max-width:760px; margin:0 auto 22px; padding:16px 20px; border-left:4px solid #0f766e; border-radius:10px; background:#f0fdfa; color:#475569; line-height:1.6; }
+.presentation-intro p { margin:5px 0 0; }
+.presentation-kicker { color:#0f766e; font-size:.72rem; font-weight:800; letter-spacing:.14em; }
+.presentation-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; max-width:980px; margin:0 auto; }
+.presentation-card { position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:9px; min-height:190px; padding:26px; overflow:hidden; border:1px solid #dbe4e7; border-radius:18px; background:linear-gradient(145deg,#fff,#f8fafc); color:#0f172a; text-align:left; cursor:pointer; box-shadow:0 10px 25px rgba(15,23,42,.06); transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.presentation-card:hover { transform:translateY(-4px); border-color:#14b8a6; box-shadow:0 16px 34px rgba(15,118,110,.14); }
+.presentation-card::after { content:""; position:absolute; right:-35px; bottom:-45px; width:150px; height:150px; border-radius:50%; background:rgba(15,118,110,.07); }
+.presentation-card-featured { border-color:#b7e4dd; background:linear-gradient(145deg,#f0fdfa,#fff); }
+.presentation-card-index { color:#0f766e; font:700 .76rem "Space Mono",monospace; letter-spacing:.12em; }
+.presentation-card-label { color:#d97706; font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.presentation-card strong { max-width:280px; font-size:1.16rem; line-height:1.35; }
+.presentation-card-action { margin-top:auto; color:#0f766e; font-size:.82rem; font-weight:800; }
+.presentation-card-action b { font-size:1.3rem; vertical-align:-2px; }
+.presentation-modal-container { width:min(1100px,94vw); max-height:90vh; }
+.presentation-modal-container .modal-body { max-height:calc(90vh - 100px); overflow:auto; }
+.presentation-switch { display:flex; gap:8px; margin:0 0 18px; padding:5px; border:1px solid #dbe4e7; border-radius:12px; background:#f8fafc; }
+.presentation-switch-btn { padding:9px 14px; border:0; border-radius:8px; background:transparent; color:#64748b; font:700 .8rem Inter,sans-serif; cursor:pointer; }
+.presentation-switch-btn.active { color:#fff; background:#0f766e; }
+.presentation-schedule-image { display:block; width:100%; max-height:68vh; object-fit:contain; margin:0 auto; border:1px solid #e2e8f0; border-radius:12px; background:#f8fafc; }
+.presentation-table-note { margin-bottom:12px; color:#64748b; font-size:.84rem; }
+.presentation-schedule-table { width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid #dbe4e7; border-radius:12px; font-size:.88rem; }
+.presentation-schedule-table th { padding:12px 14px; color:#fff; background:#0f766e; text-align:left; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; }
+.presentation-schedule-table td { padding:13px 14px; border-top:1px solid #e2e8f0; color:#334155; }
+.presentation-schedule-table tbody tr:nth-child(even) { background:#f8fafc; }
+.presentation-schedule-table td:first-child { width:60px; color:#0f766e; font-weight:800; }
+@media (max-width:768px) {
+  .presentation-grid { grid-template-columns:1fr; }
+  .presentation-card { min-height:150px; padding:22px; }
+  .presentation-card strong { font-size:1.05rem; }
+  .presentation-switch { flex-wrap:wrap; }
+}
