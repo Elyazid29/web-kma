@@ -16,7 +16,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=74">
+  <link rel="stylesheet" href="assets/css/style.css?v=75">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -286,6 +286,17 @@ if (!isAuthenticated()) {
     </button>
     <div style="display: none; padding: 0 16px 16px;">
       <img src="assets/img/logo.penjelasan.jpeg?v=20260819-1" alt="Filosofi Maskot KMA" style="max-width: 100%; border-radius: 8px;">
+    </div>
+  </div>
+</article>
+<article style="text-align: center; margin-top: 10px;">
+  <div class="kma-identity-card">
+    <button type="button" class="kma-identity-toggle" onclick="const c=this.nextElementSibling; const i=this.querySelector('.chevron'); const open=c.style.display==='none'; c.style.display=open?'block':'none'; i.style.transform=open?'rotate(180deg)':'rotate(0deg)';">
+      <span class="kma-identity-heading"><span class="kma-identity-icon">B</span>ANTAM BestMIND</span>
+      <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+    <div style="display: none; padding: 0 16px 16px;">
+      <img src="assets/img/antamBest.jpeg?v=20260819-2" alt="ANTAM BestMIND" style="max-width: 100%; border-radius: 8px; margin: 0 auto; display: block;">
     </div>
   </div>
 </article>
