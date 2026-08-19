@@ -1203,10 +1203,10 @@ if (!isAuthenticated()) {
   </div>
 <script>/* -----------------------------------------
     const presentationData = {
-      gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.jpeg?v=20260819-1", category: "GKM 1", table: false },
-      gkm2: { title: "Jadwal Presentasi GKM 2", image: "assets/img/jadwal%20presentasi/GKM2.jpeg?v=20260819-1", category: "GKM 2", table: false },
-      ss1: { title: "Jadwal Presentasi SS 1", image: "assets/img/jadwal%20presentasi/SS1.jpeg?v=20260819-1", category: "SS 1 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["02","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["03","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["04","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"]] },
-      ss2: { title: "Jadwal Presentasi SS 2", image: "assets/img/jadwal%20presentasi/SS2.jpeg?v=20260819-1", category: "SS 2 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["02","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["03","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["04","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"]] }
+      gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.JPEG?v=20260819-1", category: "GKM 1", table: false },
+      gkm2: { title: "Jadwal Presentasi GKM 2", image: "assets/img/jadwal%20presentasi/GKM2.JPEG?v=20260819-1", category: "GKM 2", table: false },
+      ss1: { title: "Jadwal Presentasi SS 1", image: "assets/img/jadwal%20presentasi/SS1.JPEG?v=20260819-1", category: "SS 1 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["02","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["03","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["04","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"]] },
+      ss2: { title: "Jadwal Presentasi SS 2", image: "assets/img/jadwal%20presentasi/SS2.JPEG?v=20260819-1", category: "SS 2 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["02","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["03","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["04","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"]] }
     };
     function openPresentation(id) {
       const data = presentationData[id];
