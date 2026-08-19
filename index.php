@@ -16,7 +16,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=76">
+  <link rel="stylesheet" href="assets/css/style.css?v=77">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -1101,10 +1101,10 @@ if (!isAuthenticated()) {
             <p>Klik salah satu panel untuk melihat jadwal presentasi. Untuk SS1 dan SS2 tersedia dua opsi tampilan: gambar referensi dan tabel corporate.</p>
           </div>
           <div class="presentation-grid animate-on-scroll delay-200">
-            <button type="button" class="presentation-card" onclick="openPresentation('gkm1')"><span class="presentation-card-index">01</span><span class="presentation-card-label">GKM 1</span><strong>Jadwal Presentasi GKM 1</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
-            <button type="button" class="presentation-card" onclick="openPresentation('gkm2')"><span class="presentation-card-index">02</span><span class="presentation-card-label">GKM 2</span><strong>Jadwal Presentasi GKM 2</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
-            <button type="button" class="presentation-card presentation-card-featured" onclick="openPresentation('ss1')"><span class="presentation-card-index">03</span><span class="presentation-card-label">SS 1 · OPSI TABEL</span><strong>Jadwal Presentasi SS 1</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
-            <button type="button" class="presentation-card presentation-card-featured" onclick="openPresentation('ss2')"><span class="presentation-card-index">04</span><span class="presentation-card-label">SS 2 · OPSI TABEL</span><strong>Jadwal Presentasi SS 2</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
+            <button type="button" class="presentation-card" onclick="event.preventDefault(); event.stopPropagation(); openPresentation('gkm1'); return false;"><span class="presentation-card-index">01</span><span class="presentation-card-label">GKM 1</span><strong>Jadwal Presentasi GKM 1</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
+            <button type="button" class="presentation-card" onclick="event.preventDefault(); event.stopPropagation(); openPresentation('gkm2'); return false;"><span class="presentation-card-index">02</span><span class="presentation-card-label">GKM 2</span><strong>Jadwal Presentasi GKM 2</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
+            <button type="button" class="presentation-card presentation-card-featured" onclick="event.preventDefault(); event.stopPropagation(); openPresentation('ss1'); return false;"><span class="presentation-card-index">03</span><span class="presentation-card-label">SS 1 · OPSI TABEL</span><strong>Jadwal Presentasi SS 1</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
+            <button type="button" class="presentation-card presentation-card-featured" onclick="event.preventDefault(); event.stopPropagation(); openPresentation('ss2'); return false;"><span class="presentation-card-index">04</span><span class="presentation-card-label">SS 2 · OPSI TABEL</span><strong>Jadwal Presentasi SS 2</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
           </div>
         </div>
       </div>

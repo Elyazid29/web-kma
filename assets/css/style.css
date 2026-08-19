@@ -2498,3 +2498,5 @@ body.presentation-mode {
   .presentation-card strong { font-size:1.05rem; }
   .presentation-switch { flex-wrap:wrap; }
 }
+.presentation-card { pointer-events:auto !important; }
+.presentation-card::after, .presentation-card * { pointer-events:none; }
