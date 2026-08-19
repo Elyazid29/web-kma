@@ -2507,3 +2507,5 @@ body.presentation-mode {
 .presentation-inline-head h3 { margin:5px 0 0; color:#0f172a; font-size:1.2rem; }
 .presentation-inline-close { width:34px; height:34px; border:0; border-radius:50%; color:#0f766e; background:#e6f4f1; font-size:1.35rem; cursor:pointer; }
 .presentation-inline-panel .presentation-schedule-image { max-height:75vh; }
+.presentation-item { display:flex; flex-direction:column; gap:12px; min-width:0; }
+.presentation-item .presentation-inline-panel { margin:0; }
