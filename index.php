@@ -16,7 +16,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=81">
+  <link rel="stylesheet" href="assets/css/style.css?v=82">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -1201,26 +1201,17 @@ if (!isAuthenticated()) {
       </div>
     </div>
   </div>
-
-    <!-- POPUP MODAL JADWAL PRESENTASI -->
-  <div class="modal-overlay" id="presentationModal" onclick="closePresentationOnOverlay(event)">
-    <div class="modal-container presentation-modal-container">
-      <div class="modal-header"><div class="modal-title-wrap"><h3 id="presentationModalTitle">Jadwal Presentasi</h3><p id="presentationModalCategory">AGENDA PRESENTASI KMA XXV</p></div><button class="modal-close" onclick="closePresentation()">&times;</button></div>
-      <div class="modal-body">
-        <div id="presentationModalSwitch" class="presentation-switch" hidden><button type="button" class="presentation-switch-btn active" data-view="image" onclick="setPresentationView('image')">Versi Gambar</button><button type="button" class="presentation-switch-btn" data-view="table" onclick="setPresentationView('table')">Versi Tabel</button></div>
-        <div id="presentationImageView" class="presentation-image-view"></div>
-        <div id="presentationTableView" class="presentation-table-view" hidden></div>
-      </div>
-    </div>
-  </div>
 <script>
     const presentationData = {
       gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.JPEG?v=20260819-1", category: "GKM 1", table: false },
       gkm2: { title: "Jadwal Presentasi GKM 2", image: "assets/img/jadwal%20presentasi/GKM2.JPEG?v=20260819-1", category: "GKM 2", table: false },
-      ss1: { title: "Jadwal Presentasi SS 1", image: "assets/img/jadwal%20presentasi/SS1.JPEG?v=20260819-1", category: "SS 1 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["02","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["03","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["04","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"]] },
-      ss2: { title: "Jadwal Presentasi SS 2", image: "assets/img/jadwal%20presentasi/SS2.JPEG?v=20260819-1", category: "SS 2 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["02","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["03","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["04","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"]] }
-    };
-    function togglePresentationInline(id) {
+      ss1: { title: "Jadwal Presentasi SS 1", category: "SS 1 · STREAM BROMO", table: true, jury1: "Susan Kustiwan", jury2: "Dialah Hokosuja Hutabalian", room: "Wangan", duration: "10 menit presentasi + 5 menit tanya jawab", rows: [
+        ["13:00–13:15","Helpless","Geomin"],["13:15–13:30","Diesmaking","ICA"],["13:30–13:45","Sundung","Geomin"],["13:45–14:00","Alien Gamma","UBPE"],["14:00–14:15","Super Jet Mill","KALBAR"],["14:15–14:30","Internal Audit Ultimate","ICA"],["14:30–14:45","The Reconciliator","Geomin"],["14:45–15:00","Bukan Karyawan Biasa","UBPE"],["15:00–15:15","Bubulak","KALBAR"],["15:15–15:30","Ribak Sude","ICA"],["15:30–15:45","Safety Can Be Fun","Geomin"],["15:45–16:00","Ultima","UBPE"],["16:00–16:15","Kudeta","KALBAR"],["16:15–16:30","Zona","ICA"],["16:30–16:45","Siap","Geomin"],["16:45–17:00","Stratejik 2","UBPE"],["17:00–17:15","Mind Safe","KALBAR"]
+      ] },
+      ss2: { title: "Jadwal Presentasi SS 2", category: "SS 2 · STREAM SEMERU", table: true, jury1: "Eko Puji Putranto", jury2: "Yudhistira Sudesno", room: "Amsterdam", duration: "10 menit presentasi + 5 menit tanya jawab", rows: [
+        ["13:00–13:15","Pinang Coklat","GAG"],["13:15–13:30","Sepia","NKA"],["13:30–13:45","Waya Cani Guna","SDA"],["13:45–14:00","Cocowaste Reborn","Malut"],["14:00–14:15","Komparator","Kolaka"],["14:15–14:30","Green Enviro","Konut"],["14:30–14:45","Komika","GAG"],["14:45–15:00","Ore-Ganized","NKA"],["15:00–15:15","Diginova","SDA"],["15:15–15:30","Armor","Malut"],["15:30–15:45","Staterman","Kolaka"],["15:45–16:00","Roger","Konut"],["16:00–16:15","Hoki","GAG"],["16:15–16:30","Flying Dustman","NKA"],["16:30–16:45","Palugada","SDA"],["16:45–17:00","D'Geol","Malut"],["17:00–17:15","Capsule","Kolaka"],["17:15–17:30","Lai Laika","Konut"]
+      ] }
+    };    function togglePresentationInline(id) {
       const data = presentationData[id];
       const panel = document.getElementById("presentationPanel-" + id);
       if (!data || !panel) return;
@@ -1232,32 +1223,13 @@ if (!isAuthenticated()) {
       if (alreadyOpen) return;
       if (data.table) {
         const rows = data.rows || [];
-        panel.innerHTML = '<div class="presentation-inline-head"><div><span class="presentation-kicker">' + data.category + '</span><h3>' + data.title + '</h3></div><button type="button" class="presentation-inline-close" onclick="togglePresentationInline(' + "'" + id + "'" + ')">&times;</button></div><div class="presentation-table-note">Tampilan tabel corporate untuk jadwal ' + data.category + '.</div><div class="deep-dive-table-scroll"><table class="presentation-schedule-table"><thead><tr><th>No.</th><th>Sesi / Kelompok</th><th>Catatan Jadwal</th></tr></thead><tbody>' + rows.map(function(row){ return '<tr><td>' + row[0] + '</td><td><strong>' + row[1] + '</strong></td><td>' + row[2] + '</td></tr>'; }).join("") + '</tbody></table></div>';
+        const meta = '<div class="presentation-meta-grid"><div><span>Juri 1</span><strong>' + data.jury1 + '</strong></div><div><span>Juri 2</span><strong>' + data.jury2 + '</strong></div><div><span>Ruangan</span><strong>' + data.room + '</strong></div><div><span>Durasi</span><strong>' + data.duration + '</strong></div></div>';
+        panel.innerHTML = '<div class="presentation-inline-head"><div><span class="presentation-kicker">' + data.category + '</span><h3>' + data.title + '</h3></div><button type="button" class="presentation-inline-close" onclick="togglePresentationInline(' + "'" + id + "'" + ')">&times;</button></div>' + meta + '<div class="presentation-table-note">Jadwal presentasi per gugus.</div><div class="deep-dive-table-scroll"><table class="presentation-schedule-table"><thead><tr><th>Waktu</th><th>Gugus</th><th>Unit</th></tr></thead><tbody>' + rows.map(function(row){ return '<tr><td><strong>' + row[0] + '</strong></td><td>' + row[1] + '</td><td>' + row[2] + '</td></tr>'; }).join("") + '</tbody></table></div>';
       } else {
         panel.innerHTML = '<div class="presentation-inline-head"><div><span class="presentation-kicker">' + data.category + '</span><h3>' + data.title + '</h3></div><button type="button" class="presentation-inline-close" onclick="togglePresentationInline(' + "'" + id + "'" + ')">&times;</button></div><img class="presentation-schedule-image" src="' + data.image + '" alt="' + data.title + '">';
-      }
-      panel.hidden = false;
+      }      panel.hidden = false;
     }
-    function openPresentation(id) {
-      const data = presentationData[id];
-      if (!data) return;
-      document.getElementById("presentationModalTitle").textContent = data.title;
-      document.getElementById("presentationModalCategory").textContent = data.category;
-      document.getElementById("presentationModalSwitch").hidden = !data.table;
-      document.getElementById("presentationImageView").innerHTML = '<img class="presentation-schedule-image" src="' + data.image + '" alt="' + data.title + '">';
-      const rows = data.rows || [];
-      document.getElementById("presentationTableView").innerHTML = '<div class="presentation-table-note">Opsi tabel corporate untuk dibandingkan dengan versi gambar.</div><div class="deep-dive-table-scroll"><table class="presentation-schedule-table"><thead><tr><th>No.</th><th>Sesi / Kelompok</th><th>Catatan Jadwal</th></tr></thead><tbody>' + rows.map(function(row){ return '<tr><td>' + row[0] + '</td><td><strong>' + row[1] + '</strong></td><td>' + row[2] + '</td></tr>'; }).join('') + '</tbody></table></div>';
-      setPresentationView("image");
-      document.getElementById("presentationModal").classList.add("active");
-    }
-    function setPresentationView(view) {
-      document.getElementById("presentationImageView").hidden = view !== "image";
-      document.getElementById("presentationTableView").hidden = view !== "table";
-      document.querySelectorAll(".presentation-switch-btn").forEach(function(btn){ btn.classList.toggle("active", btn.dataset.view === view); });
-    }
-    function closePresentation() { document.getElementById("presentationModal").classList.remove("active"); }
-    function closePresentationOnOverlay(e) { if (e.target.id === "presentationModal") closePresentation(); }
-    /* -----------------------------------------
+/* -----------------------------------------
        LOGIKA ACCORDION ANTAM BestMIND (SLIDE 2)
     ----------------------------------------- */
     function toggleBestmindAccordion(button) {

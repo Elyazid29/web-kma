@@ -2509,3 +2509,9 @@ body.presentation-mode {
 .presentation-inline-panel .presentation-schedule-image { max-height:75vh; }
 .presentation-item { display:flex; flex-direction:column; gap:12px; min-width:0; }
 .presentation-item .presentation-inline-panel { margin:0; }
+
+.presentation-meta-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:0 0 18px; }
+.presentation-meta-grid div { padding:12px 13px; border:1px solid #dbe4e7; border-radius:10px; background:#f8fafc; }
+.presentation-meta-grid span { display:block; margin-bottom:4px; color:#64748b; font-size:.68rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.presentation-meta-grid strong { color:#0f766e; font-size:.88rem; line-height:1.35; }
+@media (max-width:768px) { .presentation-meta-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
