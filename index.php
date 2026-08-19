@@ -16,7 +16,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=78">
+  <link rel="stylesheet" href="assets/css/style.css?v=79">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -1101,11 +1101,12 @@ if (!isAuthenticated()) {
             <p>Klik salah satu panel untuk melihat jadwal presentasi. Untuk SS1 dan SS2 tersedia dua opsi tampilan: gambar referensi dan tabel corporate.</p>
           </div>
           <div class="presentation-grid animate-on-scroll delay-200">
-            <a class="presentation-card" href="assets/img/jadwal%20presentasi/GKM1.JPEG?v=20260819-2" target="_blank" rel="noopener noreferrer" onclick="if (typeof openPresentation === 'function') { event.preventDefault(); openPresentation('gkm1'); }"><span class="presentation-card-index">01</span><span class="presentation-card-label">GKM 1</span><strong>Jadwal Presentasi GKM 1</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></a>
-            <a class="presentation-card" href="assets/img/jadwal%20presentasi/GKM2.JPEG?v=20260819-2" target="_blank" rel="noopener noreferrer" onclick="if (typeof openPresentation === 'function') { event.preventDefault(); openPresentation('gkm2'); }"><span class="presentation-card-index">02</span><span class="presentation-card-label">GKM 2</span><strong>Jadwal Presentasi GKM 2</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></a>
-            <a class="presentation-card" href="assets/img/jadwal%20presentasi/SS1.JPEG?v=20260819-2" target="_blank" rel="noopener noreferrer" onclick="if (typeof openPresentation === 'function') { event.preventDefault(); openPresentation('ss1'); }"><span class="presentation-card-index">03</span><span class="presentation-card-label">SS 1 · OPSI TABEL</span><strong>Jadwal Presentasi SS 1</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></a>
-            <a class="presentation-card" href="assets/img/jadwal%20presentasi/SS2.JPEG?v=20260819-2" target="_blank" rel="noopener noreferrer" onclick="if (typeof openPresentation === 'function') { event.preventDefault(); openPresentation('ss2'); }"><span class="presentation-card-index">04</span><span class="presentation-card-label">SS 2 · OPSI TABEL</span><strong>Jadwal Presentasi SS 2</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></a>
+            <button type="button" class="presentation-card" onclick="togglePresentationInline('gkm1')"><span class="presentation-card-index">01</span><span class="presentation-card-label">GKM 1</span><strong>Jadwal Presentasi GKM 1</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
+            <button type="button" class="presentation-card" onclick="togglePresentationInline('gkm2')"><span class="presentation-card-index">02</span><span class="presentation-card-label">GKM 2</span><strong>Jadwal Presentasi GKM 2</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
+            <button type="button" class="presentation-card" onclick="togglePresentationInline('ss1')"><span class="presentation-card-index">03</span><span class="presentation-card-label">SS 1 · OPSI TABEL</span><strong>Jadwal Presentasi SS 1</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
+            <button type="button" class="presentation-card" onclick="togglePresentationInline('ss2')"><span class="presentation-card-index">04</span><span class="presentation-card-label">SS 2 · OPSI TABEL</span><strong>Jadwal Presentasi SS 2</strong><span class="presentation-card-action">Bandingkan dua versi <b>›</b></span></button>
           </div>
+          <div id="presentationInline" class="presentation-inline-panel" hidden></div>
         </div>
       </div>
     </section>
@@ -1208,6 +1209,23 @@ if (!isAuthenticated()) {
       ss1: { title: "Jadwal Presentasi SS 1", image: "assets/img/jadwal%20presentasi/SS1.JPEG?v=20260819-1", category: "SS 1 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["02","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["03","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"],["04","Sesi presentasi SS 1","Mengacu jadwal pada asset SS1"]] },
       ss2: { title: "Jadwal Presentasi SS 2", image: "assets/img/jadwal%20presentasi/SS2.JPEG?v=20260819-1", category: "SS 2 · PERBANDINGAN OPSI", table: true, rows: [["01","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["02","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["03","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"],["04","Sesi presentasi SS 2","Mengacu jadwal pada asset SS2"]] }
     };
+    function togglePresentationInline(id) {
+      const data = presentationData[id];
+      const panel = document.getElementById("presentationInline");
+      if (!data || !panel) return;
+      if (!panel.hidden && panel.dataset.active === id) {
+        panel.hidden = true;
+        panel.innerHTML = "";
+        return;
+      }
+      panel.innerHTML = '<div class="presentation-inline-head"><div><span class="presentation-kicker">' + data.category + '</span><h3>' + data.title + '</h3></div><button type="button" class="presentation-inline-close" onclick="togglePresentationInline(' + "'" + id + "'" + ')">&times;</button></div><img class="presentation-schedule-image" src="' + data.image + '" alt="' + data.title + '">';
+      if (data.table) {
+        panel.innerHTML += '<div class="presentation-table-note">Versi tabel corporate tersedia pada panel Deep Dive SS.</div>';
+      }
+      panel.hidden = false;
+      panel.dataset.active = id;
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
     function openPresentation(id) {
       const data = presentationData[id];
       if (!data) return;

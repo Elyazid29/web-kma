@@ -2500,3 +2500,10 @@ body.presentation-mode {
 }
 .presentation-card { pointer-events:auto !important; }
 .presentation-card::after, .presentation-card * { pointer-events:none; }
+
+.presentation-inline-panel { max-width:980px; margin:22px auto 0; padding:22px; border:1px solid #b7e4dd; border-radius:18px; background:#fff; box-shadow:0 14px 32px rgba(15,118,110,.12); }
+.presentation-inline-panel[hidden] { display:none; }
+.presentation-inline-head { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px; }
+.presentation-inline-head h3 { margin:5px 0 0; color:#0f172a; font-size:1.2rem; }
+.presentation-inline-close { width:34px; height:34px; border:0; border-radius:50%; color:#0f766e; background:#e6f4f1; font-size:1.35rem; cursor:pointer; }
+.presentation-inline-panel .presentation-schedule-image { max-height:75vh; }
