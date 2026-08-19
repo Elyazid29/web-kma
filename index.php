@@ -16,7 +16,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=73">
+  <link rel="stylesheet" href="assets/css/style.css?v=74">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -128,7 +128,8 @@ if (!isAuthenticated()) {
             <a href="#" onclick="selectMenu(7); return false;">8. Kontak Panitia</a>
             <a href="#" onclick="selectMenu(8); return false;">9. Dewan Juri KMA XXV</a>
             <a href="#" onclick="selectMenu(9); return false;">10. Panitia KMA XXV</a>
-            <a href="#" onclick="selectMenu(10); return false;">11. Emergency</a>
+            <a href="#" onclick="selectMenu(10); return false;">11. Jadwal Presentasi</a>
+            <a href="#" onclick="selectMenu(11); return false;">12. Emergency</a>
           </div>
         </div>
         <a href="logout.php" class="nav-logout" title="Keluar dari akun" style="display:inline-flex;align-items:center;padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;color:#475569;text-decoration:none;font-size:.8rem;font-weight:700;">Keluar</a>
@@ -195,7 +196,7 @@ if (!isAuthenticated()) {
 
           <div class="hero-cta animate-on-scroll delay-300" style="flex-direction: row; justify-content: center; margin-top: 25px;">
             <button onclick="goToSlide(4)" class="btn btn-outline" style="cursor: pointer; width: auto; padding: 10px 24px;">Lihat Jadwal ›</button>
-            <a href="#kontak" onclick="goToSlide(6); return false;" class="btn btn-outline" style="width: auto; padding: 10px 24px;">Kontak Panitia</a>
+            <a href="#kontak" onclick="goToSlide(7); return false;" class="btn btn-outline" style="width: auto; padding: 10px 24px;">Kontak Panitia</a>
           </div>
 
         </div>
@@ -258,7 +259,7 @@ if (!isAuthenticated()) {
 </div>
                 </div>
 
-                <!-- Identitas KMA XXV: Filosofi Logo -->
+                <!-- Identitas KMA XXV: Filosofi Logo dan Maskot -->
                 <div class="kma-identity-grid" aria-label="Identitas KMA XXV" style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
                   <article style="text-align: center;">
                     <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
@@ -267,7 +268,7 @@ if (!isAuthenticated()) {
       <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
       </div>
-      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Filosofi Logo & Maskot KMA</span>
+      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Filosofi Logo KMA</span>
     </div>
     <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
   </div>
@@ -278,11 +279,16 @@ if (!isAuthenticated()) {
                   </article>
                   
                   <article style="text-align: center; margin-top: 10px;">
-                    <h4 style="color: #0f172a; font-size: 1.15rem; margin-bottom: 20px; font-weight: 600; cursor: pointer; background: #ffffff; padding: 16px 20px; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease;" onmouseover="this.style.borderColor='#cbd5e1'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.05)';" onmouseout="this.style.borderColor='#e2e8f0'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.02)';" onclick="const content = this.nextElementSibling; const icon = this.querySelector('.acc-icon'); if (content.style.display === 'none') { content.style.display = 'block'; icon.textContent = '−'; } else { content.style.display = 'none'; icon.textContent = '+'; }"><span>ANTAM BestMIND</span> <span class="acc-icon" style="font-size: 1.5rem; font-weight: 300; color: #64748b; line-height: 1;">+</span></h4>
-                    <div style="display: none; margin-top: 15px;">
-                      <img src="assets/img/antamBest.jpeg?v=20260818-4" alt="ANTAM BestMIND" style="max-width: 100%; border-radius: 12px; margin: 0 auto; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                    </div>
-                  </article>
+  <div class="kma-identity-card">
+    <button type="button" class="kma-identity-toggle" onclick="const c=this.nextElementSibling; const i=this.querySelector('.chevron'); const open=c.style.display==='none'; c.style.display=open?'block':'none'; i.style.transform=open?'rotate(180deg)':'rotate(0deg)';">
+      <span class="kma-identity-heading"><span class="kma-identity-icon">✦</span>Filosofi Maskot KMA</span>
+      <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+    <div style="display: none; padding: 0 16px 16px;">
+      <img src="assets/img/logo.penjelasan.jpeg?v=20260819-1" alt="Filosofi Maskot KMA" style="max-width: 100%; border-radius: 8px;">
+    </div>
+  </div>
+</article>
                 </div>
 
               </div>
@@ -653,7 +659,7 @@ if (!isAuthenticated()) {
               </div>
             </div>
 
-            <div class="day-card animate-on-scroll delay-300" onclick="openModal(4)">
+            <div class="day-card day-four animate-on-scroll delay-300" onclick="openModal(4)">
               <div class="day-card-img-header" style="background-image: url('assets/img/penutupan.png?v=20260818-2');">
               </div>
               <div class="day-card-content">
@@ -1070,30 +1076,54 @@ if (!isAuthenticated()) {
       </div>
     </section>
 
-    <!-- SLIDE 9: EMERGENCY -->
+    <!-- SLIDE 11: JADWAL PRESENTASI -->
+    <section id="presentasi" class="slide section section-light">
+      <div class="slide-scroll-wrapper">
+        <div class="container" style="padding-top: 50px; padding-bottom: 70px;">
+          <div class="section-header animate-on-scroll">
+            <p class="eyebrow">AGENDA PRESENTASI</p>
+            <h2 class="section-title">Jadwal Presentasi</h2>
+            <div class="divider"></div>
+            <p class="section-desc">Jadwal presentasi akan diperbarui setelah data final dari panitia tersedia.</p>
+          </div>
+          <div class="presentation-placeholder animate-on-scroll delay-100">
+            <div class="presentation-placeholder-icon">▦</div>
+            <h3>Jadwal Segera Hadir</h3>
+            <p>Informasi stream, urutan presentasi, dan waktu tampil akan dimasukkan di halaman ini.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SLIDE 12: EMERGENCY -->
     <section id="emergency" class="slide section section-light" style="padding-bottom: 0;">
       <div class="slide-scroll-wrapper">
         <div class="container" style="margin-bottom: 60px; padding-top: 40px;">
           <div class="section-header animate-on-scroll">
-            <h2 class="section-title" style="color: #dc2626;">Emergency & Safety</h2>
+            <p class="eyebrow emergency-eyebrow">HSE INFORMATION</p>
+            <h2 class="section-title" style="color: #b91c1c;">Emergency & Safety</h2>
             <div class="divider" style="background: #dc2626;"></div>
-            <p class="section-desc">Informasi kontak darurat dan panduan keselamatan selama KMA XXV.</p>
+            <p class="section-desc">Informasi sementara untuk kebutuhan keselamatan peserta. Kontak final akan diperbarui oleh Tim HSE.</p>
           </div>
-          <div class="emergency-list animate-on-scroll delay-100" style="max-width: 600px; margin: 0 auto;">
-             <div style="background: #fee2e2; border: 1px solid #fca5a5; padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
-               <div style="background: #ef4444; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">!</div>
-               <div>
-                 <h4 style="color: #b91c1c; margin-bottom: 4px;">Medis / Klinik Terdekat</h4>
-                 <p style="color: #7f1d1d; font-size: 0.9rem; margin: 0;">TBA (Menunggu Info Final)</p>
-               </div>
-             </div>
+          <div class="emergency-grid animate-on-scroll delay-100">
+            <article class="emergency-card emergency-primary">
+              <div class="emergency-card-icon">!</div>
+              <div><h3>Keadaan Darurat</h3><p>Hubungi <strong>112</strong> untuk layanan darurat umum atau koordinasikan segera dengan LO dan Tim HSE.</p></div>
+            </article>
+            <article class="emergency-card">
+              <div class="emergency-card-icon">+</div>
+              <div><h3>Klinik / Pos Medis</h3><p>Pos medis kegiatan: <strong>TBA oleh Tim HSE</strong>. Lokasi dan nomor kontak akan ditempel di venue dan hotel.</p></div>
+            </article>
+            <article class="emergency-card">
+              <div class="emergency-card-icon">⌖</div>
+              <div><h3>Rumah Sakit Terdekat</h3><p>Rujukan sementara: <strong>RSUD Dr. Saiful Anwar Malang</strong>. Nomor kontak dan rute akan dikonfirmasi oleh Tim HSE.</p></div>
+            </article>
+            <article class="emergency-card">
+              <div class="emergency-card-icon">H</div>
+              <div><h3>Kontak Tim HSE</h3><p>Koordinator HSE kegiatan: <strong>TBA</strong>. Simpan nomor LO unit untuk bantuan awal di lokasi.</p></div>
+            </article>
           </div>
         </div>
-        <footer class="footer">
-          <div class="container">
-            <p>&copy; 2026 PT ANTAM Tbk.</p>
-          </div>
-        </footer>
+        <footer class="footer"><div class="container"><p>&copy; 2026 PT ANTAM Tbk.</p></div></footer>
       </div>
     </section>
 
@@ -1105,7 +1135,7 @@ if (!isAuthenticated()) {
       <span class="nav-text" style="font-weight: bold;">Sebelumnya</span>
     </button>
     <div class="pill-nav-counter" id="pillNavCounter" style="font-weight: 700; color: #0f172a; font-size: 0.95rem; letter-spacing: 2px;">
-      01 / 11
+      01 / 12
     </div>
     <button class="nav-btn next-btn" id="nextBtn" onclick="nextSlide()" style="padding: 10px 20px;">
       <span class="nav-text" style="font-weight: bold;">Selanjutnya</span>
