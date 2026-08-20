@@ -2615,3 +2615,56 @@ body.presentation-mode {
 .rules-download-btn { flex:0 0 auto; padding:11px 16px; border-radius:10px; color:#fff; background:#0f766e; text-decoration:none; font-weight:800; }
 .rules-download-btn:hover { background:#115e59; }
 @media (max-width:600px) { .hackathon-gallery { grid-template-columns:1fr; } .rules-download-panel { align-items:flex-start; flex-direction:column; } }
+/* AWARD CARD HORIZONTAL */
+#penghargaan .an-award-card.award-card-horizontal {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 18px;
+  min-height: 150px;
+  padding: 18px !important;
+  text-align: left !important;
+}
+#penghargaan .award-card-horizontal .award-card-icon {
+  flex: 0 0 88px;
+  width: 88px;
+  height: 88px !important;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(145deg,#e6f4f1,#fff7ed) !important;
+}
+#penghargaan .award-card-horizontal .award-card-icon::after { display: none; }
+#penghargaan .award-card-horizontal .award-card-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  border-radius: 0;
+}
+#penghargaan .award-card-horizontal .award-card-copy {
+  flex: 1;
+  min-width: 0;
+  padding: 0 !important;
+  display: block !important;
+  text-align: left !important;
+}
+#penghargaan .award-card-horizontal .an-card-title {
+  margin: 0 0 7px !important;
+  color: #0f172a !important;
+  font-size: 1.05rem !important;
+  line-height: 1.25;
+}
+#penghargaan .award-card-horizontal .an-card-description {
+  margin: 0;
+  color: #64748b;
+  font-size: .86rem;
+  line-height: 1.55;
+}
+@media (max-width: 600px) {
+  #penghargaan .an-award-card.award-card-horizontal { gap: 12px; padding: 14px !important; }
+  #penghargaan .award-card-horizontal .award-card-icon { flex-basis: 70px; width: 70px; height: 70px !important; }
+  #penghargaan .award-card-horizontal .an-card-title { font-size: .96rem !important; }
+  #penghargaan .award-card-horizontal .an-card-description { font-size: .78rem; }
+}

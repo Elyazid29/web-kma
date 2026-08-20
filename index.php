@@ -6,6 +6,8 @@ if (!isAuthenticated()) {
 }
 $awardGuideMarkdown = file_exists(__DIR__ . '/assets/panduan penilaian.md') ? file_get_contents(__DIR__ . '/assets/panduan penilaian.md') : '';
 $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+$awardCardMarkdown = file_exists(__DIR__ . '/assets/penghargaan.md') ? file_get_contents(__DIR__ . '/assets/penghargaan.md') : '';
+$awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -18,7 +20,7 @@ $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=86">
+  <link rel="stylesheet" href="assets/css/style.css?v=87">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -1805,7 +1807,33 @@ $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON
     });
   </script>
 <script>
-    const awardGuideMarkdown = <?= $awardGuideJson ?: '""' ?>;
+    const awardGuideMarkdown = <?= $awardGuideJson ?: '""' ?>;    const awardCardMarkdown = <?= $awardCardJson ?: '""' ?>;
+    const awardCardDescriptions = {};
+    awardCardMarkdown.split(/\r?\n(?=\s*\d+\.\s)/).forEach((block) => {
+      const match = block.match(/^\s*(\d+)\.\s+\*\*(.*?)\*\*\s*([\s\S]*)$/);
+      if (match) awardCardDescriptions[match[1]] = { title: match[2].replace(/Viusl/i, 'Visual').trim(), description: match[3].replace(/\s+/g, ' ').trim() };
+    });
+    function buildAwardCardPresentation() {
+      document.querySelectorAll('#penghargaan .an-awards-grid .an-award-card').forEach((card, index) => {
+        const image = card.querySelector('img');
+        const title = card.querySelector('h4');
+        if (!image || !title) return;
+        const number = String(index + 1);
+        const data = awardCardDescriptions[number] || { title: title.textContent.trim(), description: '' };
+        title.textContent = data.title;
+        card.classList.add('award-card-horizontal');
+        const media = image.closest('div');
+        if (media) media.className = 'award-card-icon';
+        const oldBody = title.closest('div');
+        if (oldBody) {
+          oldBody.className = 'award-card-copy';
+          oldBody.innerHTML = '<h4 class="an-card-title"></h4><p class="an-card-description"></p>';
+          oldBody.querySelector('h4').textContent = data.title;
+          oldBody.querySelector('p').textContent = data.description;
+        }
+      });
+    }
+    buildAwardCardPresentation();
     const awardGuideSections = {};
     const awardGuideHeader = /\*\*\[(\d+)\.\s*([^\]]+)\]\{\.mark\}\*\*/g;
     let awardGuideMatch;
