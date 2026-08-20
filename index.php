@@ -1219,6 +1219,19 @@ if (!isAuthenticated()) {
       </div>
     </div>
   </div>
+  <!-- POPUP MODAL DETAIL PENGHARGAAN -->
+  <div class="award-detail-modal" id="awardDetailModal" aria-hidden="true" onclick="closeAwardModalOnOverlay(event)">
+    <div class="award-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="awardModalTitle">
+      <button class="award-detail-close" type="button" onclick="closeAwardModal()" aria-label="Tutup detail penghargaan">&times;</button>
+      <div class="award-detail-media"><img id="awardModalImg" src="" alt=""></div>
+      <div class="award-detail-body">
+        <div class="award-detail-kicker">PENGHARGAAN KMA XXV</div>
+        <h2 id="awardModalTitle">Detail Penghargaan</h2>
+        <p id="awardModalDescription"></p>
+        <div class="award-detail-number" id="awardModalNumber"></div>
+      </div>
+    </div>
+  </div>
 <script>
     const presentationData = {
       gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.JPEG?v=20260819-1", category: "GKM 1", table: false },
@@ -1795,6 +1808,32 @@ if (!isAuthenticated()) {
     });
   </script>
 <script>
+    function openAwardModal(title, image, description, number) {
+      const modal = document.getElementById('awardDetailModal');
+      const img = document.getElementById('awardModalImg');
+      const titleEl = document.getElementById('awardModalTitle');
+      const descEl = document.getElementById('awardModalDescription');
+      const numberEl = document.getElementById('awardModalNumber');
+      if (!modal || !img || !titleEl || !descEl) return;
+      titleEl.textContent = title;
+      descEl.textContent = description;
+      img.src = image;
+      img.alt = title;
+      if (numberEl) numberEl.textContent = number ? String(number).padStart(2, '0') : '';
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('award-modal-open');
+    }
+    function closeAwardModal() {
+      const modal = document.getElementById('awardDetailModal');
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('award-modal-open');
+    }
+    function closeAwardModalOnOverlay(e) {
+      if (e.target && e.target.id === 'awardDetailModal') closeAwardModal();
+    }
     function toggleThemeSong(e) {
       if (e) e.stopPropagation();
       setJinglePlayback(!isPlaying);

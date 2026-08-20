@@ -2550,16 +2550,19 @@ body.presentation-mode {
 /* Profile photos: clip the image and its wrapper so rounded corners are guaranteed. */
 #juri .ed-profile-img-wrap,
 #panitia .ed-profile-img-wrap {
-  overflow: hidden;
-  border-radius: 28px;
-  background: linear-gradient(145deg, #f0fdfa, #f8fafc);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, .10);
-  isolation: isolate;
+  overflow: visible;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  isolation: auto;
 }
 #juri .ed-profile-img,
 #panitia .ed-profile-img {
   border-radius: 28px !important;
   clip-path: inset(0 round 28px);
+  overflow: hidden;
+  background: #f8fafc;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, .10);
 }
 @media (max-width: 900px) {
   #penghargaan .an-awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
@@ -2569,3 +2572,19 @@ body.presentation-mode {
   #penghargaan .an-hero-mascot img,
   #penghargaan .an-trophy-img { max-height: 300px !important; transform: none; }
 }
+/* Award detail interaction modal */
+.award-modal-open { overflow: hidden; }
+.award-detail-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(15,23,42,.68); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s ease, visibility .22s ease; }
+.award-detail-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.award-detail-dialog { position: relative; display: grid; grid-template-columns: minmax(240px, .9fr) minmax(280px, 1.1fr); width: min(860px, 100%); max-height: min(680px, 92vh); overflow: hidden; border: 1px solid rgba(255,255,255,.3); border-radius: 24px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.28); transform: translateY(14px) scale(.98); transition: transform .22s ease; }
+.award-detail-modal.is-open .award-detail-dialog { transform: translateY(0) scale(1); }
+.award-detail-media { min-height: 320px; display: flex; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(145deg,#e6f4f1,#f8fafc); }
+.award-detail-media img { display: block; width: 100%; max-height: 520px; object-fit: contain; border-radius: 18px; box-shadow: 0 16px 30px rgba(15,23,42,.14); }
+.award-detail-body { position: relative; padding: 46px 42px 38px; align-self: center; }
+.award-detail-kicker { margin-bottom: 12px; color: #d97706; font-size: .76rem; font-weight: 800; letter-spacing: .14em; }
+.award-detail-body h2 { margin: 0 0 18px; color: #0f172a; font-size: clamp(1.8rem,3vw,2.6rem); line-height: 1.15; }
+.award-detail-body p { margin: 0; color: #475569; font-size: 1.05rem; line-height: 1.75; }
+.award-detail-number { position: absolute; right: 28px; bottom: 10px; color: rgba(15,118,110,.10); font-size: 7rem; font-weight: 900; line-height: 1; }
+.award-detail-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 38px; height: 38px; border: 0; border-radius: 50%; color: #0f766e; background: #e6f4f1; font-size: 1.7rem; line-height: 1; cursor: pointer; }
+.award-detail-close:hover { background: #ccede4; }
+@media (max-width: 700px) { .award-detail-dialog { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; } .award-detail-media { min-height: 220px; padding: 18px 52px 18px 18px; } .award-detail-body { padding: 26px 24px 34px; } .award-detail-body p { font-size: .95rem; } }
