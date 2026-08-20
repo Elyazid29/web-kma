@@ -3866,3 +3866,22 @@ img, svg, video, iframe { max-width: 100%; }
   #penghargaan .award-card-horizontal .award-card-icon img { height: 230px; }
   .day-card-img-header { min-height: 240px !important; }
 }
+/* REVISION 2026-08-21 CONTENT OFFSET / MEDIA */
+/* The header is in normal flow; let the presentation deck size itself below its real mobile height. */
+@media (max-width: 700px) {
+  .slide-deck { height: auto !important; min-height: 0 !important; flex: 1 1 auto; }
+  .slide { min-height: 0; }
+  .slide-scroll-wrapper { min-height: 0; padding-top: 8px !important; }
+}
+/* Excellent Awards point 3: balanced desktop media, still large and proportional. */
+@media (min-width: 901px) {
+  #penghargaan .an-awards-grid .an-award-card:nth-child(3) .award-card-icon { flex-basis: 38% !important; min-height: 260px; }
+  #penghargaan .an-awards-grid .an-award-card:nth-child(3) .award-card-icon img { max-width: 92%; max-height: 280px; margin: auto; object-fit: contain !important; }
+}
+@media (max-width: 900px) {
+  #penghargaan .an-awards-grid .an-award-card:nth-child(3) .award-card-icon img { max-width: 100%; max-height: 260px; object-fit: contain !important; }
+}
+/* Activity point 4 uses the asset's intrinsic ratio instead of a square background frame. */
+.day-four .day-card-img-header { height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; padding: 0 !important; background: #f8fafc !important; }
+.day-four .day-card-image-element { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; object-position: center; }
+@media (max-width: 700px) { .day-four .day-card-image-element { width: 100%; height: auto; } }

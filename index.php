@@ -20,7 +20,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=88">
+  <link rel="stylesheet" href="assets/css/style.css?v=89">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -745,7 +745,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             </div>
 
             <div class="day-card day-four animate-on-scroll delay-300" onclick="openModal(4)">
-              <div class="day-card-img-header" style="background-image: url('assets/img/penutupan.png?v=20260818-2');">
+              <div class="day-card-img-header">
+                <img src="assets/img/penutupan.png?v=20260818-2" alt="Penutupan dan Kepulangan KMA XXV" class="day-card-image-element">
               </div>
               <div class="day-card-content">
                 <h3 style="margin-bottom: 2px;">Jumat, 4 September 2026</h3>
