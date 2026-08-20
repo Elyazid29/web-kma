@@ -4,6 +4,8 @@ if (!isAuthenticated()) {
     header('Location: login.php');
     exit;
 }
+$awardGuideMarkdown = file_exists(__DIR__ . '/assets/panduan penilaian.md') ? file_get_contents(__DIR__ . '/assets/panduan penilaian.md') : '';
+$awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -16,7 +18,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=83">
+  <link rel="stylesheet" href="assets/css/style.css?v=84">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -608,7 +610,7 @@ if (!isAuthenticated()) {
                 </div>
                 <span>B. SPECIAL ENGAGEMENT AWARD</span>
               </div>
-              <div class="an-special-card animate-on-scroll delay-100">
+              <div class="an-special-card animate-on-scroll delay-100" onclick="openAwardModal('Best Team Spirit', 'assets/img/best.team.png', 'Penghargaan engagement untuk kekompakan, kreativitas, autentisitas, dan semangat tim.', '11')" role="button" tabindex="0">
                 <div class="an-special-num">11</div>
                 <div class="an-special-info">
                   <h4>Best Team Spirit</h4>
@@ -1808,6 +1810,37 @@ if (!isAuthenticated()) {
     });
   </script>
 <script>
+    const awardGuideMarkdown = <?= $awardGuideJson ?: '""' ?>;
+    const awardGuideSections = {};
+    const awardGuideHeader = /\*\*\[(\d+)\.\s*([^\]]+)\]\{\.mark\}\*\*/g;
+    let awardGuideMatch;
+    let awardGuidePrevious = null;
+    while ((awardGuideMatch = awardGuideHeader.exec(awardGuideMarkdown)) !== null) {
+      if (awardGuidePrevious) {
+        awardGuideSections[awardGuidePrevious.number] = awardGuideMarkdown.slice(awardGuidePrevious.end, awardGuideMatch.index).trim();
+      }
+      awardGuidePrevious = { number: awardGuideMatch[1], end: awardGuideHeader.lastIndex };
+    }
+    if (awardGuidePrevious) awardGuideSections[awardGuidePrevious.number] = awardGuideMarkdown.slice(awardGuidePrevious.end).trim();
+
+    function escapeAwardText(value) {
+      return String(value || '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
+    }
+    function awardGuideKey(title) {
+      return String(title || '').toUpperCase().replace(/&AMP;/g, '&').replace(/\s+IMPROVEMENT$/, '').trim();
+    }
+    function renderAwardGuide(raw) {
+      const clean = String(raw || '')
+        .replace(/\r/g, '')
+        .replace(/\*\*\[([^\]]+)\]\{\.mark\}\*\*/g, '$1')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/^\s*[-*]\s+/gm, '• ')
+        .replace(/^\s*\d+\.\s+/gm, (line) => line.trim() + ' ')
+        .trim();
+      const paragraphs = clean.split(/\n\s*\n/).map((part) => '<p>' + escapeAwardText(part).replace(/\n/g, '<br>') + '</p>').join('');
+      return '<div class="award-guide-content">' + paragraphs + '</div>';
+    }
+
     function openAwardModal(title, image, description, number) {
       const modal = document.getElementById('awardDetailModal');
       const img = document.getElementById('awardModalImg');
@@ -1815,16 +1848,17 @@ if (!isAuthenticated()) {
       const descEl = document.getElementById('awardModalDescription');
       const numberEl = document.getElementById('awardModalNumber');
       if (!modal || !img || !titleEl || !descEl) return;
+      const guideNumber = String(number || '').replace(/^0+/, '') || String(number || '');
+      const guide = awardGuideSections[guideNumber];
       titleEl.textContent = title;
-      descEl.textContent = description;
+      descEl.innerHTML = guide ? renderAwardGuide(guide) : '<p>' + escapeAwardText(description) + '</p>';
       img.src = image;
       img.alt = title;
       if (numberEl) numberEl.textContent = number ? String(number).padStart(2, '0') : '';
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('award-modal-open');
-    }
-    function closeAwardModal() {
+    }    function closeAwardModal() {
       const modal = document.getElementById('awardDetailModal');
       if (!modal) return;
       modal.classList.remove('is-open');

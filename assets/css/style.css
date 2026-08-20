@@ -2587,4 +2587,6 @@ body.presentation-mode {
 .award-detail-number { position: absolute; right: 28px; bottom: 10px; color: rgba(15,118,110,.10); font-size: 7rem; font-weight: 900; line-height: 1; }
 .award-detail-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 38px; height: 38px; border: 0; border-radius: 50%; color: #0f766e; background: #e6f4f1; font-size: 1.7rem; line-height: 1; cursor: pointer; }
 .award-detail-close:hover { background: #ccede4; }
-@media (max-width: 700px) { .award-detail-dialog { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; } .award-detail-media { min-height: 220px; padding: 18px 52px 18px 18px; } .award-detail-body { padding: 26px 24px 34px; } .award-detail-body p { font-size: .95rem; } }
+@media (max-width: 700px) { .award-detail-dialog { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; } .award-detail-media { min-height: 220px; padding: 18px 52px 18px 18px; } .award-detail-body { padding: 26px 24px 34px; } .award-detail-body p { font-size: .95rem; } }.award-guide-content { max-height: min(52vh, 420px); overflow-y: auto; padding-right: 8px; }
+.award-guide-content p { margin: 0 0 14px; }
+.award-guide-content p:last-child { margin-bottom: 0; }
