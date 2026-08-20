@@ -3821,3 +3821,48 @@ img, svg, video, iframe { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
+/* REVISION 2026-08-21 MOBILE HEADER / LAYOUT */
+/* Remove the white text panel entirely; keep contrast through text treatment only. */
+#penghargaan .an-hero-text::before { display: none !important; }
+#penghargaan .an-hero-sub { color: #153c3a !important; text-shadow: 0 1px 3px rgba(255,255,255,.45) !important; }
+/* Trophy must remain solid and fully opaque. */
+#penghargaan .an-trophy-img { opacity: 1 !important; mask-image: none !important; -webkit-mask-image: none !important; filter: drop-shadow(0 14px 24px rgba(15,23,42,.16)) !important; }
+/* Use the available image area for Excellent Awards without distortion. */
+#penghargaan .award-card-horizontal .award-card-icon { min-height: 330px; overflow: hidden; }
+#penghargaan .award-card-horizontal .award-card-icon img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover !important; object-position: center; }
+/* Activities: fill the image frame on desktop/mobile; preserve aspect ratio with cover. */
+.day-card-img-header { background-size: cover !important; background-position: center !important; }
+.day-four .day-card-img-header { background-size: cover !important; }
+/* Keep desktop alternating cards unchanged; on mobile right-hand compositions stay right aligned but fit. */
+@media (max-width: 700px) {
+  .header { height: auto !important; min-height: 58px; }
+  .header-inner { width: 100%; flex-direction: column; align-items: stretch !important; gap: 8px; padding: 10px 12px !important; }
+  .logo { width: 100%; justify-content: flex-start; min-width: 0; gap: 8px; }
+  .logo-img { width: 38px !important; height: 38px !important; flex: 0 0 38px; }
+  .logo-text { min-width: 0; font-size: .86rem !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav { width: 100% !important; display: grid !important; grid-template-columns: minmax(0,1fr) auto auto; align-items: center !important; justify-content: initial !important; gap: 6px !important; margin-top: 0 !important; }
+  .nav-audio-btn { width: 100%; min-width: 0; max-width: none !important; justify-content: center; padding: 7px 8px !important; font-size: .72rem !important; }
+  .nav-audio-btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dropbtn { min-width: 44px; height: 36px; padding: 6px 8px !important; justify-content: center; }
+  .dropbtn > span:last-child { display: none; }
+  .nav-logout { height: 36px; padding: 6px 9px !important; font-size: .72rem !important; white-space: nowrap; }
+  .dropdown-content { top: calc(100% + 8px); right: 0 !important; left: auto !important; width: min(290px, calc(100vw - 24px)); min-width: 0 !important; max-height: min(70vh, 520px); overflow-y: auto; }
+  /* Alternating schedule stays alternating on mobile. */
+  #deepDiveTables .event-pass.dd-ticket-right,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right { width: calc(100% - 12px); margin-left: auto; margin-right: 0; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head { grid-template-columns: minmax(0,1fr) 56px; text-align: right; justify-items: end; padding: 18px 12px 18px 18px !important; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2),
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2) { order: 1; text-align: right; width: 100%; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-index,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-index { order: 2; width: 56px; min-height: 76px; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-meta,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-meta { justify-content: flex-end; text-align: right; }
+  #deepDiveTables .event-pass.dd-ticket-right .dd-table-wrap,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .dd-table-wrap { text-align: right; }
+  #deepDiveTables .event-pass.dd-ticket-right .dd-table-wrap img,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .dd-table-wrap img { width: 100%; height: auto; object-fit: contain; }
+  #penghargaan .award-card-horizontal .award-card-icon { min-height: 230px; }
+  #penghargaan .award-card-horizontal .award-card-icon img { height: 230px; }
+  .day-card-img-header { min-height: 240px !important; }
+}
