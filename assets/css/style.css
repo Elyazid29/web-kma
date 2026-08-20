@@ -2590,3 +2590,28 @@ body.presentation-mode {
 @media (max-width: 700px) { .award-detail-dialog { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; } .award-detail-media { min-height: 220px; padding: 18px 52px 18px 18px; } .award-detail-body { padding: 26px 24px 34px; } .award-detail-body p { font-size: .95rem; } }.award-guide-content { max-height: min(52vh, 420px); overflow-y: auto; padding-right: 8px; }
 .award-guide-content p { margin: 0 0 14px; }
 .award-guide-content p:last-child { margin-bottom: 0; }
+/* KMA REFERENCE POLISH */
+#tentang .tentang-container > .dd-ticket { position: relative; border: 1px solid #dbe4e7 !important; background: linear-gradient(135deg,#ffffff 0%,#f8fafc 100%) !important; box-shadow: 0 12px 28px rgba(15,23,42,.07) !important; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+#tentang .tentang-container > .dd-ticket::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 5px; background: linear-gradient(#0f766e,#d97706); }
+#tentang .tentang-container > .dd-ticket:hover { transform: translateY(-4px); border-color: #99d7ce !important; box-shadow: 0 18px 36px rgba(15,118,110,.13) !important; }
+#tentang .tentang-container > .dd-ticket .dd-ticket-content { padding: 20px 24px 20px 30px !important; }
+#tentang .tentang-container > .dd-ticket .dd-ticket-content > div:first-child > div { background: linear-gradient(145deg,#e6f4f1,#fff7ed) !important; box-shadow: inset 0 0 0 1px #cce8e2; }
+#tentang .tentang-container > .dd-ticket .dd-table-wrap { background: linear-gradient(180deg,#f8fafc,#ffffff) !important; }
+#tentang .tentang-container > .dd-ticket img { max-height: 440px; object-fit: contain; }
+#penghargaan .an-awards-grid { counter-reset: award-card; }
+#penghargaan .an-awards-grid .an-award-card { counter-increment: award-card; position: relative; }
+#penghargaan .an-awards-grid .an-award-card::after { content: '0' counter(award-card); position: absolute; top: 12px; right: 14px; z-index: 3; padding: 5px 8px; border-radius: 999px; color: #0f766e; background: rgba(255,255,255,.92); font: 800 .72rem/1 Inter,sans-serif; box-shadow: 0 4px 12px rgba(15,23,42,.12); }
+#penghargaan .an-awards-grid .an-award-card:nth-child(n+10)::after { content: counter(award-card); }
+#penghargaan .an-awards-grid .an-award-card > div:first-child { position: relative; height: 210px !important; overflow: hidden; }
+#penghargaan .an-awards-grid .an-award-card > div:first-child::after { content: ''; position: absolute; inset: auto 0 0; height: 45%; background: linear-gradient(transparent,rgba(15,23,42,.22)); pointer-events: none; }
+.hackathon-gallery { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin-top: 18px; }
+.hackathon-gallery figure { margin: 0; overflow: hidden; border: 1px solid #dbe4e7; border-radius: 14px; background: #fff; box-shadow: 0 8px 18px rgba(15,23,42,.07); }
+.hackathon-gallery img { display: block; width: 100%; height: auto; max-height: 360px; object-fit: contain; background: #f8fafc; }
+.hackathon-gallery figcaption { padding: 9px 12px; color: #0f766e; font-size: .78rem; font-weight: 800; }
+.rules-download-panel { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 26px auto 0; padding: 18px 20px; max-width: 780px; border: 1px solid #b7e4dd; border-radius: 16px; background: linear-gradient(135deg,#f0fdfa,#ffffff); box-shadow: 0 10px 24px rgba(15,118,110,.08); }
+.rules-download-panel strong,.rules-download-panel span { display:block; }
+.rules-download-panel strong { color:#0f172a; font-size:1rem; }
+.rules-download-panel span { margin-top:4px; color:#64748b; font-size:.84rem; }
+.rules-download-btn { flex:0 0 auto; padding:11px 16px; border-radius:10px; color:#fff; background:#0f766e; text-decoration:none; font-weight:800; }
+.rules-download-btn:hover { background:#115e59; }
+@media (max-width:600px) { .hackathon-gallery { grid-template-columns:1fr; } .rules-download-panel { align-items:flex-start; flex-direction:column; } }

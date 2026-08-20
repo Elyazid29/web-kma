@@ -18,7 +18,7 @@ $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=84">
+  <link rel="stylesheet" href="assets/css/style.css?v=86">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -357,7 +357,7 @@ $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON
                 </div>
             </div>
             <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
-                <img src="assets/img/penjelasan maskot.jpeg" alt="Filosofi Maskot KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+                <img src="assets/img/penjelasan.maskot.jpeg" alt="Filosofi Maskot KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
             </div>
         </article>
         <article class="dd-ticket animate-on-scroll delay-400" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
@@ -547,12 +547,12 @@ $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Safety Improvement</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Environment &amp; Sustainability', 'assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png', 'Penghargaan kepada inovasi yang memberikan dampak terbaik, terukur, dan berkelanjutan terhadap lingkungan serta penggunaan sumber daya.', '5')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="openAwardModal('Best Environment &amp; Sustainability Improvement', 'assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png', 'Penghargaan kepada inovasi yang memberikan dampak terbaik, terukur, dan berkelanjutan terhadap lingkungan serta penggunaan sumber daya.', '5')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png" alt="Best Environment &amp; Sustainability" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
-                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Environment &amp; Sustainability</h4>
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Environment &amp; Sustainability Improvement</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="openAwardModal('Best Technology &amp; Digital Innovation', 'assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png', 'Penghargaan kepada inovasi yang paling tepat, efektif, andal, dan relevan dalam memanfaatkan teknologi atau solusi digital untuk meningkatkan proses kerja.', '6')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
@@ -1154,6 +1154,12 @@ $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON
                 <div class="an-gold-line"></div>
               </div>
         </div>
+          <div class="rules-download-panel animate-on-scroll" aria-label="Download dokumen ketentuan">
+            <div><strong>Dokumen ketentuan KMA XXV</strong><span>Unduh file resmi untuk dibaca atau dibagikan kepada peserta.</span></div>
+            <a class="rules-download-btn" href="assets/Ketentuan Lainnya_KMA XXV MALANG_2026.pdf" download>Unduh PDF</a>
+          </div>
+          </div>
+        </div>
       </div>
     </section>
 <section id="emergency" class="slide section section-light" style="padding-bottom: 0;">
@@ -1384,25 +1390,14 @@ $awardGuideJson = json_encode($awardGuideMarkdown, JSON_UNESCAPED_UNICODE | JSON
         title: "ANTAM Hackathon 2026",
         category: "KOMPETISI INOVASI TERBUKA",
         content: `
-          <p style="margin-bottom: 12px; font-weight: 500; color: #334155; line-height: 1.6;">ANTAM Hackathon adalah kompetisi inovasi terbuka yang menantang para inovator muda untuk memecahkan permasalahan nyata di industri pertambangan. Ajang ini memacu kreativitas dan kolaborasi lintas disiplin untuk menghasilkan solusi teknologi inovatif dan efisien bagi ANTAM.</p>
-          <div style="margin-bottom: 15px;">
-            <p style="margin: 0; font-weight: bold; color: #0f172a; font-size: 1.1rem;">Total Peserta: <span style="color: #006d64;">77 Tim</span></p>
+          <p class="highlight-intro">ANTAM Hackathon 2026 menampilkan rangkaian informasi kompetisi, tantangan, dan hasil kegiatan secara berurutan.</p>
+          <div class="hackathon-gallery" aria-label="Materi ANTAM Hackathon">
+            <figure><img src="assets/img/hackaton/hk1.jpeg" alt="ANTAM Hackathon - materi 1"><figcaption>Materi Hackathon 1</figcaption></figure>
+            <figure><img src="assets/img/hackaton/hk2.jpeg" alt="ANTAM Hackathon - materi 2"><figcaption>Materi Hackathon 2</figcaption></figure>
+            <figure><img src="assets/img/hackaton/hk3.jpeg" alt="ANTAM Hackathon - materi 3"><figcaption>Materi Hackathon 3</figcaption></figure>
+            <figure><img src="assets/img/hackaton/hk4.jpeg" alt="ANTAM Hackathon - materi 4"><figcaption>Materi Hackathon 4</figcaption></figure>
           </div>
-          <p style="margin-bottom: 8px; font-weight: bold;">Berdasarkan Tema:</p>
-          <ul style="padding-left: 20px; margin-bottom: 16px;">
-            <li><strong>Eksplorasi:</strong> 46 tim</li>
-            <li><strong>Pengolahan Mineral:</strong> 18 tim</li>
-            <li><strong>Penambangan:</strong> 13 tim</li>
-          </ul>
-          <div style="margin-top:18px;">
-            <p style="margin-bottom:8px;font-weight:800;color:#0f172a;">Asal Kampus (25 kampus · 77 tim)</p>
-            <div class="hackathon-campus-grid">
-              <span>Institut Teknologi Bandung <b>12</b></span><span>Institut Teknologi Sains Bandung <b>7</b></span><span>Universitas Syiah Kuala <b>8</b></span><span>Institut Teknologi Sepuluh Nopember <b>5</b></span><span>Institut Teknologi Sumatera <b>4</b></span><span>Universitas Gadjah Mada <b>5</b></span><span>Universitas Brawijaya <b>4</b></span><span>Universitas Negeri Padang <b>4</b></span><span>UPN Veteran Yogyakarta <b>4</b></span><span>Universitas Jenderal Soedirman <b>3</b></span><span>Universitas Indonesia <b>2</b></span><span>Telkom University <b>2</b></span><span>Universitas Khairun Ternate <b>2</b></span><span>Universitas Trisakti <b>2</b></span><span>PEP Bandung <b>1</b></span><span>Universitas Islam Riau <b>1</b></span><span>Universitas Jember <b>1</b></span><span>Universitas Lambung Mangkurat <b>1</b></span><span>Universitas Muhammadiyah Yogyakarta <b>1</b></span><span>Universitas Padjadjaran <b>1</b></span><span>Universitas Palangka Raya <b>1</b></span><span>Universitas Pattimura <b>1</b></span><span>Universitas Presiden <b>1</b></span><span>Universitas Sriwijaya <b>1</b></span><span>Universitas Tanjungpura <b>1</b></span>
-            </div>
-          </div>
-          
-        `
-      }
+        `      }
     };
 
     function openHighlightModal(id) {
