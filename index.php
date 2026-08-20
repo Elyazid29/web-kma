@@ -86,6 +86,71 @@ if (!isAuthenticated()) {
       transform: rotate(90deg);
     }
   </style>
+<style>
+      .dd-ticket.open .dd-chevron { transform: translateY(-50%) rotate(180deg) !important; }
+      .dd-ticket.open .dd-table-wrap { display: block !important; }
+    </style>
+
+    <style>
+      /* Header fixes */
+      @media (max-width: 768px) {
+        .header-inner { flex-wrap: wrap; justify-content: space-between; align-items: center; }
+        .logo-text { font-size: 0.9rem; margin-top: 4px; }
+        .nav { width: 100%; justify-content: flex-end; margin-top: 10px; gap: 6px !important; }
+        .nav-audio-btn { padding: 4px 8px; font-size: 0.75rem; }
+        .nav-logout { padding: 4px 8px !important; font-size: 0.75rem !important; }
+        .dropbtn { padding: 4px 8px; font-size: 0.75rem; }
+      }
+      /* Bottom Nav (Pill style) */
+      .slide-nav-controls.pill-nav {
+        background: #1e293b !important;
+        border-radius: 50px !important;
+        padding: 6px 6px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+        border: none !important;
+        width: max-content !important;
+        margin: 0 auto !important;
+        bottom: 20px !important;
+      }
+      .pill-nav .nav-btn {
+        background: transparent !important;
+        color: #94a3b8 !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        border-radius: 50px !important;
+        font-weight: 500 !important;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.3s;
+      }
+      .pill-nav .nav-btn:hover { color: white !important; }
+      .pill-nav .nav-btn.next-btn {
+        background: #006d64 !important;
+        color: white !important;
+      }
+      .pill-nav .nav-btn.next-btn:hover { background: #00524a !important; }
+      .pill-nav-counter {
+        color: #f8fafc !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+      }
+    </style>
+    
+
+    <style>
+      .an-modal { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; }
+      .an-modal.active { display: flex; }
+      .an-modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+      .an-modal-content { position: relative; z-index: 1; width: 90%; max-height: 90vh; overflow-y: auto; transform: scale(0.95); opacity: 0; transition: 0.3s; }
+      .an-modal.active .an-modal-content { transform: scale(1); opacity: 1; }
+    </style>
+    
 </head>
 <body class="presentation-mode">
 
@@ -106,30 +171,30 @@ if (!isAuthenticated()) {
       <nav class="nav" style="display: flex; align-items: center; gap: 10px;">
         
         <!-- Tombol Audio Ringkas (Default Status ON / Class "playing") -->
-        <button id="audioToggleBtn" class="nav-audio-btn playing" onclick="toggleAudio(event)" title="Mute/Putar Musik">
+        <button id="themeSongBtn" class="nav-btn nav-audio-btn" onclick="toggleThemeSong(event)" aria-label="Toggle Theme Song" style="display: flex; align-items: center; gap: 8px; background: #006d64; color: white; border: none; padding: 8px 16px; border-radius: 50px; cursor: pointer; font-weight: bold;">
           <svg id="audioIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>
           </svg>
-          <span>Musik</span>
+          <span>Theme Song KMA</span>
         </button>
 
         <!-- Dropdown Menu -->
         <div class="dropdown" id="menuDropdown">
           <button class="dropbtn" onclick="toggleDropdown(event)" aria-label="Buka menu"><span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span><span>Menu</span></button>
           <div class="dropdown-content">
-            <a href="#" onclick="selectMenu(0); return false;">1. Beranda & Countdown</a>
+            <a href="#" onclick="selectMenu(0); return false;">1. Beranda</a>
             <a href="#" onclick="selectMenu(1); return false;">2. Tentang KMA</a>
             <a href="#" onclick="selectMenu(2); return false;">3. Key Highlights</a>
             <a href="#" onclick="selectMenu(3); return false;">4. Penghargaan</a>
             <a href="#" onclick="selectMenu(4); return false;">5. Rangkaian Kegiatan</a>
-            <a href="#" onclick="selectMenu(5); return false;">6. Deep Dive Interview</a>
-            <a href="#" onclick="selectMenu(6); return false;">7. Lokasi Acara</a>
-            <a href="#" onclick="selectMenu(7); return false;">8. Kontak Panitia</a>
-            <a href="#" onclick="selectMenu(8); return false;">9. Dewan Juri KMA XXV</a>
-            <a href="#" onclick="selectMenu(9); return false;">10. Panitia KMA XXV</a>
-            <a href="#" onclick="selectMenu(10); return false;">11. Jadwal Presentasi</a>
-            <a href="#" onclick="selectMenu(11); return false;">12. Emergency</a>
+            <a href="#" onclick="selectMenu(5); return false;">6. Jadwal Deep Dive</a>
+            <a href="#" onclick="selectMenu(6); return false;">7. Jadwal Presentasi</a>
+            <a href="#" onclick="selectMenu(7); return false;">8. Dewan Juri KMA XXV</a>
+            <a href="#" onclick="selectMenu(8); return false;">9. Panitia KMA XXV</a>
+            <a href="#" onclick="selectMenu(9); return false;">10. Lokasi Acara</a>
+            <a href="#" onclick="selectMenu(10); return false;">11. Kontak Panitia</a>
+            <a href="#" onclick="selectMenu(11); return false;">12. Aturan Lainnya</a>
+            <a href="#" onclick="selectMenu(12); return false;">13. Emergency</a>
           </div>
         </div>
         <a href="logout.php" class="nav-logout" title="Keluar dari akun" style="display:inline-flex;align-items:center;padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;color:#475569;text-decoration:none;font-size:.8rem;font-weight:700;">Keluar</a>
@@ -139,9 +204,7 @@ if (!isAuthenticated()) {
 
   <!-- Presentation Deck Container -->
   <main class="slide-deck">
-
-    <!-- SLIDE 1 -->
-    <section id="home" class="slide active hero" style="background-image: url('assets/img/asset1.png');">
+<section id="home" class="slide active hero" style="background-image: url('assets/img/asset1.png');">
       <div class="hero-overlay" style="background: rgba(0, 0, 0, 0.45);"></div>
       <div class="slide-scroll-wrapper">
         <div class="container hero-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; pointer-events: auto;">
@@ -202,30 +265,33 @@ if (!isAuthenticated()) {
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 2: TENTANG KMA XXV (UPDATE TERBARU) -->
-    <section id="tentang" class="slide section section-light">
+<section id="tentang" class="slide section section-light">
       <div class="slide-scroll-wrapper">
         <div class="container">
           
+          
+          <div class="kma-hero-card animate-on-scroll" style="position: relative; background: #ffffff; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 40px; border: 1px solid #f1f5f9; display: flex; flex-wrap: wrap; min-height: 280px;">
+              <div style="position: absolute; inset: 0; z-index: 1; opacity: 0.15; background-image: url('assets/img/tugu_malang.jpg'); background-size: cover; background-position: center; pointer-events: none;"></div>
+              
+              <div style="position: relative; z-index: 2; padding: 40px; flex: 1 1 300px;">
+                  <h1 style="font-size: 2.8rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1; letter-spacing: -1px;">KMA XXV</h1>
+                  <h2 style="font-size: 1.6rem; font-weight: 800; color: #006d64; margin: 0 0 20px 0;">MALANG <span style="color: #f97316;">• 2026</span></h2>
+                  <div style="width: 40px; height: 3px; background: #f97316; margin-bottom: 24px;"></div>
+                  <p style="font-size: 1.05rem; color: #334155; max-width: 320px; line-height: 1.6; font-style: italic;">
+                      25 Years of Continuous Improvement:<br>Powering Sustainable Growth, Transforming the Future.
+                  </p>
+              </div>
+              
+              <div style="position: relative; z-index: 2; flex: 1 1 250px; display: flex; align-items: flex-end; justify-content: center; padding: 20px 40px 0 40px;">
+                  <img src="assets/img/golnix.png" alt="Mascot GOLNIX" style="max-height: 300px; width: auto; object-fit: contain; filter: drop-shadow(-5px 10px 15px rgba(0,0,0,0.1)); display: block; margin-bottom: 0; transform: translateY(18px);">
+              </div>
+          </div>
+
           <div class="about-card-wrapper animate-on-scroll">
             <!-- Grid Layout Utama: Visual Kiri + Content Kanan -->
             <div class="about-grid">
               
               <!-- Kolom Visual (Logo KMA + Maskot GOLNIX + Watermark Malang) -->
-              <div class="about-visual-col">
-                <div class="about-visual-container">
-                  <!-- Latar Belakang Gunungan Malang -->
-                  <img src="assets/img/gunung2.png" class="malang-watermark-bg" alt="Motif Malang Watermark">
-                  
-                  <!-- Logo 25 Tahun KMA (Layer Belakang) -->
-                  <img src="assets/img/logo.kma.png" class="kma-logo-layer" alt="Logo KMA XXV">
-                  
-                  <!-- Maskot GOLNIX (Layer Depan Utama) -->
-                  <img src="assets/img/golnix.png" class="golnix-mascot-layer" alt="Maskot GOLNIX">
-                </div>
-              </div>
-
               <!-- Kolom Narasi Utama -->
               <div class="about-content-col">
                 <div class="section-header" style="text-align: left; margin-bottom: 20px;">
@@ -234,85 +300,77 @@ if (!isAuthenticated()) {
                 </div>
 
                 <div class="about-narrative-text">
-                  <p>Konvensi Mutu ANTAM (KMA) XXV Tahun 2026 menandai <strong>Silver Jubileeâ€”25 tahun atau seperempat abad perjalanan budaya mutu, inovasi, dan continuous improvement di ANTAM</strong>. Lebih dari sekadar kompetisi, KMA menjadi momentum untuk mengapresiasi karya inovatif Insan ANTAM sekaligus merefleksikan bagaimana gagasan, kreativitas, dan semangat perbaikan terus berkembang menjadi solusi yang memberikan nilai bagi perusahaan.</p>
+                  <p>Konvensi Mutu ANTAM (KMA) XXV Tahun 2026 menandai <strong>Silver Jubilee—25 tahun atau seperempat abad perjalanan budaya mutu, inovasi, dan continuous improvement di ANTAM</strong>. Lebih dari sekadar kompetisi, KMA menjadi momentum untuk mengapresiasi karya inovatif Insan ANTAM sekaligus merefleksikan bagaimana gagasan, kreativitas, dan semangat perbaikan terus berkembang menjadi solusi yang memberikan nilai bagi perusahaan.</p>
                   
-                  <p>Konvensi Mutu ANTAM (KMA) merupakan bagian dari ekosistem <strong>ANTAM BestMIND â€” Wadah Inovasi Terintegrasi ANTAM</strong>, yang berfungsi sebagai payung besar yang menghubungkan berbagai inisiatif inovasi dan perbaikan di ANTAM. Dalam ekosistem BestMIND, <strong>KMA menjadi salah satu ruang utama untuk mengangkat, mengapresiasi, menguji, serta menyebarluaskan praktik continuous improvement dan inovasi terbaik</strong>, sehingga ide tidak berhenti pada kompetisi, tetapi berkembang menjadi <em>knowledge</em>, solusi, dan <em>value</em> bagi ANTAM.</p>
+                  <p>Konvensi Mutu ANTAM (KMA) merupakan bagian dari ekosistem <strong>ANTAM BestMIND — Wadah Inovasi Terintegrasi ANTAM</strong>, yang berfungsi sebagai payung besar yang menghubungkan berbagai inisiatif inovasi dan perbaikan di ANTAM. Dalam ekosistem BestMIND, <strong>KMA menjadi salah satu ruang utama untuk mengangkat, mengapresiasi, menguji, serta menyebarluaskan praktik continuous improvement dan inovasi terbaik</strong>, sehingga ide tidak berhenti pada kompetisi, tetapi berkembang menjadi <em>knowledge</em>, solusi, dan <em>value</em> bagi ANTAM.</p>
                   
                   <p>KMA bertujuan menjadi <strong>ruang berbagi pengetahuan, pembelajaran, kolaborasi, dan diseminasi inovasi</strong> antarunit serta Anak Perusahaan ANTAM. Melalui KMA, berbagai solusi perbaikan tidak berhenti sebagai keberhasilan di satu tempat, tetapi didorong untuk dikembangkan, distandarisasi, direplikasi, dan memberikan dampak yang lebih luas terhadap <strong>produktifitas, efisiensi, kualitas, keselamatan, keberlanjutan, serta kinerja perusahaan</strong>.</p>
                 </div>
 
                 <!-- Kotak Tema KMA -->
-                <div class="theme-box" style="margin-top: 20px; text-align: center;">
-                  <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
+                <div class="kma-identity-grid" style="display: flex; flex-direction: column; gap: 12px; margin-top: 30px;">
+        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
   <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
     <div style="display: flex; align-items: center; gap: 16px;">
       <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
       </div>
       <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Tema KMA</span>
     </div>
     <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
   </div>
   <div style="display: none; padding: 0 16px 16px 16px;">
-    <img src="assets/img/TEMA.KMA.JPEG?v=20260818-3" alt="Tema KMA XXV 2026" style="max-width: 100%; border-radius: 8px;">
+    <img src="assets/img/TEMA.KMA.JPEG" alt="Tema KMA" style="width: 100%; border-radius: 8px;">
   </div>
 </div>
-                </div>
-
-                <!-- Identitas KMA XXV: Filosofi Logo dan Maskot -->
-                <div class="kma-identity-grid" aria-label="Identitas KMA XXV" style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
-                  <article style="text-align: center;">
-                    <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
+        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
   <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
     <div style="display: flex; align-items: center; gap: 16px;">
       <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
       </div>
       <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Filosofi Logo KMA</span>
     </div>
     <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
   </div>
   <div style="display: none; padding: 0 16px 16px 16px;">
-    <img src="assets/img/logo.penjelasan.jpeg?v=20260818-4" alt="Penjelasan Logo KMA XXV" style="max-width: 100%; border-radius: 8px;">
+    <img src="assets/img/logo.penjelasan.jpeg" alt="Filosofi Logo KMA" style="width: 100%; border-radius: 8px;">
   </div>
 </div>
-                  </article>
-                  
-                  <article style="text-align: center; margin-top: 10px;">
-  <div class="kma-identity-card">
-    <button type="button" class="kma-identity-toggle" onclick="const c=this.nextElementSibling; const i=this.querySelector('.chevron'); const open=c.style.display==='none'; c.style.display=open?'block':'none'; i.style.transform=open?'rotate(180deg)':'rotate(0deg)';">
-      <span class="kma-identity-heading"><span class="kma-identity-icon">✦</span>Filosofi Maskot KMA</span>
-      <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </button>
-    <div style="display: none; padding: 0 16px 16px;">
-      <img src="assets/img/logo.penjelasan.jpeg?v=20260819-1" alt="Filosofi Maskot KMA" style="max-width: 100%; border-radius: 8px;">
-    </div>
-  </div>
-</article>
-<article style="text-align: center; margin-top: 10px;">
-  <div class="kma-identity-card">
-    <button type="button" class="kma-identity-toggle" onclick="const c=this.nextElementSibling; const i=this.querySelector('.chevron'); const open=c.style.display==='none'; c.style.display=open?'block':'none'; i.style.transform=open?'rotate(180deg)':'rotate(0deg)';">
-      <span class="kma-identity-heading"><span class="kma-identity-icon">B</span>ANTAM BestMIND</span>
-      <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </button>
-    <div style="display: none; padding: 0 16px 16px;">
-      <img src="assets/img/antamBest.jpeg?v=20260819-2" alt="ANTAM BestMIND" style="max-width: 100%; border-radius: 8px; margin: 0 auto; display: block;">
-    </div>
-  </div>
-</article>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-
-        </div>
+        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
+  <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
       </div>
+      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Filosofi Maskot KMA</span>
+    </div>
+    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </div>
+  <div style="display: none; padding: 0 16px 16px 16px;">
+    <img src="assets/img/penjelasan maskot.jpeg" alt="Filosofi Maskot KMA" style="width: 100%; border-radius: 8px;">
+  </div>
+</div>
+        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
+  <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+      </div>
+      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">ANTAM BestMIND</span>
+    </div>
+    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </div>
+  <div style="display: none; padding: 0 16px 16px 16px;">
+    <img src="assets/img/antamBest.jpeg" alt="ANTAM BestMIND" style="width: 100%; border-radius: 8px;">
+  </div>
+</div>
+    </div>
+</div>
+</div>
+</div>
     </section>
-
-    <!-- SLIDE 3 -->
-    <section id="highlights" class="slide kh-section">
+<section id="highlights" class="slide kh-section">
       <div class="slide-scroll-wrapper">
         
         <!-- BANNER FULL WIDTH -->
@@ -321,7 +379,7 @@ if (!isAuthenticated()) {
             <div class="kh-banner-left">
               <div class="kh-sub-header">
                 <span class="kh-sub-text">KEY HIGHLIGHTS OF</span>
-                <span class="kh-diamond">â—†</span>
+                <span class="kh-diamond">◆</span>
                 <span class="kh-line"></span>
               </div>
               <h2 class="kh-main-title">
@@ -330,7 +388,7 @@ if (!isAuthenticated()) {
               </h2>
               <div class="kh-location-badge">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>KMA XXV â€“ MALANG</span>
+                <span>KMA XXV – MALANG</span>
               </div>
             </div>
             <div class="kh-banner-right">
@@ -350,7 +408,7 @@ if (!isAuthenticated()) {
                 <h3 class="kh-card-title">Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</h3>
                 <div class="kh-gold-line"></div>
                 <p class="kh-card-desc">Mendokumentasikan perjalanan eksplorasi di berbagai wilayah Indonesia selama periode 2000-2025.</p>
-                <span class="kh-click-hint">Klik untuk detail info â€º</span>
+                <span class="kh-click-hint">Klik untuk detail info ›</span>
               </div>
               <div class="kh-card-img-wrap kh-img-contain-wrap">
                 <img src="assets/img/25tahun.png" alt="Logo KMA 25 Tahun" class="kh-card-img kh-card-img-contain">
@@ -364,7 +422,7 @@ if (!isAuthenticated()) {
                 <h3 class="kh-card-title">Prosiding Inovasi 25 Tahun</h3>
                 <div class="kh-gold-line"></div>
                 <p class="kh-card-desc">Refleksi perjalanan inovasi, mendokumentasikan lebih dari 332 inovasi berkelanjutan dari seluruh insan ANTAM.</p>
-                <span class="kh-click-hint">Klik untuk detail info â€º</span>
+                <span class="kh-click-hint">Klik untuk detail info ›</span>
               </div>
               <div class="kh-card-img-wrap">
                 <img src="assets/img/prosiding.png" alt="Prosiding Inovasi" class="kh-card-img">
@@ -378,7 +436,7 @@ if (!isAuthenticated()) {
                 <h3 class="kh-card-title">Official Theme Song KMA XXV</h3>
                 <div class="kh-gold-line"></div>
                 <p class="kh-card-desc">Saksikan lirik dan notasi balok dari jingle resmi KMA XXV yang mengobarkan semangat kebersamaan.</p>
-                <span class="kh-click-hint">Klik untuk detail info â€º</span>
+                <span class="kh-click-hint">Klik untuk detail info ›</span>
               </div>
               <div class="kh-card-img-wrap">
                 <img src="assets/img/theme.song.png" alt="Official Theme Song" class="kh-card-img">
@@ -392,7 +450,7 @@ if (!isAuthenticated()) {
                 <h3 class="kh-card-title">ANTAM Hackathon</h3>
                 <div class="kh-gold-line"></div>
                 <p class="kh-card-desc">Program kompetisi yang diikuti oleh 77 tim terbaik untuk menjawab tantangan nyata ANTAM.</p>
-                <span class="kh-click-hint">Klik untuk detail info â€º</span>
+                <span class="kh-click-hint">Klik untuk detail info ›</span>
               </div>
               <div class="kh-card-img-wrap kh-img-contain-wrap">
                 <img src="assets/img/hackaton.png?v=20260818-2" alt="ANTAM Hackathon" class="kh-card-img kh-card-img-contain">
@@ -403,9 +461,7 @@ if (!isAuthenticated()) {
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 4 -->
-    <section id="penghargaan" class="slide an-section">
+<section id="penghargaan" class="slide an-section">
       <div class="slide-scroll-wrapper">
         <div class="an-hero" style="background-image: url('assets/img/bg.malang.png'); background-size: cover; background-position: center bottom; padding: 40px 0; border-bottom: 1px solid #e2e8f0; position: relative; overflow: hidden;">
           <div style="position: absolute; top: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.2) 100%); z-index: 0;"></div>
@@ -447,105 +503,85 @@ if (!isAuthenticated()) {
             </div>
 
             <div class="an-awards-grid animate-on-scroll delay-100">
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
-                  </div>
-                  <div class="an-card-num">1</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Presenter', 'assets/img/Icon Mockup Board juara/Best Presenter.png', 'Penghargaan kepada tim yang paling mampu menyampaikan, menjelaskan, dan mempertahankan materi inovasi secara jelas, sistematis, meyakinkan, serta profesional.', '1')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Presenter.png" alt="Best Presenter" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Presenter</h4>
-                <p class="an-card-desc">Individu yang mampu menyampaikan, menjelaskan, dan mempertahankan materi inovasi dengan sangat baik.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Presenter</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                  </div>
-                  <div class="an-card-num">2</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Makalah', 'assets/img/Icon Mockup Board juara/Best Makalah.png', 'Penghargaan kepada karya inovasi GKM atau SS dengan dokumen makalah yang paling berkualitas dari sisi struktur, substansi, metodologi, alur PDCA, penyajian data, keterbacaan, dan kualitas visual dokumen.', '2')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Makalah.png" alt="Best Makalah" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Makalah</h4>
-                <p class="an-card-desc">Gugus dengan kualitas makalah terbaik dari sisi struktur, substansi, metodologi, dan penyajian.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Makalah</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="m7 11 3-3 3 3 4-4"/></svg>
-                  </div>
-                  <div class="an-card-num">3</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Visual Communication', 'assets/img/Icon Mockup Board juara/Best Visual Communication.png', 'Penghargaan kepada tim yang paling efektif dan kreatif dalam memvisualisasikan inovasi selama presentasi sehingga masalah, solusi, proses, dan hasil inovasi dapat dipahami dengan mudah oleh juri dan audiens.', '3')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Visual Communication.png" alt="Best Visual Communication" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Visual Communication</h4>
-                <p class="an-card-desc">Gugus yang menyajikan materi dengan visual yang paling efektif, menarik, dan mudah dipahami.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Visual Communication</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                  </div>
-                  <div class="an-card-num">4</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Safety Improvement', 'assets/img/Icon Mockup Board juara/Best Safety Improvement.png', 'Penghargaan kepada inovasi yang memberikan peningkatan paling kuat, nyata, dan berkelanjutan terhadap keselamatan kerja serta pengendalian risiko.', '4')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Safety Improvement.png" alt="Best Safety Improvement" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Safety Improvement</h4>
-                <p class="an-card-desc">Inovasi yang memberikan peningkatan terbaik pada aspek keselamatan kerja dan pengendalian risiko.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Safety Improvement</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-                  </div>
-                  <div class="an-card-num">5</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Environment &amp; Sustainability', 'assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png', 'Penghargaan kepada inovasi yang memberikan dampak terbaik, terukur, dan berkelanjutan terhadap lingkungan serta penggunaan sumber daya.', '5')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png" alt="Best Environment &amp; Sustainability" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Environment &amp; Sustainability</h4>
-                <p class="an-card-desc">Inovasi yang memberikan dampak terbaik terhadap lingkungan dan keberlanjutan.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Environment &amp; Sustainability</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-                  </div>
-                  <div class="an-card-num">6</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Technology &amp; Digital Innovation', 'assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png', 'Penghargaan kepada inovasi yang paling tepat, efektif, andal, dan relevan dalam memanfaatkan teknologi atau solusi digital untuk meningkatkan proses kerja.', '6')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png" alt="Best Technology &amp; Digital Innovation" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Technology &amp; Digital Innovation</h4>
-                <p class="an-card-desc">Inovasi yang memanfaatkan teknologi atau solusi digital secara efektif dan relevan.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Technology &amp; Digital Innovation</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                  </div>
-                  <div class="an-card-num">7</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Proven Financial Benefit', 'assets/img/Icon Mockup Board juara/Best Finance Benefit.png', 'Penghargaan kepada inovasi dengan manfaat finansial bersih terbesar yang telah terealisasi, terukur, dapat ditelusuri, dan terverifikasi.', '7')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Finance Benefit.png" alt="Best Proven Financial Benefit" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Proven Financial Benefit</h4>
-                <p class="an-card-desc">Inovasi dengan manfaat finansial terbesar yang telah terbukti dan terverifikasi.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Proven Financial Benefit</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                  </div>
-                  <div class="an-card-num">8</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Collaboration', 'assets/img/Icon Mockup Board juara/Best Collaboration.png', 'Penghargaan kepada tim yang paling kuat menunjukkan kolaborasi lintas satuan kerja, fungsi, unit, atau anak perusahaan dan stake holder lainnya diluar perusahaan dalam pembentukan dan pelaksanaan inovasi.', '8')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Collaboration.png" alt="Best Collaboration" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Collaboration</h4>
-                <p class="an-card-desc">Gugus yang menunjukkan kolaborasi terbaik lintas fungsi, unit, atau anak perusahaan.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Collaboration</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  </div>
-                  <div class="an-card-num">9</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Transformation Behaviour', 'assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png', 'Penghargaan kepada tim yang proses inovasinya paling kuat dan paling nyata mencerminkan minimal 6 dari 8 Key Behaviours Transformasi ANTAM.', '9')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png" alt="Best Transformation Behaviour" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Transformation Behaviour</h4>
-                <p class="an-card-desc">Gugus yang paling mencerminkan penerapan 8 Key Behaviours Transformasi ANTAM.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Transformation Behaviour</h4>
+                </div>
               </div>
-              <div class="an-award-card">
-                <div class="an-card-icon-wrap">
-                  <div class="an-card-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                  </div>
-                  <div class="an-card-num">10</div>
+              <div class="an-award-card" onclick="openAwardModal('Best Replication Potential', 'assets/img/Icon Mockup Board juara/Best replication potential.png', 'Penghargaan kepada inovasi yang paling layak, mudah, dan bernilai untuk diterapkan pada lingkup kerja, unit, atau anak perusahaan lainnya atau lingkungan sekitar wilayah operasi.', '10')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                <div style="height: 180px; background: #f8fafc;">
+                  <img src="assets/img/Icon Mockup Board juara/Best replication potential.png" alt="Best Replication Potential" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h4 class="an-card-title">Best Replication Potential</h4>
-                <p class="an-card-desc">Inovasi yang paling mudah direplikasi dan diterapkan di unit atau lokasi lain.</p>
+                <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
+                  <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Replication Potential</h4>
+                </div>
               </div>
             </div>
           </div>
@@ -573,17 +609,7 @@ if (!isAuthenticated()) {
           </div>
         </div>
 
-        <!-- C. Ketentuan Umum -->
-        <div class="an-rules-block">
-          <div class="container">
-            <div class="an-rules-head animate-on-scroll">
-              <div class="an-rules-icon-wrap">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              </div>
-              <div>
-                <h3 class="an-rules-title">C. KETENTUAN UMUM</h3>
-                <div class="an-gold-line"></div>
-              </div>
+        
             </div>
             <div class="an-rules-grid animate-on-scroll delay-100">
               <div class="an-rule-item">
@@ -608,13 +634,12 @@ if (!isAuthenticated()) {
             <div class="an-footer-note animate-on-scroll delay-200">
               <p>Seluruh kategori menggunakan acuan penilaian yang berbeda sesuai objek penilaiannya.</p>
             </div>
+<br><br><div style="text-align: center;"><a href="assets/Ketentuan Lainnya_KMA XXV MALANG_2026.pdf" download class="btn btn-primary" style="display: inline-block; padding: 12px 24px; background: #006d64; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0, 109, 100, 0.3);">Download Ketentuan Lainnya (PDF)</a></div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 5: RANGKAIAN KEGIATAN -->
-    <section id="jadwal" class="slide section section-light">
+<section id="jadwal" class="slide section section-light">
       <div class="slide-scroll-wrapper">
         <div class="container">
           <div class="section-header animate-on-scroll">
@@ -687,9 +712,7 @@ if (!isAuthenticated()) {
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 6: DEEP DIVE -->
-    <section id="deep-dive" class="slide an-section" style="background: #f8fafc; position: relative;">
+<section id="deep-dive" class="slide an-section" style="background: #f8fafc; position: relative;">
       <div class="slide-scroll-wrapper">
         <div class="container" style="padding-top: 60px; padding-bottom: 60px;">
           <!-- Editorial Header -->
@@ -707,113 +730,19 @@ if (!isAuthenticated()) {
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 6 -->
-    <section id="lokasi" class="slide section section-white" style="padding-bottom: 0;">
+<section id="presentasi" class="slide section" style="background-color: #F5F7F7;">
       <div class="slide-scroll-wrapper">
-        <div class="container" style="margin-bottom: 60px; padding-top: 40px;">
+        <div class="container" style="padding-top: 50px; padding-bottom: 70px;">
           <div class="section-header animate-on-scroll">
-            <h2 class="section-title">Lokasi Acara</h2>
+            <p class="eyebrow">AGENDA PRESENTASI</p>
+            <h2 class="section-title">Jadwal Presentasi</h2>
             <div class="divider"></div>
-          </div>
-          <div class="location-grid animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/mercure.mirama.jpg'); height: 180px;">
-                <div class="day-badge">HOTEL & CONVENTION</div>
-              </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Mercure Mirama Hotel</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Jl. Raden Panji Suroso No.7, Kota Malang, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/TuQjnsZZyXWNcRGx7" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
-              </div>
-            </div>
-
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/warung%20wareg.jpg?v=20260818-3'); height: 220px;">
-                <div class="day-badge">MAKAN SIANG</div>
-              </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Resto Warung Wareg</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Malang, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/kFcfna1EVPKxmJit5" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
-              </div>
-            </div>
-
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/pagupon.jpg?v=20260818-3'); height: 220px;">
-                <div class="day-badge">TEAM BUILDING</div>
-              </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Pagupon Camp</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/ADmDNfi9pxoynXcD6" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
-              </div>
-            </div>
-
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/brawijaya.jpeg?v=20260818-3'); height: 220px;">
-                <div class="day-badge">OLEH-OLEH</div>
-              </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Brawijaya Oleh Oleh</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/5bGhM3z2G2CzwC7X9" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SLIDE KONTAK PANITIA -->
-    <section id="kontak" class="slide section section-light">
-      <div class="slide-scroll-wrapper">
-        <div id="kontak-content" class="container" style="margin-bottom: 40px;">
-          <div class="section-header animate-on-scroll">
-            <img src="assets/img/golnix.png?v=20260818-3" alt="Maskot GOLNIX" style="max-height: 120px; margin-bottom: 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
-            <h2 class="section-title">Kontak Panitia</h2>
-            <div class="divider"></div>
-            <p class="section-desc">Punya pertanyaan seputar event KMA XXV?<br>Jangan ragu untuk menghubungi kami melalui jalur di bawah ini.</p>
-          </div>
-
-          <div class="contact-list animate-on-scroll delay-100">
-            <a href="mailto:kma25@antam.com" class="clist-item">
-              <div class="clist-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              </div>
-              <div class="clist-info">
-                <span class="clist-label">Email</span>
-                <span class="clist-value">kma25@antam.com</span>
-              </div>
-              <div class="clist-arrow">â€º</div>
-            </a>
-
-            <button type="button" class="clist-item lo-toggle-button" onclick="toggleLoContacts()" aria-expanded="false" aria-controls="loContacts"><div class="clist-icon clist-wa"><span style="font-size:1.3rem;">◉</span></div><div class="clist-info"><span class="clist-label">WhatsApp</span><span class="clist-value">Tanya KMA (LO Unit)</span></div><div class="clist-arrow">›</div></button>
-          <div id="loContacts" class="lo-contact-section animate-on-scroll delay-200" hidden>
-            <h3>Kontak LO Peserta</h3>
-            <p class="lo-contact-intro">Pilih unit peserta untuk menghubungi LO melalui WhatsApp.</p>
-            <div class="lo-contact-grid">
-              <a href="https://wa.me/6287874643444" target="_blank" rel="noopener"><strong>Unit Kolaka</strong><span>Utiah Sukarini · 0878 7464 3444</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6287974633444" target="_blank" rel="noopener"><strong>Unit Konawe Utara</strong><span>Utiah Sukarini · 0879 7464 3444</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281293272929" target="_blank" rel="noopener"><strong>Unit Kalimantan Barat</strong><span>Yosafat Simanjuntak · 0812 9327 2929</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281393272929" target="_blank" rel="noopener"><strong>PT ICA</strong><span>Yosafat Simanjuntak · 0813 9327 2929</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281281802944" target="_blank" rel="noopener"><strong>Unit Pongkor</strong><span>Agus Sugiharto · 0812 8180 2944</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281242234684" target="_blank" rel="noopener"><strong>Unit Maluku Utara</strong><span>Dedi Sunjaya · 0812 4223 4684</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281340611919" target="_blank" rel="noopener"><strong>Unit Logam Mulia</strong><span>Bella Sakina · 0813 4061 1919</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6285258221237" target="_blank" rel="noopener"><strong>PT GAG Nikel</strong><span>Zakaria · 0852 5822 1237</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6282125149788" target="_blank" rel="noopener"><strong>PT SDA</strong><span>Oni Setia Himawan · 0821 2514 9788</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6282225149788" target="_blank" rel="noopener"><strong>PT NKA</strong><span>Oni Setia Himawan · 0822 2514 9788</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281910022602" target="_blank" rel="noopener"><strong>Kantor Pusat</strong><span>Ruri Pitaloka · 0819 1002 2602</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6282010022602" target="_blank" rel="noopener"><strong>Unit Geomin</strong><span>Ruri Pitaloka · 0820 1002 2602</span><b>WhatsApp</b></a>
-            </div>
-          </div>          </div>
+            
+          </div>          <div id="jadwalPresentasiTables" class="deep-dive-grid-modern animate-on-scroll delay-100" style="margin-top: 40px; margin-bottom: 100px;"></div>
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 7: DEWAN JURI -->
-    <section id="juri" class="slide section section-light">
+<section id="juri" class="slide section section-light">
       <div class="slide-scroll-wrapper">
         <div class="container">
           
@@ -828,84 +757,84 @@ if (!isAuthenticated()) {
             <!-- Juri 1 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dialah Hokosuja.png" alt="Dialah Hokosuja" class="ed-profile-img">
+                <img src="assets/img/juri/Dodi Pramadi.png" alt="Dodi Pramadi" class="ed-profile-img">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
-                <h3 class="ed-profile-name">Dialah Hokosuja</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <h3 class="ed-profile-name">Dodi Pramadi</h3>
+                <span class="ed-profile-role">Dewan Juri Eksternal</span>
               </div>
             </div>
             
             <!-- Juri 2 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dodi Pramadi.png" alt="Dodi Pramadi" class="ed-profile-img">
+                <img src="assets/img/juri/Eko Pudji.png" alt="Eko Pudji" class="ed-profile-img">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">02</div>
-                <h3 class="ed-profile-name">Dodi Pramadi</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <h3 class="ed-profile-name">Eko Pudji</h3>
+                <span class="ed-profile-role">Dewan Juri Eksternal</span>
               </div>
             </div>
 
             <!-- Juri 3 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Eko Pudji.png" alt="Eko Pudji" class="ed-profile-img">
+                <img src="assets/img/juri/Sri Prahyoto.png" alt="Sri Prahyoto" class="ed-profile-img">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">03</div>
-                <h3 class="ed-profile-name">Eko Pudji</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <h3 class="ed-profile-name">Sri Prahyoto</h3>
+                <span class="ed-profile-role">Dewan Juri Eksternal</span>
               </div>
             </div>
 
             <!-- Juri 4 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Evi Sabrina.png" alt="Evi Sabrina" class="ed-profile-img">
+                <img src="assets/img/juri/Susan Kustiwan.png" alt="Susan Kustiwan" class="ed-profile-img">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">04</div>
-                <h3 class="ed-profile-name">Evi Sabrina</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <h3 class="ed-profile-name">Susan Kustiwan</h3>
+                <span class="ed-profile-role">Dewan Juri Eksternal</span>
               </div>
             </div>
 
             <!-- Juri 5 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Muhammad Amri.png" alt="Muhammad Amri" class="ed-profile-img">
+                <img src="assets/img/juri/Dialah Hokosuja.png" alt="Dialah Hokosuja" class="ed-profile-img">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">05</div>
-                <h3 class="ed-profile-name">Muhammad Amri</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <h3 class="ed-profile-name">Dialah Hokosuja</h3>
+                <span class="ed-profile-role">Dewan Juri Internal</span>
               </div>
             </div>
 
             <!-- Juri 6 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Sri Prahyoto.png" alt="Sri Prahyoto" class="ed-profile-img">
+                <img src="assets/img/juri/Evi Sabrina.png" alt="Evi Sabrina" class="ed-profile-img">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">06</div>
-                <h3 class="ed-profile-name">Sri Prahyoto</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <h3 class="ed-profile-name">Evi Sabrina</h3>
+                <span class="ed-profile-role">Dewan Juri Internal</span>
               </div>
             </div>
 
             <!-- Juri 7 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Susan Kustiwan.png" alt="Susan Kustiwan" class="ed-profile-img">
+                <img src="assets/img/juri/Muhammad Amri.png" alt="Muhammad Amri" class="ed-profile-img">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">07</div>
-                <h3 class="ed-profile-name">Susan Kustiwan</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <h3 class="ed-profile-name">Muhammad Amri</h3>
+                <span class="ed-profile-role">Dewan Juri Internal</span>
               </div>
             </div>
 
@@ -917,17 +846,14 @@ if (!isAuthenticated()) {
               <div class="ed-profile-info">
                 <div class="ed-profile-number">08</div>
                 <h3 class="ed-profile-name">Yudhistira</h3>
-                <span class="ed-profile-role">Dewan Juri</span>
+                <span class="ed-profile-role">Dewan Juri Internal</span>
               </div>
             </div>
-
-          </div>
+</div>
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 8: PANITIA -->
-    <section id="panitia" class="slide section section-white">
+<section id="panitia" class="slide section section-white">
       <div class="slide-scroll-wrapper">
         <div class="container">
           
@@ -946,7 +872,7 @@ if (!isAuthenticated()) {
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
                 <h3 class="ed-profile-name">Agus Pajrin</h3>
-                <span class="ed-profile-role">Panitia</span>
+                <span class="ed-profile-role">Ketua Panitia</span>
               </div>
             </div>
 
@@ -1086,43 +1012,139 @@ if (!isAuthenticated()) {
         </div>
       </div>
     </section>
-
-    <!-- SLIDE 11: JADWAL PRESENTASI -->
-    <section id="presentasi" class="slide section section-light">
+<section id="lokasi" class="slide section section-white" style="padding-bottom: 0;">
       <div class="slide-scroll-wrapper">
-        <div class="container" style="padding-top: 50px; padding-bottom: 70px;">
+        <div class="container" style="margin-bottom: 60px; padding-top: 40px;">
           <div class="section-header animate-on-scroll">
-            <p class="eyebrow">AGENDA PRESENTASI</p>
-            <h2 class="section-title">Jadwal Presentasi</h2>
+            <h2 class="section-title">Lokasi Acara</h2>
             <div class="divider"></div>
-            <p class="section-desc">Jadwal presentasi akan diperbarui setelah data final dari panitia tersedia.</p>
-          </div>          <div class="presentation-intro animate-on-scroll delay-100">
-            <span class="presentation-kicker">PILIHAN FORMAT JADWAL</span>
-            <p>Klik salah satu panel untuk melihat jadwal presentasi. Untuk SS1 dan SS2 tersedia dua opsi tampilan: gambar referensi dan tabel corporate.</p>
           </div>
-                    <div class="presentation-grid animate-on-scroll delay-200">
-            <div class="presentation-item">
-              <button type="button" class="presentation-card" onclick="togglePresentationInline('gkm1')"><span class="presentation-card-index">01</span><span class="presentation-card-label">GKM 1</span><strong>Jadwal Presentasi GKM 1</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
-              <div id="presentationPanel-gkm1" class="presentation-inline-panel" hidden></div>
+          <div class="location-grid animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            <div class="day-card location-card" style="cursor: default;">
+              <div class="day-card-img-header" style="background-image: url('assets/img/mercure.mirama.jpg'); height: 250px; background-size: cover; background-position: center;">
+                <div class="day-badge">HOTEL & CONVENTION</div>
+              </div>
+              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Mercure Mirama Hotel</h3>
+                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Jl. Raden Panji Suroso No.7, Kota Malang, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/TuQjnsZZyXWNcRGx7" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              </div>
             </div>
-            <div class="presentation-item">
-              <button type="button" class="presentation-card" onclick="togglePresentationInline('gkm2')"><span class="presentation-card-index">02</span><span class="presentation-card-label">GKM 2</span><strong>Jadwal Presentasi GKM 2</strong><span class="presentation-card-action">Buka jadwal <b>›</b></span></button>
-              <div id="presentationPanel-gkm2" class="presentation-inline-panel" hidden></div>
+
+            <div class="day-card location-card" style="cursor: default;">
+              <div class="day-card-img-header" style="background-image: url('assets/img/warung%20wareg.jpg?v=20260818-3'); height: 220px;">
+                <div class="day-badge">MAKAN SIANG</div>
+              </div>
+              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Resto Warung Wareg</h3>
+                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Malang, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/kFcfna1EVPKxmJit5" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              </div>
             </div>
-            <div class="presentation-item">
-              <button type="button" class="presentation-card presentation-card-featured" onclick="togglePresentationInline('ss1')"><span class="presentation-card-index">03</span><span class="presentation-card-label">SS 1 · TABEL</span><strong>Jadwal Presentasi SS 1</strong><span class="presentation-card-action">Buka tabel <b>›</b></span></button>
-              <div id="presentationPanel-ss1" class="presentation-inline-panel" hidden></div>
+
+            <div class="day-card location-card" style="cursor: default;">
+              <div class="day-card-img-header" style="background-image: url('assets/img/pagupon.jpg?v=20260818-3'); height: 220px;">
+                <div class="day-badge">TEAM BUILDING</div>
+              </div>
+              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Pagupon Camp</h3>
+                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/ADmDNfi9pxoynXcD6" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              </div>
             </div>
-            <div class="presentation-item">
-              <button type="button" class="presentation-card presentation-card-featured" onclick="togglePresentationInline('ss2')"><span class="presentation-card-index">04</span><span class="presentation-card-label">SS 2 · TABEL</span><strong>Jadwal Presentasi SS 2</strong><span class="presentation-card-action">Buka tabel <b>›</b></span></button>
-              <div id="presentationPanel-ss2" class="presentation-inline-panel" hidden></div>
+
+            <div class="day-card location-card" style="cursor: default;">
+              <div class="day-card-img-header" style="background-image: url('assets/img/brawijaya.jpeg?v=20260818-3'); height: 220px;">
+                <div class="day-badge">OLEH-OLEH</div>
+              </div>
+              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Brawijaya Oleh Oleh</h3>
+                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/5bGhM3z2G2CzwC7X9" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
-    <!-- SLIDE 12: EMERGENCY -->
-    <section id="emergency" class="slide section section-light" style="padding-bottom: 0;">
+<section id="kontak" class="slide section section-light">
+      <div class="slide-scroll-wrapper">
+        <div id="kontak-content" class="container" style="margin-bottom: 40px;">
+          <div class="section-header animate-on-scroll">
+            <img src="assets/img/golnix.png?v=20260818-3" alt="Maskot GOLNIX" style="max-height: 120px; margin-bottom: 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+            <h2 class="section-title">Kontak Panitia</h2>
+            <div class="divider"></div>
+            <p class="section-desc">Punya pertanyaan seputar event KMA XXV?<br>Jangan ragu untuk menghubungi kami melalui jalur di bawah ini.</p>
+          </div>
+
+          <div class="contact-list animate-on-scroll delay-100">
+            <a href="https://instagram.com/antam_official" target="_blank" rel="noopener noreferrer" class="clist-item">
+              <div class="clist-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
+              <div class="clist-info">
+                <span class="clist-label">Instagram</span>
+                <span class="clist-value">@antam_official</span>
+              </div>
+              <div class="clist-arrow">›</div>
+            </a>
+            
+            <a href="mailto:kma25@antam.com" class="clist-item">
+              <div class="clist-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div class="clist-info">
+                <span class="clist-label">Email</span>
+                <span class="clist-value">kma25@antam.com</span>
+              </div>
+              <div class="clist-arrow">›</div>
+            </a>
+
+            <button type="button" class="clist-item lo-toggle-button" onclick="toggleLoContacts()" aria-expanded="false" aria-controls="loContacts"><div class="clist-icon clist-wa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div><div class="clist-info"><span class="clist-label">WhatsApp</span><span class="clist-value">Tanya KMA (LO Unit)</span></div><div class="clist-arrow">›</div></button>
+          <div id="loContacts" class="lo-contact-section animate-on-scroll delay-200" hidden>
+            <h3>Kontak LO Peserta</h3>
+            <p class="lo-contact-intro">Pilih unit peserta untuk menghubungi LO melalui WhatsApp.</p>
+            <div class="lo-contact-grid">
+              <a href="https://wa.me/6287874643444" target="_blank" rel="noopener"><strong>Unit Kolaka</strong><span>Utiah Sukarini · 0878 7464 3444</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6287974633444" target="_blank" rel="noopener"><strong>Unit Konawe Utara</strong><span>Utiah Sukarini · 0879 7464 3444</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281293272929" target="_blank" rel="noopener"><strong>Unit Kalimantan Barat</strong><span>Yosafat Simanjuntak · 0812 9327 2929</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281393272929" target="_blank" rel="noopener"><strong>PT ICA</strong><span>Yosafat Simanjuntak · 0813 9327 2929</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281281802944" target="_blank" rel="noopener"><strong>Unit Pongkor</strong><span>Agus Sugiharto · 0812 8180 2944</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281242234684" target="_blank" rel="noopener"><strong>Unit Maluku Utara</strong><span>Dedi Sunjaya · 0812 4223 4684</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281340611919" target="_blank" rel="noopener"><strong>Unit Logam Mulia</strong><span>Bella Sakina · 0813 4061 1919</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6285258221237" target="_blank" rel="noopener"><strong>PT GAG Nikel</strong><span>Zakaria · 0852 5822 1237</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6282125149788" target="_blank" rel="noopener"><strong>PT SDA</strong><span>Oni Setia Himawan · 0821 2514 9788</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6282225149788" target="_blank" rel="noopener"><strong>PT NKA</strong><span>Oni Setia Himawan · 0822 2514 9788</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281910022602" target="_blank" rel="noopener"><strong>Kantor Pusat</strong><span>Ruri Pitaloka · 0819 1002 2602</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6282010022602" target="_blank" rel="noopener"><strong>Unit Geomin</strong><span>Ruri Pitaloka · 0820 1002 2602</span><b>WhatsApp</b></a>
+            </div>
+          </div>          </div>
+        </div>
+      </div>
+    </section>
+<!-- SLIDE 12: ATURAN LAINNYA -->
+    <section id="aturan" class="slide section section-white">
+      <div class="slide-scroll-wrapper">
+        <div class="container" style="padding-top: 50px;">
+          <div class="section-header animate-on-scroll">
+            <p class="eyebrow">KETENTUAN UMUM</p>
+            <h2 class="section-title">Aturan Lainnya</h2>
+            <div class="divider"></div>
+          </div>
+          <!-- C. Ketentuan Umum -->
+        <div class="an-rules-block">
+          <div class="container">
+            <div class="an-rules-head animate-on-scroll">
+              <div class="an-rules-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div>
+                <h3 class="an-rules-title">C. KETENTUAN UMUM</h3>
+                <div class="an-gold-line"></div>
+              </div>
+        </div>
+      </div>
+    </section>
+<section id="emergency" class="slide section section-light" style="padding-bottom: 0;">
       <div class="slide-scroll-wrapper">
         <div class="container" style="margin-bottom: 60px; padding-top: 40px;">
           <div class="section-header animate-on-scroll">
@@ -1132,40 +1154,26 @@ if (!isAuthenticated()) {
             <p class="section-desc">Informasi sementara untuk kebutuhan keselamatan peserta. Kontak final akan diperbarui oleh Tim HSE.</p>
           </div>
           <div class="emergency-grid animate-on-scroll delay-100">
-            <article class="emergency-card emergency-primary">
-              <div class="emergency-card-icon">!</div>
-              <div><h3>Keadaan Darurat</h3><p>Hubungi <strong>112</strong> untuk layanan darurat umum atau koordinasikan segera dengan LO dan Tim HSE.</p></div>
-            </article>
-            <article class="emergency-card">
-              <div class="emergency-card-icon">+</div>
-              <div><h3>Klinik / Pos Medis</h3><p>Pos medis kegiatan: <strong>TBA oleh Tim HSE</strong>. Lokasi dan nomor kontak akan ditempel di venue dan hotel.</p></div>
-            </article>
-            <article class="emergency-card">
-              <div class="emergency-card-icon">⌖</div>
-              <div><h3>Rumah Sakit Terdekat</h3><p>Rujukan sementara: <strong>RSUD Dr. Saiful Anwar Malang</strong>. Nomor kontak dan rute akan dikonfirmasi oleh Tim HSE.</p></div>
-            </article>
-            <article class="emergency-card">
-              <div class="emergency-card-icon">H</div>
-              <div><h3>Kontak Tim HSE</h3><p>Koordinator HSE kegiatan: <strong>TBA</strong>. Simpan nomor LO unit untuk bantuan awal di lokasi.</p></div>
-            </article>
+            <img src="assets/img/emergency.jpeg" alt="HSE Emergency" style="width: 100%; max-width: 800px; margin: 0 auto; display: block; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
           </div>
         </div>
-        <footer class="footer"><div class="container"><p>&copy; 2026 PT ANTAM Tbk.</p></div></footer>
+        <footer class="footer"><div class="container"><p>@KMA.XXV.2026</p></div></footer>
       </div>
     </section>
-
   </main>
 
   <!-- Navigation Controls (Bottom Bar) -->
   <div class="slide-nav-controls pill-nav">
-    <button class="nav-btn prev-btn" id="prevBtn" onclick="prevSlide()" style="padding: 10px 20px;">
-      <span class="nav-text" style="font-weight: bold;">Sebelumnya</span>
+    <button class="nav-btn prev-btn" id="prevBtn" onclick="prevSlide()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span class="nav-text">Sebelumnya</span>
     </button>
     <div class="pill-nav-counter" id="pillNavCounter" style="font-weight: 700; color: #0f172a; font-size: 0.95rem; letter-spacing: 2px;">
       01 / 12
     </div>
-    <button class="nav-btn next-btn" id="nextBtn" onclick="nextSlide()" style="padding: 10px 20px;">
-      <span class="nav-text" style="font-weight: bold;">Selanjutnya</span>
+    <button class="nav-btn next-btn" id="nextBtn" onclick="nextSlide()">
+      <span class="nav-text">Selanjutnya</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
     </button>
   </div>
 
@@ -1205,30 +1213,9 @@ if (!isAuthenticated()) {
     const presentationData = {
       gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.JPEG?v=20260819-1", category: "GKM 1", table: false },
       gkm2: { title: "Jadwal Presentasi GKM 2", image: "assets/img/jadwal%20presentasi/GKM2.JPEG?v=20260819-1", category: "GKM 2", table: false },
-      ss1: { title: "Jadwal Presentasi SS 1", category: "SS 1 · STREAM BROMO", table: true, jury1: "Susan Kustiwan", jury2: "Dialah Hokosuja Hutabalian", room: "Wangan", duration: "10 menit presentasi + 5 menit tanya jawab", rows: [
-        ["13:00–13:15","Helpless","Geomin"],["13:15–13:30","Diesmaking","ICA"],["13:30–13:45","Sundung","Geomin"],["13:45–14:00","Alien Gamma","UBPE"],["14:00–14:15","Super Jet Mill","KALBAR"],["14:15–14:30","Internal Audit Ultimate","ICA"],["14:30–14:45","The Reconciliator","Geomin"],["14:45–15:00","Bukan Karyawan Biasa","UBPE"],["15:00–15:15","Bubulak","KALBAR"],["15:15–15:30","Ribak Sude","ICA"],["15:30–15:45","Safety Can Be Fun","Geomin"],["15:45–16:00","Ultima","UBPE"],["16:00–16:15","Kudeta","KALBAR"],["16:15–16:30","Zona","ICA"],["16:30–16:45","Siap","Geomin"],["16:45–17:00","Stratejik 2","UBPE"],["17:00–17:15","Mind Safe","KALBAR"]
-      ] },
-      ss2: { title: "Jadwal Presentasi SS 2", category: "SS 2 · STREAM SEMERU", table: true, jury1: "Eko Puji Putranto", jury2: "Yudhistira Sudesno", room: "Amsterdam", duration: "10 menit presentasi + 5 menit tanya jawab", rows: [
-        ["13:00–13:15","Pinang Coklat","GAG"],["13:15–13:30","Sepia","NKA"],["13:30–13:45","Waya Cani Guna","SDA"],["13:45–14:00","Cocowaste Reborn","Malut"],["14:00–14:15","Komparator","Kolaka"],["14:15–14:30","Green Enviro","Konut"],["14:30–14:45","Komika","GAG"],["14:45–15:00","Ore-Ganized","NKA"],["15:00–15:15","Diginova","SDA"],["15:15–15:30","Armor","Malut"],["15:30–15:45","Staterman","Kolaka"],["15:45–16:00","Roger","Konut"],["16:00–16:15","Hoki","GAG"],["16:15–16:30","Flying Dustman","NKA"],["16:30–16:45","Palugada","SDA"],["16:45–17:00","D'Geol","Malut"],["17:00–17:15","Capsule","Kolaka"],["17:15–17:30","Lai Laika","Konut"]
-      ] }
-    };    function togglePresentationInline(id) {
-      const data = presentationData[id];
-      const panel = document.getElementById("presentationPanel-" + id);
-      if (!data || !panel) return;
-      const alreadyOpen = !panel.hidden;
-      document.querySelectorAll(".presentation-inline-panel").forEach(function(item) {
-        item.hidden = true;
-        item.innerHTML = "";
-      });
-      if (alreadyOpen) return;
-      if (data.table) {
-        const rows = data.rows || [];
-        const meta = '<div class="presentation-meta-grid"><div><span>Juri 1</span><strong>' + data.jury1 + '</strong></div><div><span>Juri 2</span><strong>' + data.jury2 + '</strong></div><div><span>Ruangan</span><strong>' + data.room + '</strong></div><div><span>Durasi</span><strong>' + data.duration + '</strong></div></div>';
-        panel.innerHTML = '<div class="presentation-inline-head"><div><span class="presentation-kicker">' + data.category + '</span><h3>' + data.title + '</h3></div><button type="button" class="presentation-inline-close" onclick="togglePresentationInline(' + "'" + id + "'" + ')">&times;</button></div>' + meta + '<div class="presentation-table-note">Jadwal presentasi per gugus.</div><div class="deep-dive-table-scroll"><table class="presentation-schedule-table"><thead><tr><th>Waktu</th><th>Gugus</th><th>Unit</th></tr></thead><tbody>' + rows.map(function(row){ return '<tr><td><strong>' + row[0] + '</strong></td><td>' + row[1] + '</td><td>' + row[2] + '</td></tr>'; }).join("") + '</tbody></table></div>';
-      } else {
-        panel.innerHTML = '<div class="presentation-inline-head"><div><span class="presentation-kicker">' + data.category + '</span><h3>' + data.title + '</h3></div><button type="button" class="presentation-inline-close" onclick="togglePresentationInline(' + "'" + id + "'" + ')">&times;</button></div><img class="presentation-schedule-image" src="' + data.image + '" alt="' + data.title + '">';
-      }      panel.hidden = false;
-    }
+      ss1: { title: "Jadwal Presentasi SS 1", category: "SS 1 · STREAM BROMO", image: "assets/img/jadwal%20presentasi/SS1.JPEG?v=20260819-2", table: false },
+      ss2: { title: "Jadwal Presentasi SS 2", category: "SS 2 · STREAM SEMERU", image: "assets/img/jadwal%20presentasi/SS2.JPEG?v=20260819-2", table: false }
+    };    
 /* -----------------------------------------
        LOGIKA ACCORDION ANTAM BestMIND (SLIDE 2)
     ----------------------------------------- */
@@ -1241,24 +1228,45 @@ if (!isAuthenticated()) {
     ----------------------------------------- */
     const jingle = document.getElementById('bgJingle');
     const audioBtn = document.getElementById('audioToggleBtn');
+    const themeSongBtn = document.getElementById('themeSongBtn');
     const audioIcon = document.getElementById('audioIcon');
     let isPlaying = false;
 
-    function enableAudioOnInteraction() {
-      if (!isPlaying) {
+    function syncAudioControls() {
+      if (!jingle) return;
+      isPlaying = !jingle.paused && !jingle.muted;
+      const iconOn = '<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+      const iconOff = '<path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+      if (audioIcon) audioIcon.innerHTML = isPlaying ? iconOn : iconOff;
+      [audioBtn, themeSongBtn].forEach((btn) => {
+        if (!btn) return;
+        btn.classList.toggle('playing', isPlaying);
+        btn.setAttribute('aria-pressed', String(isPlaying));
+        const label = btn.querySelector('span');
+        if (label) label.textContent = btn.id === 'themeSongBtn' ? (isPlaying ? 'Theme Song KMA (ON)' : 'Theme Song KMA (OFF)') : 'Musik';
+        if (btn.id === 'themeSongBtn') {
+          btn.style.background = isPlaying ? '#006d64' : '#64748b';
+          btn.title = isPlaying ? 'Matikan Theme Song KMA' : 'Nyalakan Theme Song KMA';
+        }
+      });
+    }
+
+    function setJinglePlayback(shouldPlay) {
+      if (!jingle) return;
+      if (shouldPlay) {
         jingle.muted = false;
-        jingle.play().then(() => {
-          isPlaying = true;
-          audioBtn.classList.add('playing');
-          audioIcon.innerHTML = `
-            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          `;
-          removeAllAudioListeners();
-        }).catch(err => {
-          console.warn("Gagal memutar audio otomatis:", err);
-        });
+        const promise = jingle.play();
+        if (promise && promise.then) promise.then(syncAudioControls).catch((err) => console.warn('Gagal memutar audio:', err));
+        else syncAudioControls();
+      } else {
+        jingle.pause();
+        syncAudioControls();
       }
+    }
+
+    function enableAudioOnInteraction() {
+      if (!isPlaying) setJinglePlayback(true);
+      if (isPlaying) removeAllAudioListeners();
     }
 
     function removeAllAudioListeners() {
@@ -1270,34 +1278,18 @@ if (!isAuthenticated()) {
 
     function toggleAudio(e) {
       if (e) e.stopPropagation();
-
-      if (isPlaying && !jingle.paused) {
-        jingle.pause();
-        isPlaying = false;
-        audioBtn.classList.remove('playing');
-        audioIcon.innerHTML = `
-          <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>
-        `;
-      } else {
-        jingle.muted = false;
-        jingle.play().then(() => {
-          isPlaying = true;
-          audioBtn.classList.add('playing');
-          audioIcon.innerHTML = `
-            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          `;
-          removeAllAudioListeners();
-        });
-      }
+      setJinglePlayback(!isPlaying);
     }
 
+    if (jingle) {
+      ['play', 'pause', 'ended', 'volumechange'].forEach((eventName) => jingle.addEventListener(eventName, syncAudioControls));
+      syncAudioControls();
+    }
     document.addEventListener('click', enableAudioOnInteraction);
     document.addEventListener('touchstart', enableAudioOnInteraction);
     document.addEventListener('keydown', enableAudioOnInteraction);
-    document.addEventListener('scroll', enableAudioOnInteraction, true);/* -----------------------------------------
+    document.addEventListener('scroll', enableAudioOnInteraction, true);
+/* -----------------------------------------
        LOGIKA TOGGLE DROPDOWN MENU
     ----------------------------------------- */
     function toggleDropdown(e) {
@@ -1336,8 +1328,8 @@ if (!isAuthenticated()) {
       1: {
         title: "Jejak Langkah 25 Tahun Eksplorasi Unit Geomin",
         category: "LAUNCHING BUKU",
-        content: `<p><strong>Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</strong> merekam perjalanan panjang di balik setiap sumber daya dan cadangan mineral ANTAM—perjalanan yang dibangun dari ketekunan, dedikasi, dan mental tangguh untuk menapaki wilayah yang belum terjamah, membaca tanda-tanda geologi, serta mengubah potensi menjadi keyakinan geologi yang bernilai bagi perusahaan dan negeri.</p>
-          <p>Unit Geomin telah hadir sejak 1974 dan menjadi ujung tombak ANTAM dalam mencari, menemukan, membuktikan, serta mengembangkan sumber daya dan cadangan mineral. Dari Sumatra hingga Papua, jejak Insan Geomin terbentang melintasi pegunungan, hutan, sungai, pesisir, dan wilayah terpencil Nusantara.</p>
+        content: `<p><strong>Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</strong><br><br>Merekam perjalanan panjang di balik setiap sumber daya dan cadangan mineral ANTAM—perjalanan yang dibangun dari ketekunan, dedikasi, dan mental tangguh untuk menapaki wilayah yang belum terjamah, membaca tanda-tanda geologi, serta mengubah potensi menjadi keyakinan geologi yang bernilai bagi perusahaan dan negeri.</p>
+          <p><br><br>Unit Geomin telah hadir sejak 1974 dan menjadi ujung tombak ANTAM dalam mencari, menemukan, membuktikan, serta mengembangkan sumber daya dan cadangan mineral. Dari Sumatra hingga Papua, jejak Insan Geomin terbentang melintasi pegunungan, hutan, sungai, pesisir, dan wilayah terpencil Nusantara.</p>
           <p>Rentang <strong>2000–2025</strong> dipilih sebagai bingkai editorial untuk merefleksikan seperempat abad perjalanan eksplorasi kontemporer Unit Geomin sekaligus menyelaraskannya dengan momentum Silver Jubilee KMA XXV. Periode ini menjadi ruang untuk melihat kembali perjalanan, mengambil pembelajaran, dan menyiapkan pijakan berikutnya.</p>
           <p>Ratusan sampel, jutaan rekaman data geologi, dan ribuan hari kerja lapangan merangkai cerita tentang bauksit, emas, nikel, serta potensi mineral lain yang dicari, dikenali, diuji, dan dibuktikan hingga menjadi sumber daya serta cadangan yang menopang keberlanjutan bisnis ANTAM.</p>
           <p>Buku ini menjadi rekam ingatan organisasi, dokumentasi pengetahuan eksplorasi, sekaligus penghormatan kepada generasi Insan Geomin. Lebih dari sekadar mengenang masa lalu, buku ini menjadi jembatan pengetahuan antargenerasi—agar pengalaman lapangan menjadi pembelajaran, inspirasi, dan pijakan bagi generasi eksplorasi berikutnya.</p>
@@ -1350,7 +1342,7 @@ if (!isAuthenticated()) {
           <p>Dalam kurun waktu 25 tahun, <strong>lebih dari 332 inovasi</strong> lahir dari berbagai insan, unit, dan fungsi di ANTAM. Setiap inovasi merepresentasikan upaya nyata untuk meningkatkan produktivitas, efisiensi, keselamatan, kualitas proses, pemanfaatan teknologi, serta nilai tambah yang mendukung keberlanjutan bisnis.</p>
           <p>Lebih dari sekadar kumpulan karya, prosiding ini menjadi <strong>rekam jejak kematangan budaya inovasi ANTAM</strong>—budaya yang terus dikembangkan untuk mendukung transformasi menuju organisasi yang adaptif, kolaboratif, digital, kompetitif, dan berorientasi pada <em>sustainable growth</em>.</p>
           <p>Melalui inovasi yang terus tumbuh dan direplikasi, ANTAM tidak hanya memperbaiki cara bekerja hari ini, tetapi juga membangun fondasi masa depan yang lebih efisien, resilient, bertanggung jawab, dan berkelanjutan.</p>
-          <p><strong>Dari ide menjadi solusi, dari solusi menjadi transformasi, dan dari transformasi menjadi pertumbuhan ANTAM yang berkelanjutan.</strong></p>`
+          <p><strong>Dari ide menjadi solusi, dari solusi menjadi transformasi, dan dari transformasi menjadi pertumbuhan ANTAM yang berkelanjutan.</strong></p><br><br><a href="assets/Antam - Proceeding Inovasi 2025 - Hiress.pdf" download class="btn btn-primary" style="display: inline-block; padding: 10px 20px; background: #006d64; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Unduh Prosiding (PDF)</a>`
       },
       2: {
         title: "Official Theme Song KMA XXV",
@@ -1367,10 +1359,7 @@ if (!isAuthenticated()) {
         title: "ANTAM Hackathon 2026",
         category: "KOMPETISI INOVASI TERBUKA",
         content: `
-          <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border-left: 4px solid #d97706; margin-bottom: 15px;">
-            <p style="margin: 0; font-weight: bold; color: #0f172a;">Status Pendaftaran:</p>
-            <p style="margin: 0; color: #475569;">Pendaftaran dibuka hingga 15 Juni 2026</p>
-          </div>
+          <p style="margin-bottom: 12px; font-weight: 500; color: #334155; line-height: 1.6;">ANTAM Hackathon adalah kompetisi inovasi terbuka yang menantang para inovator muda untuk memecahkan permasalahan nyata di industri pertambangan. Ajang ini memacu kreativitas dan kolaborasi lintas disiplin untuk menghasilkan solusi teknologi inovatif dan efisien bagi ANTAM.</p>
           <div style="margin-bottom: 15px;">
             <p style="margin: 0; font-weight: bold; color: #0f172a; font-size: 1.1rem;">Total Peserta: <span style="color: #006d64;">77 Tim</span></p>
           </div>
@@ -1386,7 +1375,7 @@ if (!isAuthenticated()) {
               <span>Institut Teknologi Bandung <b>12</b></span><span>Institut Teknologi Sains Bandung <b>7</b></span><span>Universitas Syiah Kuala <b>8</b></span><span>Institut Teknologi Sepuluh Nopember <b>5</b></span><span>Institut Teknologi Sumatera <b>4</b></span><span>Universitas Gadjah Mada <b>5</b></span><span>Universitas Brawijaya <b>4</b></span><span>Universitas Negeri Padang <b>4</b></span><span>UPN Veteran Yogyakarta <b>4</b></span><span>Universitas Jenderal Soedirman <b>3</b></span><span>Universitas Indonesia <b>2</b></span><span>Telkom University <b>2</b></span><span>Universitas Khairun Ternate <b>2</b></span><span>Universitas Trisakti <b>2</b></span><span>PEP Bandung <b>1</b></span><span>Universitas Islam Riau <b>1</b></span><span>Universitas Jember <b>1</b></span><span>Universitas Lambung Mangkurat <b>1</b></span><span>Universitas Muhammadiyah Yogyakarta <b>1</b></span><span>Universitas Padjadjaran <b>1</b></span><span>Universitas Palangka Raya <b>1</b></span><span>Universitas Pattimura <b>1</b></span><span>Universitas Presiden <b>1</b></span><span>Universitas Sriwijaya <b>1</b></span><span>Universitas Tanjungpura <b>1</b></span>
             </div>
           </div>
-          <p style="font-size:0.85rem;color:#64748b;font-style:italic;margin-top:14px;">Data peserta dan kampus bersumber dari rekapitulasi Hackathon 2026 pada materi revisi.</p>
+          
         `
       }
     };
@@ -1562,14 +1551,44 @@ if (!isAuthenticated()) {
       {title:'SS 1 — Stream Bromo', judges:'Susan Kustiawan · Dilah Hokosuja Hutabalian', columns:['Mulai','Selesai','Gugus · Unit'], rows:[['08:00','08:20','ALIEN GAMMA · GEOMIN'],['08:20','08:40','THE RECONCILIATOR · GEOMIN'],['08:40','09:00','SILA · GEOMIN'],['09:00','09:20','DIESMAKING · LM'],['09:20','09:40','BUKAN KARYAWAN BIASA · LM'],['09:40','10:00','KUDETA · LM'],['10:00','10:20','SUNDUNG · UBPE'],['10:20','10:40','BUBULAK · UBPE'],['10:40','11:00','ZONA · UBPE'],['11:00','11:20','HELPLESS · KALBAR'],['11:20','11:40','RIBAK SUDE · KALBAR'],['11:40','12:00','SIAP · KALBAR'],['12:00','13:00','BREAK · —'],['13:00','13:20','SUPER JET MILL · ICA'],['13:20','13:40','SAFETY CAN BE FUN · ICA'],['13:40','14:00','STRATEJIK 2 · ICA'],['14:00','14:20','INTERNAL AUDIT ULTIMATE · KP'],['14:20','14:40','ULTIMA · KP'],['14:40','15:00','MIND SAFE · KP']]},
       {title:'SS 2 — Stream Semeru', judges:'Eko Pudji Putranto · Yudhistira Sudesno', columns:['WIB','WIT/WITA','Zona · Gugus · Unit'], rows:[['08:00–08:20','10:00–10:20','WIT · PINANG COKLAT · GAG'],['08:20–08:40','10:20–10:40','WIT · KOMIKA · GAG'],['08:40–09:00','10:40–11:00','WIT · HOKI · GAG'],['09:00–09:20','11:00–11:20','WIT · SEPIA · NKA'],['09:20–09:40','11:20–11:40','WIT · ORE-GANIZED · NKA'],['09:40–10:00','11:40–12:00','WIT · FLYING DUSTMAN · NKA'],['10:00–10:20','12:00–12:20','WIT · WAYA GANI GUNA · SDA'],['10:20–10:40','12:20–12:40','WIT · DIGINOVA · SDA'],['10:40–11:00','12:40–13:00','WIT · PALUGADA · SDA'],['11:00–11:20','13:00–13:20','WIT · COWCOASTE REBORN · MALUT'],['11:20–11:40','13:20–13:40','WIT · ARMOR · MALUT'],['11:40–12:00','13:40–14:00','WIT · D’GEOL · MALUT'],['12:00–13:00','—','BREAK · —'],['13:00–13:20','14:00–14:20','WITA · KOMPARATOR · KOLAKA'],['13:20–13:40','14:20–14:40','WITA · STATERMAN · KOLAKA'],['13:40–14:00','14:40–15:00','WITA · CAPSULE · KOLAKA'],['14:00–14:20','15:00–15:20','WITA · GREEN ENVIRO · KONUT'],['14:20–14:40','15:20–15:40','WITA · ROGER · KONUT'],['14:40–15:00','15:40–16:00','WITA · LAI LAIKA · KONUT']]}
     ];
+        function renderJadwalPresentasiTables() {
+      const root = document.getElementById('jadwalPresentasiTables'); if (!root) return; root.style.gridTemplateColumns = '1fr'; root.style.maxWidth = '1000px'; root.style.margin = '0 auto';
+      root.innerHTML = Object.values(presentationData).map((data, idx) => {
+        const num = String(idx + 1).padStart(2, '0');
+        
+        return `<article class="dd-ticket" style="margin-bottom: 24px; border-radius: 20px; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); background: #ffffff; position: relative; overflow: hidden;">
+          
+          <div class="dd-ticket-content" style="padding: 24px 24px 16px 24px; cursor: pointer; position: relative; z-index: 2;">
+            <div style="position: absolute; left: 16px; top: 0px; font-size: 6.5rem; font-weight: 900; color: #0f172a; opacity: 0.04; line-height: 1; pointer-events: none; z-index: -1;">${num}</div>
+            
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; position: relative; z-index: 2;">
+                <div>
+                    <span style="font-size: 0.9rem; font-weight: 800; color: #006d64; letter-spacing: 1px; display: block; margin-bottom: 4px;">${data.category}</span>
+                    <h3 style="font-size: 1.4rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1.15;">JADWAL<br>PRESENTASI</h3>
+                </div>
+                <div style="color: #64748b; padding: 4px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;" class="dd-chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+            </div>
+          </div>
+          
+          <div class="dd-table-wrap" style="padding: 0; display: none;">
+            <img src="${data.image}" alt="${data.title}" style="width: 100%; display: block; border-radius: 0 0 20px 20px; border-top: 1px solid #f1f5f9;">
+          </div>
+        </article>`;
+      }).join('');
+    }
+
     function renderDeepDiveTables() {
       const root = document.getElementById('deepDiveTables'); if (!root) return;
+      const images = ['deepdive.gkm1.png', 'deepdive.gkm2.png', 'deepdive.ss1.png', 'deepdive.ss2.png'];
       root.innerHTML = deepDiveData.map((stream, idx) => {
         const num = String(idx + 1).padStart(2, '0');
         const titleParts = stream.title.split(' — ');
         const type = titleParts[0];
         const name = titleParts[1] ? titleParts[1] : '';
         const isRightAligned = idx % 2 !== 0;
+        const imgSrc = 'assets/img/jadwal deep dive/' + images[idx];
         
         return `<article class="dd-ticket ${isRightAligned ? 'dd-ticket-right' : ''}">
           <div class="dd-ticket-bg">${num}</div>
@@ -1586,8 +1605,8 @@ if (!isAuthenticated()) {
               <span class="dd-btn-text">Lihat Jadwal <span class="dd-arrow">→</span></span>
             </div>
           </div>
-          <div class="dd-table-wrap">
-            <table><thead><tr>${stream.columns.map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>${stream.rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table>
+          <div class="dd-table-wrap" style="padding: 20px;">
+            <img src="${imgSrc}" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
           </div>
         </article>`;
       }).join('');
@@ -1613,7 +1632,9 @@ if (!isAuthenticated()) {
       const nextBtn = document.getElementById('nextBtn');
       let currentSlide = 0;
 
-      renderDeepDiveTables();
+            renderDeepDiveTables();
+      renderJadwalPresentasiTables();
+      document.getElementById('jadwalPresentasiTables')?.addEventListener('click', function(e) { const panel=e.target.closest('.dd-ticket'); if(panel) panel.classList.toggle('open'); });
       document.getElementById('deepDiveTables')?.addEventListener('click', function(e) { const panel=e.target.closest('.dd-ticket'); if(panel) panel.classList.toggle('open'); });
       observeAnimations(slides[0]);
 
@@ -1630,7 +1651,7 @@ if (!isAuthenticated()) {
         
         const pillCounter = document.getElementById('pillNavCounter');
         if(pillCounter) {
-          pillCounter.innerText = String(currentSlide + 1).padStart(2, '0') + " / " + String(slides.length).padStart(2, '0');
+          pillCounter.innerText = (currentSlide + 1) + " / " + slides.length;
         }
 
         observeAnimations(slides[currentSlide]);
@@ -1754,5 +1775,51 @@ if (!isAuthenticated()) {
       });
     });
   </script>
+<script>
+    function toggleThemeSong(e) {
+      if (e) e.stopPropagation();
+      setJinglePlayback(!isPlaying);
+    }
+</script>
+
+    <!-- Award Modal -->
+    <div id="awardModal" class="an-modal">
+      <div class="an-modal-overlay" onclick="closeAwardModal()"></div>
+      <div class="an-modal-content" style="max-width: 500px; padding: 0; border-radius: 16px; overflow: hidden; background: #fff; position: relative;">
+        <button class="an-modal-close" onclick="closeAwardModal()" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex; align-items: flex-start; padding: 20px;">
+            <div style="flex: 0 0 120px; height: 160px; border-radius: 12px; overflow: hidden; background: #000; margin-right: 20px;">
+               <img id="awardModalImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="flex: 1; position: relative;">
+               <div id="awardModalNum" style="position: absolute; top: 0; right: 0; width: 36px; height: 36px; background: #0f766e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; border: 2px solid #a3e635; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">1</div>
+               <h3 id="awardModalTitle" style="color: #0f766e; font-size: 1.4rem; font-weight: 800; margin-top: 0; margin-bottom: 8px; padding-right: 40px;">Title</h3>
+               <div style="width: 40px; height: 3px; background: #d97706; margin-bottom: 16px;"></div>
+               <p id="awardModalDesc" style="color: #475569; line-height: 1.6; font-size: 0.95rem; margin: 0;">Desc</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function openAwardModal(title, imgUrl, desc, num) {
+        document.getElementById('awardModalTitle').textContent = title;
+        document.getElementById('awardModalImg').src = imgUrl;
+        document.getElementById('awardModalDesc').textContent = desc;
+        document.getElementById('awardModalNum').textContent = num;
+        const modal = document.getElementById('awardModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeAwardModal() {
+        document.getElementById('awardModal').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    </script>
+    
+    
 </body>
 </html>
