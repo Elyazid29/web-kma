@@ -16,7 +16,7 @@ if (!isAuthenticated()) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=82">
+  <link rel="stylesheet" href="assets/css/style.css?v=83">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -85,11 +85,17 @@ if (!isAuthenticated()) {
     .dropdown.active .dropbtn .arrow {
       transform: rotate(90deg);
     }
-  </style>
+  
+      .dd-ticket .dd-table-wrap { display: none; }
+      .dd-ticket.open .dd-table-wrap { display: block; }
+</style>
 <style>
       .dd-ticket.open .dd-chevron { transform: translateY(-50%) rotate(180deg) !important; }
       .dd-ticket.open .dd-table-wrap { display: block !important; }
-    </style>
+    
+      .dd-ticket .dd-table-wrap { display: none; }
+      .dd-ticket.open .dd-table-wrap { display: block; }
+</style>
 
     <style>
       /* Header fixes */
@@ -140,7 +146,10 @@ if (!isAuthenticated()) {
         font-weight: 600 !important;
         letter-spacing: 1px !important;
       }
-    </style>
+    
+      .dd-ticket .dd-table-wrap { display: none; }
+      .dd-ticket.open .dd-table-wrap { display: block; }
+</style>
     
 
     <style>
@@ -149,7 +158,10 @@ if (!isAuthenticated()) {
       .an-modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
       .an-modal-content { position: relative; z-index: 1; width: 90%; max-height: 90vh; overflow-y: auto; transform: scale(0.95); opacity: 0; transition: 0.3s; }
       .an-modal.active .an-modal-content { transform: scale(1); opacity: 1; }
-    </style>
+    
+      .dd-ticket .dd-table-wrap { display: none; }
+      .dd-ticket.open .dd-table-wrap { display: block; }
+</style>
     
 </head>
 <body class="presentation-mode">
@@ -187,8 +199,8 @@ if (!isAuthenticated()) {
             <a href="#" onclick="selectMenu(2); return false;">3. Key Highlights</a>
             <a href="#" onclick="selectMenu(3); return false;">4. Penghargaan</a>
             <a href="#" onclick="selectMenu(4); return false;">5. Rangkaian Kegiatan</a>
-            <a href="#" onclick="selectMenu(5); return false;">6. Jadwal Deep Dive</a>
-            <a href="#" onclick="selectMenu(6); return false;">7. Jadwal Presentasi</a>
+            <a href="#" onclick="selectMenu(5); return false;">6. Jadwal Deep Dive Gugus</a>
+            <a href="#" onclick="selectMenu(6); return false;">7. Jadwal Presentasi Gugus</a>
             <a href="#" onclick="selectMenu(7); return false;">8. Dewan Juri KMA XXV</a>
             <a href="#" onclick="selectMenu(8); return false;">9. Panitia KMA XXV</a>
             <a href="#" onclick="selectMenu(9); return false;">10. Lokasi Acara</a>
@@ -287,86 +299,84 @@ if (!isAuthenticated()) {
               </div>
           </div>
 
-          <div class="about-card-wrapper animate-on-scroll">
-            <!-- Grid Layout Utama: Visual Kiri + Content Kanan -->
-            <div class="about-grid">
-              
-              <!-- Kolom Visual (Logo KMA + Maskot GOLNIX + Watermark Malang) -->
-              <!-- Kolom Narasi Utama -->
-              <div class="about-content-col">
-                <div class="section-header" style="text-align: left; margin-bottom: 20px;">
-                  <h2 class="section-title" style="margin-bottom: 8px;">Tentang KMA XXV</h2>
-                  <div class="divider" style="margin: 0;"></div>
+          <div class="tentang-container" style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+        <!-- Narasi Card -->
+        <div class="an-award-card animate-on-scroll" style="background: #ffffff; padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: #d97706;"></div>
+            <h2 style="font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 24px;">Tentang KMA XXV</h2>
+            <div style="color: #334155; line-height: 1.7; font-size: 1.05rem;">
+                <p style="margin-bottom: 16px;">Konvensi Mutu ANTAM (KMA) XXV Tahun 2026 menandai <strong>Silver Jubilee-25 tahun atau seperempat abad perjalanan budaya mutu, inovasi, dan continuous improvement di ANTAM</strong>. Lebih dari sekadar kompetisi, KMA menjadi momentum untuk mengapresiasi karya inovatif Insan ANTAM sekaligus merefleksikan bagaimana gagasan, kreativitas, dan semangat perbaikan terus berkembang menjadi solusi yang memberikan nilai bagi perusahaan.</p>
+                <p style="margin-bottom: 16px;">Konvensi Mutu ANTAM (KMA) merupakan bagian dari ekosistem <strong>ANTAM BestMIND - Wadah Inovasi Terintegrasi ANTAM</strong>, yang berfungsi sebagai payung besar yang menghubungkan berbagai inisiatif inovasi dan perbaikan di ANTAM. Dalam ekosistem BestMIND, <strong>KMA menjadi salah satu ruang utama untuk mengangkat, mengapresiasi, menguji, serta menyebarluaskan praktik continuous improvement dan inovasi terbaik</strong>, sehingga ide tidak berhenti pada kompetisi, tetapi berkembang menjadi <em>knowledge</em>, solusi, dan <em>value</em> bagi ANTAM.</p>
+                <p>KMA bertujuan menjadi <strong>ruang berbagi pengetahuan, pembelajaran, kolaborasi, dan diseminasi inovasi</strong> antarunit serta Anak Perusahaan ANTAM. Melalui KMA, berbagai solusi perbaikan tidak berhenti sebagai keberhasilan di satu tempat, tetapi didorong untuk dikembangkan, distandarisasi, direplikasi, dan memberikan dampak yang lebih luas terhadap <strong>produktifitas, efisiensi, kualitas, keselamatan, keberlanjutan, serta kinerja perusahaan</strong>.</p>
+            </div>
+        </div>
+        <article class="dd-ticket animate-on-scroll delay-100" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
+            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">Tema KMA</h3>
                 </div>
-
-                <div class="about-narrative-text">
-                  <p>Konvensi Mutu ANTAM (KMA) XXV Tahun 2026 menandai <strong>Silver Jubilee—25 tahun atau seperempat abad perjalanan budaya mutu, inovasi, dan continuous improvement di ANTAM</strong>. Lebih dari sekadar kompetisi, KMA menjadi momentum untuk mengapresiasi karya inovatif Insan ANTAM sekaligus merefleksikan bagaimana gagasan, kreativitas, dan semangat perbaikan terus berkembang menjadi solusi yang memberikan nilai bagi perusahaan.</p>
-                  
-                  <p>Konvensi Mutu ANTAM (KMA) merupakan bagian dari ekosistem <strong>ANTAM BestMIND — Wadah Inovasi Terintegrasi ANTAM</strong>, yang berfungsi sebagai payung besar yang menghubungkan berbagai inisiatif inovasi dan perbaikan di ANTAM. Dalam ekosistem BestMIND, <strong>KMA menjadi salah satu ruang utama untuk mengangkat, mengapresiasi, menguji, serta menyebarluaskan praktik continuous improvement dan inovasi terbaik</strong>, sehingga ide tidak berhenti pada kompetisi, tetapi berkembang menjadi <em>knowledge</em>, solusi, dan <em>value</em> bagi ANTAM.</p>
-                  
-                  <p>KMA bertujuan menjadi <strong>ruang berbagi pengetahuan, pembelajaran, kolaborasi, dan diseminasi inovasi</strong> antarunit serta Anak Perusahaan ANTAM. Melalui KMA, berbagai solusi perbaikan tidak berhenti sebagai keberhasilan di satu tempat, tetapi didorong untuk dikembangkan, distandarisasi, direplikasi, dan memberikan dampak yang lebih luas terhadap <strong>produktifitas, efisiensi, kualitas, keselamatan, keberlanjutan, serta kinerja perusahaan</strong>.</p>
+                <div style="color: #94a3b8;">
+                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
-
-                <!-- Kotak Tema KMA -->
-                <div class="kma-identity-grid" style="display: flex; flex-direction: column; gap: 12px; margin-top: 30px;">
-        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
-  <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </div>
+            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
+                <img src="assets/img/TEMA.KMA.JPEG" alt="Tema KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            </div>
+        </article>
+        <article class="dd-ticket animate-on-scroll delay-200" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
+            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">Filosofi Logo KMA</h3>
+                </div>
+                <div style="color: #94a3b8;">
+                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+            </div>
+            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
+                <img src="assets/img/logo.penjelasan.jpeg" alt="Filosofi Logo KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            </div>
+        </article>
+        <article class="dd-ticket animate-on-scroll delay-300" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
+            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">Filosofi Maskot KMA</h3>
+                </div>
+                <div style="color: #94a3b8;">
+                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+            </div>
+            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
+                <img src="assets/img/penjelasan maskot.jpeg" alt="Filosofi Maskot KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            </div>
+        </article>
+        <article class="dd-ticket animate-on-scroll delay-400" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
+            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">ANTAM BestMIND</h3>
+                </div>
+                <div style="color: #94a3b8;">
+                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+            </div>
+            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
+                <img src="assets/img/antamBest.jpeg" alt="ANTAM BestMIND" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            </div>
+        </article>
+    </div>
+        </div>
       </div>
-      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Tema KMA</span>
-    </div>
-    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-  </div>
-  <div style="display: none; padding: 0 16px 16px 16px;">
-    <img src="assets/img/TEMA.KMA.JPEG" alt="Tema KMA" style="width: 100%; border-radius: 8px;">
-  </div>
-</div>
-        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
-  <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-      </div>
-      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Filosofi Logo KMA</span>
-    </div>
-    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-  </div>
-  <div style="display: none; padding: 0 16px 16px 16px;">
-    <img src="assets/img/logo.penjelasan.jpeg" alt="Filosofi Logo KMA" style="width: 100%; border-radius: 8px;">
-  </div>
-</div>
-        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
-  <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-      </div>
-      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">Filosofi Maskot KMA</span>
-    </div>
-    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-  </div>
-  <div style="display: none; padding: 0 16px 16px 16px;">
-    <img src="assets/img/penjelasan maskot.jpeg" alt="Filosofi Maskot KMA" style="width: 100%; border-radius: 8px;">
-  </div>
-</div>
-        <div style="margin-bottom: 12px; border: 1px solid #eef2f6; border-radius: 12px; background: #ffffff; box-shadow: 0 4px 6px -2px rgba(0,0,0,0.02);">
-  <div onclick="const c = this.nextElementSibling; const i = this.querySelector('.chevron'); if(c.style.display==='none'){c.style.display='block'; i.style.transform='rotate(180deg)';}else{c.style.display='none'; i.style.transform='rotate(0deg)';}" style="display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer;">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eef7f4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-      </div>
-      <span style="font-weight: 700; color: #0f172a; font-size: 1.05rem;">ANTAM BestMIND</span>
-    </div>
-    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#006d64" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-  </div>
-  <div style="display: none; padding: 0 16px 16px 16px;">
-    <img src="assets/img/antamBest.jpeg" alt="ANTAM BestMIND" style="width: 100%; border-radius: 8px;">
-  </div>
-</div>
-    </div>
-</div>
 </div>
 </div>
     </section>
@@ -634,7 +644,7 @@ if (!isAuthenticated()) {
             <div class="an-footer-note animate-on-scroll delay-200">
               <p>Seluruh kategori menggunakan acuan penilaian yang berbeda sesuai objek penilaiannya.</p>
             </div>
-<br><br><div style="text-align: center;"><a href="assets/Ketentuan Lainnya_KMA XXV MALANG_2026.pdf" download class="btn btn-primary" style="display: inline-block; padding: 12px 24px; background: #006d64; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0, 109, 100, 0.3);">Download Ketentuan Lainnya (PDF)</a></div>
+<br><br><div style="text-align: center;"><a href="assets/Ketentuan Lainnya_KMA XXV MALANG_2026.pdf" download class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 12px; padding: 16px 32px; background: #006d64; color: white; text-decoration: none; border-radius: 12px; font-weight: 800; font-size: 1.15rem; box-shadow: 0 10px 25px rgba(0, 109, 100, 0.3); transition: transform 0.2s;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download Ketentuan Lainnya</a></div>
           </div>
         </div>
       </div>
@@ -719,10 +729,10 @@ if (!isAuthenticated()) {
           <div class="dd-header animate-on-scroll">
             <div class="dd-num-large">06</div>
             <div class="dd-title-wrap">
-              <h2 class="dd-title-display">DEEP DIVE<br><span style="color:#006d64;">INTERVIEW</span></h2>
+              <h2 class="dd-title-display">JADWAL DEEP DIVE<br><span style="color:#006d64;">GUGUS</span></h2>
               <p class="dd-subtitle">KMA XXV 2026</p>
               <div class="an-gold-bar" style="width: 60px; height: 5px; background: #d97706; margin-top: 20px; margin-bottom: 20px;"></div>
-              <p class="dd-desc">Jadwal wawancara per stream, juri, gugus, dan unit. Klik masing-masing tiket untuk melihat jadwal lengkap.</p>
+              <p class="dd-desc">Jadwal wawancara per stream, juri, gugus, dan unit. Klik masing-masing jadwal untuk melihat informasi lengkap.</p>
             </div>
           </div>
           
@@ -757,7 +767,7 @@ if (!isAuthenticated()) {
             <!-- Juri 1 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dodi Pramadi.png" alt="Dodi Pramadi" class="ed-profile-img">
+                <img src="assets/img/juri/Dodi Pramadi.png" alt="Dodi Pramadi" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
@@ -769,7 +779,7 @@ if (!isAuthenticated()) {
             <!-- Juri 2 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Eko Pudji.png" alt="Eko Pudji" class="ed-profile-img">
+                <img src="assets/img/juri/Eko Pudji.png" alt="Eko Pudji" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">02</div>
@@ -781,7 +791,7 @@ if (!isAuthenticated()) {
             <!-- Juri 3 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Sri Prahyoto.png" alt="Sri Prahyoto" class="ed-profile-img">
+                <img src="assets/img/juri/Sri Prahyoto.png" alt="Sri Prahyoto" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">03</div>
@@ -793,7 +803,7 @@ if (!isAuthenticated()) {
             <!-- Juri 4 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Susan Kustiwan.png" alt="Susan Kustiwan" class="ed-profile-img">
+                <img src="assets/img/juri/Susan Kustiwan.png" alt="Susan Kustiwan" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">04</div>
@@ -805,7 +815,7 @@ if (!isAuthenticated()) {
             <!-- Juri 5 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dialah Hokosuja.png" alt="Dialah Hokosuja" class="ed-profile-img">
+                <img src="assets/img/juri/Dialah Hokosuja.png" alt="Dialah Hokosuja" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">05</div>
@@ -817,7 +827,7 @@ if (!isAuthenticated()) {
             <!-- Juri 6 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Evi Sabrina.png" alt="Evi Sabrina" class="ed-profile-img">
+                <img src="assets/img/juri/Evi Sabrina.png" alt="Evi Sabrina" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">06</div>
@@ -829,7 +839,7 @@ if (!isAuthenticated()) {
             <!-- Juri 7 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Muhammad Amri.png" alt="Muhammad Amri" class="ed-profile-img">
+                <img src="assets/img/juri/Muhammad Amri.png" alt="Muhammad Amri" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">07</div>
@@ -841,7 +851,7 @@ if (!isAuthenticated()) {
             <!-- Juri 8 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Yudhistira.png" alt="Yudhistira" class="ed-profile-img">
+                <img src="assets/img/juri/Yudhistira.png" alt="Yudhistira" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">08</div>
@@ -867,7 +877,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 1 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Agus Pajrin.png" alt="Agus Pajrin" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Agus Pajrin.png" alt="Agus Pajrin" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
@@ -879,7 +889,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 2 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Agus Sugiharto.jpeg" alt="Agus Sugiharto" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Agus Sugiharto.jpeg" alt="Agus Sugiharto" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">02</div>
@@ -891,7 +901,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 3 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Bella Sakina.png" alt="Bella Sakina" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Bella Sakina.png" alt="Bella Sakina" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">03</div>
@@ -903,7 +913,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 4 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Dedi Sunjaya.png" alt="Dedi Sunjaya" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Dedi Sunjaya.png" alt="Dedi Sunjaya" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">04</div>
@@ -915,7 +925,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 5 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Munif Hadi.png" alt="Munif Hadi" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Munif Hadi.png" alt="Munif Hadi" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">05</div>
@@ -927,7 +937,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 6 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Oni Setia Himawan.png" alt="Oni Setia Himawan" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Oni Setia Himawan.png" alt="Oni Setia Himawan" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">06</div>
@@ -939,7 +949,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 7 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Ruri Pitaloka.png" alt="Ruri Pitaloka" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Ruri Pitaloka.png" alt="Ruri Pitaloka" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">07</div>
@@ -951,7 +961,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 8 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Satriya Alrizki.png" alt="Satriya Alrizki" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Satriya Alrizki.png" alt="Satriya Alrizki" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">08</div>
@@ -963,7 +973,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 9 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Sofian.png" alt="Sofian" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Sofian.png" alt="Sofian" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">09</div>
@@ -975,7 +985,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 10 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Utiah Sukarini.png" alt="Utiah Sukarini" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Utiah Sukarini.png" alt="Utiah Sukarini" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">10</div>
@@ -987,7 +997,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 11 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Yosafat Simanjuntak.png" alt="Yosafat Simanjuntak" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Yosafat Simanjuntak.png" alt="Yosafat Simanjuntak" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">11</div>
@@ -999,7 +1009,7 @@ if (!isAuthenticated()) {
             <!-- Panitia 12 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Zakaria Budi.png" alt="Zakaria Budi" class="ed-profile-img">
+                <img src="assets/img/FOTO PANITIA/Zakaria Budi.png" alt="Zakaria Budi" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">12</div>
@@ -1552,28 +1562,28 @@ if (!isAuthenticated()) {
       {title:'SS 2 — Stream Semeru', judges:'Eko Pudji Putranto · Yudhistira Sudesno', columns:['WIB','WIT/WITA','Zona · Gugus · Unit'], rows:[['08:00–08:20','10:00–10:20','WIT · PINANG COKLAT · GAG'],['08:20–08:40','10:20–10:40','WIT · KOMIKA · GAG'],['08:40–09:00','10:40–11:00','WIT · HOKI · GAG'],['09:00–09:20','11:00–11:20','WIT · SEPIA · NKA'],['09:20–09:40','11:20–11:40','WIT · ORE-GANIZED · NKA'],['09:40–10:00','11:40–12:00','WIT · FLYING DUSTMAN · NKA'],['10:00–10:20','12:00–12:20','WIT · WAYA GANI GUNA · SDA'],['10:20–10:40','12:20–12:40','WIT · DIGINOVA · SDA'],['10:40–11:00','12:40–13:00','WIT · PALUGADA · SDA'],['11:00–11:20','13:00–13:20','WIT · COWCOASTE REBORN · MALUT'],['11:20–11:40','13:20–13:40','WIT · ARMOR · MALUT'],['11:40–12:00','13:40–14:00','WIT · D’GEOL · MALUT'],['12:00–13:00','—','BREAK · —'],['13:00–13:20','14:00–14:20','WITA · KOMPARATOR · KOLAKA'],['13:20–13:40','14:20–14:40','WITA · STATERMAN · KOLAKA'],['13:40–14:00','14:40–15:00','WITA · CAPSULE · KOLAKA'],['14:00–14:20','15:00–15:20','WITA · GREEN ENVIRO · KONUT'],['14:20–14:40','15:20–15:40','WITA · ROGER · KONUT'],['14:40–15:00','15:40–16:00','WITA · LAI LAIKA · KONUT']]}
     ];
         function renderJadwalPresentasiTables() {
-      const root = document.getElementById('jadwalPresentasiTables'); if (!root) return; root.style.gridTemplateColumns = '1fr'; root.style.maxWidth = '1000px'; root.style.margin = '0 auto';
+      const root = document.getElementById('jadwalPresentasiTables'); if (!root) return; 
+      root.style.gridTemplateColumns = '1fr'; root.style.maxWidth = '1000px'; root.style.margin = '0 auto';
       root.innerHTML = Object.values(presentationData).map((data, idx) => {
         const num = String(idx + 1).padStart(2, '0');
+        const isRightAligned = idx % 2 !== 0;
         
-        return `<article class="dd-ticket" style="margin-bottom: 24px; border-radius: 20px; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); background: #ffffff; position: relative; overflow: hidden;">
-          
-          <div class="dd-ticket-content" style="padding: 24px 24px 16px 24px; cursor: pointer; position: relative; z-index: 2;">
-            <div style="position: absolute; left: 16px; top: 0px; font-size: 6.5rem; font-weight: 900; color: #0f172a; opacity: 0.04; line-height: 1; pointer-events: none; z-index: -1;">${num}</div>
-            
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; position: relative; z-index: 2;">
+        return `<article class="dd-ticket ${isRightAligned ? 'dd-ticket-right' : ''}" style="margin-bottom: 24px; border-radius: 20px; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: #ffffff; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #f97316, #fbbf24);"></div>
+          <div class="dd-ticket-bg" style="opacity: 0.03; font-size: 8rem; right: 20px; top: -20px; position: absolute; font-weight: 900; color: #0f172a; pointer-events: none; z-index: 1;">${num}</div>
+          <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; position: relative; z-index: 2;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
-                    <span style="font-size: 0.9rem; font-weight: 800; color: #006d64; letter-spacing: 1px; display: block; margin-bottom: 4px;">${data.category}</span>
-                    <h3 style="font-size: 1.4rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1.15;">JADWAL<br>PRESENTASI</h3>
+                  <div style="display: inline-block; padding: 6px 12px; background: #fff7ed; color: #ea580c; border-radius: 8px; font-weight: 800; font-size: 0.9rem; margin-bottom: 12px; border: 1px solid #ffedd5;">${data.category}</div>
+                  <h3 style="font-size: 1.6rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1.2;">JADWAL PRESENTASI</h3>
                 </div>
-                <div style="color: #64748b; padding: 4px;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;" class="dd-chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <div style="padding: 10px;">
+                  <svg class="dd-chevron" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
             </div>
           </div>
-          
-          <div class="dd-table-wrap" style="padding: 0; display: none;">
-            <img src="${data.image}" alt="${data.title}" style="width: 100%; display: block; border-radius: 0 0 20px 20px; border-top: 1px solid #f1f5f9;">
+          <div class="dd-table-wrap" style="padding: 0; background: #f8fafc; border-top: 1px solid #e2e8f0;">
+            <img src="${data.image}" alt="${data.title}" style="width: 100%; display: block; border-radius: 0 0 20px 20px;">
           </div>
         </article>`;
       }).join('');
@@ -1590,23 +1600,25 @@ if (!isAuthenticated()) {
         const isRightAligned = idx % 2 !== 0;
         const imgSrc = 'assets/img/jadwal deep dive/' + images[idx];
         
-        return `<article class="dd-ticket ${isRightAligned ? 'dd-ticket-right' : ''}">
-          <div class="dd-ticket-bg">${num}</div>
-          <div class="dd-ticket-content">
-            <div class="dd-ticket-header">
-              <span class="dd-ticket-type">${type}</span>
-              <h3 class="dd-ticket-name">${name.toUpperCase()}</h3>
-            </div>
-            <div class="dd-ticket-body">
-              <div class="dd-ticket-divider"></div>
-              <p class="dd-ticket-judges">${stream.judges.replace(/ · /g, '<br>')}</p>
-            </div>
-            <div class="dd-ticket-footer">
-              <span class="dd-btn-text">Lihat Jadwal <span class="dd-arrow">→</span></span>
+        return `<article class="dd-ticket ${isRightAligned ? 'dd-ticket-right' : ''}" style="margin-bottom: 24px; border-radius: 20px; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: #ffffff; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #006d64, #a3e635);"></div>
+          <div class="dd-ticket-bg" style="opacity: 0.03; font-size: 8rem; right: 20px; top: -20px;">${num}</div>
+          <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; position: relative; z-index: 2;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <div style="display: inline-block; padding: 6px 12px; background: #eef7f4; color: #006d64; border-radius: 8px; font-weight: 800; font-size: 0.9rem; margin-bottom: 12px; border: 1px solid #ccede4;">${type}</div>
+                  <h3 style="font-size: 1.6rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1.2;">${name.toUpperCase()}</h3>
+                  <div style="margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 16px;">
+                      <p style="color: #64748b; font-size: 0.95rem; margin: 0;">${stream.judges.replace(/ · /g, '<br>')}</p>
+                  </div>
+                </div>
+                <div style="padding: 10px;">
+                  <svg class="dd-chevron" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
             </div>
           </div>
-          <div class="dd-table-wrap" style="padding: 20px;">
-            <img src="${imgSrc}" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+          <div class="dd-table-wrap" style="padding: 0; background: #f8fafc; display: none;">
+            <img src="${imgSrc}" style="width: 100%; border-radius: 0 0 20px 20px; border-top: 1px solid #e2e8f0; display: block;">
           </div>
         </article>`;
       }).join('');
@@ -1634,8 +1646,15 @@ if (!isAuthenticated()) {
 
             renderDeepDiveTables();
       renderJadwalPresentasiTables();
-      document.getElementById('jadwalPresentasiTables')?.addEventListener('click', function(e) { const panel=e.target.closest('.dd-ticket'); if(panel) panel.classList.toggle('open'); });
-      document.getElementById('deepDiveTables')?.addEventListener('click', function(e) { const panel=e.target.closest('.dd-ticket'); if(panel) panel.classList.toggle('open'); });
+                  
+      // Generic delegation for dd-ticket (Tentang KMA, Deep Dive, Awards)
+      document.body.addEventListener('click', function(e) {
+         const ticket = e.target.closest('.dd-ticket');
+         if (ticket) {
+            ticket.classList.toggle('open');
+         }
+      });
+    
       observeAnimations(slides[0]);
 
       function updateSlide(index) {
@@ -1782,43 +1801,7 @@ if (!isAuthenticated()) {
     }
 </script>
 
-    <!-- Award Modal -->
-    <div id="awardModal" class="an-modal">
-      <div class="an-modal-overlay" onclick="closeAwardModal()"></div>
-      <div class="an-modal-content" style="max-width: 500px; padding: 0; border-radius: 16px; overflow: hidden; background: #fff; position: relative;">
-        <button class="an-modal-close" onclick="closeAwardModal()" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-        <div style="display: flex; flex-direction: column;">
-          <div style="display: flex; align-items: flex-start; padding: 20px;">
-            <div style="flex: 0 0 120px; height: 160px; border-radius: 12px; overflow: hidden; background: #000; margin-right: 20px;">
-               <img id="awardModalImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div style="flex: 1; position: relative;">
-               <div id="awardModalNum" style="position: absolute; top: 0; right: 0; width: 36px; height: 36px; background: #0f766e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; border: 2px solid #a3e635; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">1</div>
-               <h3 id="awardModalTitle" style="color: #0f766e; font-size: 1.4rem; font-weight: 800; margin-top: 0; margin-bottom: 8px; padding-right: 40px;">Title</h3>
-               <div style="width: 40px; height: 3px; background: #d97706; margin-bottom: 16px;"></div>
-               <p id="awardModalDesc" style="color: #475569; line-height: 1.6; font-size: 0.95rem; margin: 0;">Desc</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-      function openAwardModal(title, imgUrl, desc, num) {
-        document.getElementById('awardModalTitle').textContent = title;
-        document.getElementById('awardModalImg').src = imgUrl;
-        document.getElementById('awardModalDesc').textContent = desc;
-        document.getElementById('awardModalNum').textContent = num;
-        const modal = document.getElementById('awardModal');
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-      function closeAwardModal() {
-        document.getElementById('awardModal').classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    </script>
+    
     
     
 </body>

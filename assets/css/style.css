@@ -2515,3 +2515,57 @@ body.presentation-mode {
 .presentation-meta-grid span { display:block; margin-bottom:4px; color:#64748b; font-size:.68rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
 .presentation-meta-grid strong { color:#0f766e; font-size:.88rem; line-height:1.35; }
 @media (max-width:768px) { .presentation-meta-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+/* KMA FINAL VISUAL OVERRIDES */
+/* Awards: make the hero and cards visibly match the corporate redesign. */
+#penghargaan .an-hero-mascot img {
+  max-height: 480px !important;
+  transform: scale(1.08) translateY(8px);
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 18px 28px rgba(15, 23, 42, .18));
+}
+#penghargaan .an-trophy-img {
+  max-height: 460px !important;
+  transform: scale(1.08);
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 20px 30px rgba(15, 23, 42, .22));
+}
+#penghargaan .an-awards-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+#penghargaan .an-award-card {
+  min-height: 300px;
+  border: 1px solid #dbe4e7 !important;
+  border-top: 5px solid #006d64 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, .08) !important;
+}
+#penghargaan .an-award-card:hover {
+  border-top-color: #d97706 !important;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, .14) !important;
+}
+#penghargaan .an-award-card img {
+  border-radius: 16px 16px 0 0;
+}
+/* Profile photos: clip the image and its wrapper so rounded corners are guaranteed. */
+#juri .ed-profile-img-wrap,
+#panitia .ed-profile-img-wrap {
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(145deg, #f0fdfa, #f8fafc);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, .10);
+  isolation: isolate;
+}
+#juri .ed-profile-img,
+#panitia .ed-profile-img {
+  border-radius: 28px !important;
+  clip-path: inset(0 round 28px);
+}
+@media (max-width: 900px) {
+  #penghargaan .an-awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 600px) {
+  #penghargaan .an-awards-grid { grid-template-columns: 1fr !important; }
+  #penghargaan .an-hero-mascot img,
+  #penghargaan .an-trophy-img { max-height: 300px !important; transform: none; }
+}
