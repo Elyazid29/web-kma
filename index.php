@@ -20,7 +20,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=87">
+  <link rel="stylesheet" href="assets/css/style.css?v=88">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -274,7 +274,14 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
           </div>
 
           <div class="hero-cta animate-on-scroll delay-300" style="flex-direction: row; justify-content: center; margin-top: 25px;">
-            <button onclick="goToSlide(4)" class="btn btn-outline" style="cursor: pointer; width: auto; padding: 10px 24px;">Lihat Jadwal ›</button>
+            <div class="home-schedule-menu">
+              <button type="button" class="btn btn-outline home-schedule-toggle" aria-expanded="false" onclick="toggleHomeSchedule(event)">Lihat Jadwal <span aria-hidden="true">›</span></button>
+              <div class="home-schedule-options" role="menu">
+                <a href="#" onclick="selectHomeSchedule(5); return false;" role="menuitem">Jadwal Deep Dive Gugus</a>
+                <a href="#" onclick="selectHomeSchedule(6); return false;" role="menuitem">Jadwal Presentasi Gugus</a>
+                <a href="#" onclick="selectHomeSchedule(4); return false;" role="menuitem">Rangkaian Kegiatan</a>
+              </div>
+            </div>
             <a href="#kontak" onclick="goToSlide(7); return false;" class="btn btn-outline" style="width: auto; padding: 10px 24px;">Kontak Panitia</a>
           </div>
 
@@ -314,69 +321,49 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                 <p>KMA bertujuan menjadi <strong>ruang berbagi pengetahuan, pembelajaran, kolaborasi, dan diseminasi inovasi</strong> antarunit serta Anak Perusahaan ANTAM. Melalui KMA, berbagai solusi perbaikan tidak berhenti sebagai keberhasilan di satu tempat, tetapi didorong untuk dikembangkan, distandarisasi, direplikasi, dan memberikan dampak yang lebih luas terhadap <strong>produktifitas, efisiensi, kualitas, keselamatan, keberlanjutan, serta kinerja perusahaan</strong>.</p>
             </div>
         </div>
-        <article class="dd-ticket animate-on-scroll delay-100" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
-            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                    </div>
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">Tema KMA</h3>
+        <article class="dd-ticket kma-feature kma-feature--tema animate-on-scroll delay-100">
+            <div class="dd-ticket-content kma-feature-head">
+                <div class="kma-feature-copy">
+                    <span class="kma-feature-kicker"><b>01</b> IDENTITAS EVENT</span>
+                    <h3>Tema KMA</h3>
+                    <p>25 Years of Continuous Improvement: Powering Sustainable Growth, Transforming the Future.</p>
                 </div>
-                <div style="color: #94a3b8;">
-                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
+                <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
-                <img src="assets/img/TEMA.KMA.JPEG" alt="Tema KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-            </div>
+            <div class="dd-table-wrap"><img src="assets/img/TEMA.KMA.JPEG" alt="Tema KMA"></div>
         </article>
-        <article class="dd-ticket animate-on-scroll delay-200" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
-            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                    </div>
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">Filosofi Logo KMA</h3>
+        <article class="dd-ticket kma-feature kma-feature--logo animate-on-scroll delay-200">
+            <div class="dd-ticket-content kma-feature-head">
+                <div class="kma-feature-copy">
+                    <span class="kma-feature-kicker"><b>02</b> IDENTITAS VISUAL</span>
+                    <h3>Filosofi Logo KMA</h3>
+                    <p>Makna bentuk, warna, dan elemen visual logo KMA XXV Malang 2026.</p>
                 </div>
-                <div style="color: #94a3b8;">
-                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
+                <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
-                <img src="assets/img/logo.penjelasan.jpeg" alt="Filosofi Logo KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-            </div>
+            <div class="dd-table-wrap"><img src="assets/img/logo.penjelasan.jpeg" alt="Filosofi Logo KMA"></div>
         </article>
-        <article class="dd-ticket animate-on-scroll delay-300" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
-            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                    </div>
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">Filosofi Maskot KMA</h3>
+        <article class="dd-ticket kma-feature kma-feature--mascot animate-on-scroll delay-300">
+            <div class="dd-ticket-content kma-feature-head">
+                <div class="kma-feature-copy">
+                    <span class="kma-feature-kicker"><b>03</b> MASKOT EVENT</span>
+                    <h3>Filosofi Maskot KMA</h3>
+                    <p>GOLNIX, wajah semangat inovasi dan kebersamaan peserta KMA XXV.</p>
                 </div>
-                <div style="color: #94a3b8;">
-                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
+                <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
-                <img src="assets/img/penjelasan.maskot.jpeg" alt="Filosofi Maskot KMA" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-            </div>
+            <div class="dd-table-wrap"><img src="assets/img/penjelasan.maskot.jpeg" alt="Filosofi Maskot KMA"></div>
         </article>
-        <article class="dd-ticket animate-on-scroll delay-400" style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; overflow: hidden;">
-            <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; color: #006d64;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-                    </div>
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin: 0;">ANTAM BestMIND</h3>
+        <article class="dd-ticket kma-feature kma-feature--mind animate-on-scroll delay-400">
+            <div class="dd-ticket-content kma-feature-head">
+                <div class="kma-feature-copy">
+                    <span class="kma-feature-kicker"><b>04</b> EKOSISTEM INOVASI</span>
+                    <h3>ANTAM BestMIND</h3>
+                    <p>Payung inovasi terintegrasi yang menempatkan KMA sebagai ruang apresiasi dan diseminasi.</p>
                 </div>
-                <div style="color: #94a3b8;">
-                    <svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
+                <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap" style="padding: 0 24px 24px 24px; border-top: 1px solid #f1f5f9; background: #fafafa;">
-                <img src="assets/img/antamBest.jpeg" alt="ANTAM BestMIND" style="width: 100%; border-radius: 12px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-            </div>
+            <div class="dd-table-wrap"><img src="assets/img/antamBest.jpeg" alt="ANTAM BestMIND"></div>
         </article>
     </div>
         </div>
@@ -415,61 +402,114 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         <div class="container">
           <div class="kh-cards-wrapper">
 
-            <!-- Point 1: Jejak Langkah -->
-            <div class="kh-card animate-on-scroll" onclick="openHighlightModal(1)">
-              <div class="kh-card-text">
-                <span class="kh-tag">LAUNCHING</span>
-                <h3 class="kh-card-title">Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</h3>
-                <div class="kh-gold-line"></div>
-                <p class="kh-card-desc">Mendokumentasikan perjalanan eksplorasi di berbagai wilayah Indonesia selama periode 2000-2025.</p>
-                <span class="kh-click-hint">Klik untuk detail info ›</span>
+            <article class="kh-item animate-on-scroll">
+              <button type="button" class="kh-item-toggle" aria-expanded="false">
+                <div class="kh-card-text">
+                  <span class="kh-tag">LAUNCHING</span>
+                  <h3 class="kh-card-title">Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</h3>
+                  <div class="kh-gold-line"></div>
+                  <p class="kh-card-desc">Mendokumentasikan perjalanan eksplorasi di berbagai wilayah Indonesia selama periode 2000-2025.</p>
+                  <span class="kh-item-hint"><span>Baca materi lengkap</span></span>
+                </div>
+                <div class="kh-item-media">
+                  <img src="assets/img/25tahun.png" alt="Logo KMA 25 Tahun">
+                </div>
+              </button>
+              <div class="kh-item-panel">
+                <div class="hl-article">
+                  <h3>Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</h3>
+                  <p class="hl-lead">Merekam perjalanan panjang di balik setiap sumber daya dan cadangan mineral ANTAM—perjalanan yang dibangun dari ketekunan, dedikasi, dan mental tangguh untuk menapaki wilayah yang belum terjamah, membaca tanda-tanda geologi, serta mengubah potensi menjadi keyakinan geologi yang bernilai bagi perusahaan dan negeri.</p>
+                  <h4>Unit Geomin</h4>
+                  <p>Unit Geomin telah hadir sejak 1974 dan menjadi ujung tombak ANTAM dalam mencari, menemukan, membuktikan, serta mengembangkan sumber daya dan cadangan mineral. Dari Sumatra hingga Papua, jejak Insan Geomin terbentang melintasi pegunungan, hutan, sungai, pesisir, dan wilayah terpencil Nusantara.</p>
+                  <h4>Bingkai editorial 2000–2025</h4>
+                  <p>Rentang <strong>2000–2025</strong> dipilih sebagai bingkai editorial untuk merefleksikan seperempat abad perjalanan eksplorasi kontemporer Unit Geomin sekaligus menyelaraskannya dengan momentum Silver Jubilee KMA XXV. Periode ini menjadi ruang untuk melihat kembali perjalanan, mengambil pembelajaran, dan menyiapkan pijakan berikutnya.</p>
+                  <p>Ratusan sampel, jutaan rekaman data geologi, dan ribuan hari kerja lapangan merangkai cerita tentang bauksit, emas, nikel, serta potensi mineral lain yang dicari, dikenali, diuji, dan dibuktikan hingga menjadi sumber daya serta cadangan yang menopang keberlanjutan bisnis ANTAM.</p>
+                  <h4>Rekam ingatan organisasi</h4>
+                  <p>Buku ini menjadi rekam ingatan organisasi, dokumentasi pengetahuan eksplorasi, sekaligus penghormatan kepada generasi Insan Geomin. Lebih dari sekadar mengenang masa lalu, buku ini menjadi jembatan pengetahuan antargenerasi—agar pengalaman lapangan menjadi pembelajaran, inspirasi, dan pijakan bagi generasi eksplorasi berikutnya.</p>
+                  <p><em>Eksplorasi tidak pernah sekadar mencari mineral. Ia adalah keberanian mencari kemungkinan, membuktikan harapan, dan menyiapkan masa depan.</em></p>
+                </div>
               </div>
-              <div class="kh-card-img-wrap kh-img-contain-wrap">
-                <img src="assets/img/25tahun.png" alt="Logo KMA 25 Tahun" class="kh-card-img kh-card-img-contain">
-              </div>
-            </div>
+            </article>
 
-            <!-- Point 2: Prosiding Inovasi -->
-            <div class="kh-card animate-on-scroll delay-100" onclick="openHighlightModal('prosiding')">
-              <div class="kh-card-text">
-                <span class="kh-tag">LAUNCHING</span>
-                <h3 class="kh-card-title">Prosiding Inovasi 25 Tahun</h3>
-                <div class="kh-gold-line"></div>
-                <p class="kh-card-desc">Refleksi perjalanan inovasi, mendokumentasikan lebih dari 332 inovasi berkelanjutan dari seluruh insan ANTAM.</p>
-                <span class="kh-click-hint">Klik untuk detail info ›</span>
+            <article class="kh-item animate-on-scroll delay-100">
+              <button type="button" class="kh-item-toggle" aria-expanded="false">
+                <div class="kh-card-text">
+                  <span class="kh-tag">LAUNCHING</span>
+                  <h3 class="kh-card-title">Prosiding Inovasi 25 Tahun</h3>
+                  <div class="kh-gold-line"></div>
+                  <p class="kh-card-desc">Refleksi perjalanan inovasi, mendokumentasikan lebih dari 332 inovasi berkelanjutan dari seluruh insan ANTAM.</p>
+                  <span class="kh-item-hint"><span>Baca materi lengkap</span></span>
+                </div>
+                <div class="kh-item-media">
+                  <img src="assets/img/prosiding.png" alt="Prosiding Inovasi">
+                </div>
+              </button>
+              <div class="kh-item-panel">
+                <div class="hl-article">
+                  <h3>Prosiding Inovasi 25 Tahun</h3>
+                  <p class="hl-lead"><strong>Prosiding Inovasi 25 Tahun</strong> hadir sebagai dokumentasi perjalanan budaya mutu, kreativitas, dan <em>continuous improvement</em> di ANTAM. Disusun dalam momentum <strong>Silver Jubilee KMA XXV</strong>, prosiding ini merefleksikan konsistensi ANTAM membangun ekosistem inovasi selama seperempat abad sebagai bagian dari perjalanan transformasi perusahaan.</p>
+                  <h4>Skala inovasi</h4>
+                  <p>Dalam kurun waktu 25 tahun, <strong>lebih dari 332 inovasi</strong> lahir dari berbagai insan, unit, dan fungsi di ANTAM. Setiap inovasi merepresentasikan upaya nyata untuk meningkatkan produktivitas, efisiensi, keselamatan, kualitas proses, pemanfaatan teknologi, serta nilai tambah yang mendukung keberlanjutan bisnis.</p>
+                  <h4>Rekam jejak budaya inovasi</h4>
+                  <p>Lebih dari sekadar kumpulan karya, prosiding ini menjadi <strong>rekam jejak kematangan budaya inovasi ANTAM</strong>—budaya yang terus dikembangkan untuk mendukung transformasi menuju organisasi yang adaptif, kolaboratif, digital, kompetitif, dan berorientasi pada <em>sustainable growth</em>.</p>
+                  <p>Melalui inovasi yang terus tumbuh dan direplikasi, ANTAM tidak hanya memperbaiki cara bekerja hari ini, tetapi juga membangun fondasi masa depan yang lebih efisien, resilient, bertanggung jawab, dan berkelanjutan.</p>
+                  <p><strong>Dari ide menjadi solusi, dari solusi menjadi transformasi, dan dari transformasi menjadi pertumbuhan ANTAM yang berkelanjutan.</strong></p>
+                  <p><a href="assets/Antam - Proceeding Inovasi 2025 - Hiress.pdf" download class="btn btn-primary" style="display: inline-block; padding: 10px 20px; background: #006d64; color: white; text-decoration: none; border-radius: 8px; font-weight: 700;">Unduh Prosiding (PDF)</a></p>
+                </div>
               </div>
-              <div class="kh-card-img-wrap">
-                <img src="assets/img/prosiding.png" alt="Prosiding Inovasi" class="kh-card-img">
-              </div>
-            </div>
+            </article>
 
-            <!-- Point 3: Theme Song -->
-            <div class="kh-card animate-on-scroll delay-200" onclick="openHighlightModal(2)">
-              <div class="kh-card-text">
-                <span class="kh-tag">OFFICIAL</span>
-                <h3 class="kh-card-title">Official Theme Song KMA XXV</h3>
-                <div class="kh-gold-line"></div>
-                <p class="kh-card-desc">Saksikan lirik dan notasi balok dari jingle resmi KMA XXV yang mengobarkan semangat kebersamaan.</p>
-                <span class="kh-click-hint">Klik untuk detail info ›</span>
+            <article class="kh-item animate-on-scroll delay-200">
+              <button type="button" class="kh-item-toggle" aria-expanded="false">
+                <div class="kh-card-text">
+                  <span class="kh-tag">OFFICIAL</span>
+                  <h3 class="kh-card-title">Official Theme Song KMA XXV</h3>
+                  <div class="kh-gold-line"></div>
+                  <p class="kh-card-desc">Saksikan lirik dan notasi balok dari jingle resmi KMA XXV yang mengobarkan semangat kebersamaan.</p>
+                  <span class="kh-item-hint"><span>Baca materi lengkap</span></span>
+                </div>
+                <div class="kh-item-media">
+                  <img src="assets/img/theme.song.png" alt="Official Theme Song">
+                </div>
+              </button>
+              <div class="kh-item-panel">
+                <div class="hl-article">
+                  <h3>Official Theme Song KMA XXV</h3>
+                  <p><strong>Official Theme Song KMA XXV</strong> menjadi identitas musikal perayaan 25 tahun budaya mutu, inovasi, dan continuous improvement ANTAM.</p>
+                  <p>Lagu ini membawa semangat kebersamaan dan menyelaraskan energi acara dengan tema <em>25 Years of Continuous Improvement: Powering Sustainable Growth, Transforming the Future</em>.</p>
+                  <div class="theme-song-points"><span>Semangat kebersamaan</span><span>Energi inovasi</span><span>Transformasi berkelanjutan</span></div>
+                  <h4>Notasi dan lirik</h4>
+                  <p>Lirik dan notasi visual Official Theme Song KMA XXV dapat dibaca langsung pada gambar berikut.</p>
+                  <div class="theme-song-artwork"><img src="assets/img/lirik.jpeg" alt="Lirik Official Theme Song KMA XXV"></div>
+                </div>
               </div>
-              <div class="kh-card-img-wrap">
-                <img src="assets/img/theme.song.png" alt="Official Theme Song" class="kh-card-img">
-              </div>
-            </div>
+            </article>
 
-            <!-- Point 4: Hackathon -->
-            <div class="kh-card animate-on-scroll delay-300" onclick="openHighlightModal(5)">
-              <div class="kh-card-text">
-                <span class="kh-tag">KOMPETISI</span>
-                <h3 class="kh-card-title">ANTAM Hackathon</h3>
-                <div class="kh-gold-line"></div>
-                <p class="kh-card-desc">Program kompetisi yang diikuti oleh 77 tim terbaik untuk menjawab tantangan nyata ANTAM.</p>
-                <span class="kh-click-hint">Klik untuk detail info ›</span>
+            <article class="kh-item kh-item--hackathon animate-on-scroll delay-300">
+              <button type="button" class="kh-item-toggle" aria-expanded="false">
+                <div class="kh-card-text">
+                  <span class="kh-tag">KOMPETISI</span>
+                  <h3 class="kh-card-title">ANTAM Hackathon</h3>
+                  <div class="kh-gold-line"></div>
+                  <p class="kh-card-desc">Program kompetisi yang diikuti oleh 77 tim terbaik untuk menjawab tantangan nyata ANTAM.</p>
+                  <span class="kh-item-hint"><span>Lihat materi visual</span></span>
+                </div>
+                <div class="kh-item-media">
+                  <img src="assets/img/hackaton.png?v=20260818-2" alt="ANTAM Hackathon">
+                </div>
+              </button>
+              <div class="kh-item-panel">
+                <div class="hl-article">
+                  <p class="hl-lead">ANTAM Hackathon 2026 menampilkan rangkaian informasi kompetisi, tantangan, dan hasil kegiatan secara berurutan.</p>
+                  <div class="hackathon-gallery" aria-label="Materi ANTAM Hackathon">
+                    <figure><img src="assets/img/hackaton/hk1.jpeg" alt="ANTAM Hackathon"></figure>
+                    <figure><img src="assets/img/hackaton/hk2.jpeg" alt="ANTAM Hackathon"></figure>
+                    <figure><img src="assets/img/hackaton/hk3.jpeg" alt="ANTAM Hackathon"></figure>
+                    <figure><img src="assets/img/hackaton/hk4.jpeg" alt="ANTAM Hackathon"></figure>
+                  </div>
+                </div>
               </div>
-              <div class="kh-card-img-wrap kh-img-contain-wrap">
-                <img src="assets/img/hackaton.png?v=20260818-2" alt="ANTAM Hackathon" class="kh-card-img kh-card-img-contain">
-              </div>
-            </div>
+            </article>
 
           </div>
         </div>
@@ -482,11 +522,6 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
           <div class="container" style="position: relative; z-index: 1;">
             <div class="an-hero-inner" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
               
-              <!-- Kiri: Maskot GOLNIX -->
-              <div class="an-hero-mascot animate-on-scroll" style="flex: 1; min-width: 250px; display: flex; justify-content: flex-end;">
-                <img src="assets/img/golnix.png?v=20260818-2" alt="GOLNIX" style="max-height: 400px; object-fit: contain; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));">
-              </div>
-
               <!-- Tengah: Teks -->
               <div class="an-hero-text animate-on-scroll delay-100" style="flex: 1.2; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
                 <div class="an-gold-bar" style="width: 45px; height: 5px; background: #d97706; border-radius: 3px; margin-bottom: 16px;"></div>
@@ -499,7 +534,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
               <!-- Kanan: Piala/Trophy -->
               <div class="an-hero-img animate-on-scroll delay-200" style="flex: 1; min-width: 250px; display: flex; justify-content: flex-start; position: relative;">
                 <div class="an-trophy-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%); z-index: 0; border-radius: 50%;"></div>
-                <img src="assets/img/trophy.png" alt="Trophy KMA XXV 2026" class="an-trophy-img" style="max-height: 400px; object-fit: contain; z-index: 1; position: relative; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));">
+                <img src="assets/img/trophy-transparent.png" alt="Trophy KMA XXV 2026" class="an-trophy-img" style="max-height: 400px; object-fit: contain; z-index: 1; position: relative; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));">
               </div>
 
             </div>
@@ -517,7 +552,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             </div>
 
             <div class="an-awards-grid animate-on-scroll delay-100">
-              <div class="an-award-card" onclick="openAwardModal('Best Presenter', 'assets/img/Icon Mockup Board juara/Best Presenter.png', 'Penghargaan kepada tim yang paling mampu menyampaikan, menjelaskan, dan mempertahankan materi inovasi secara jelas, sistematis, meyakinkan, serta profesional.', '1')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Presenter', 'assets/img/Icon Mockup Board juara/Best Presenter.png', 'Penghargaan kepada tim yang paling mampu menyampaikan, menjelaskan, dan mempertahankan materi inovasi secara jelas, sistematis, meyakinkan, serta profesional.', '1')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Presenter.png" alt="Best Presenter" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -525,7 +560,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Presenter</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Makalah', 'assets/img/Icon Mockup Board juara/Best Makalah.png', 'Penghargaan kepada karya inovasi GKM atau SS dengan dokumen makalah yang paling berkualitas dari sisi struktur, substansi, metodologi, alur PDCA, penyajian data, keterbacaan, dan kualitas visual dokumen.', '2')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Makalah', 'assets/img/Icon Mockup Board juara/Best Makalah.png', 'Penghargaan kepada karya inovasi GKM atau SS dengan dokumen makalah yang paling berkualitas dari sisi struktur, substansi, metodologi, alur PDCA, penyajian data, keterbacaan, dan kualitas visual dokumen.', '2')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Makalah.png" alt="Best Makalah" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -533,7 +568,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Makalah</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Visual Communication', 'assets/img/Icon Mockup Board juara/Best Visual Communication.png', 'Penghargaan kepada tim yang paling efektif dan kreatif dalam memvisualisasikan inovasi selama presentasi sehingga masalah, solusi, proses, dan hasil inovasi dapat dipahami dengan mudah oleh juri dan audiens.', '3')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Visual Communication', 'assets/img/Icon Mockup Board juara/Best Visual Communication.png', 'Penghargaan kepada tim yang paling efektif dan kreatif dalam memvisualisasikan inovasi selama presentasi sehingga masalah, solusi, proses, dan hasil inovasi dapat dipahami dengan mudah oleh juri dan audiens.', '3')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Visual Communication.png" alt="Best Visual Communication" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -541,7 +576,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Visual Communication</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Safety Improvement', 'assets/img/Icon Mockup Board juara/Best Safety Improvement.png', 'Penghargaan kepada inovasi yang memberikan peningkatan paling kuat, nyata, dan berkelanjutan terhadap keselamatan kerja serta pengendalian risiko.', '4')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Safety Improvement', 'assets/img/Icon Mockup Board juara/Best Safety Improvement.png', 'Penghargaan kepada inovasi yang memberikan peningkatan paling kuat, nyata, dan berkelanjutan terhadap keselamatan kerja serta pengendalian risiko.', '4')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Safety Improvement.png" alt="Best Safety Improvement" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -549,7 +584,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Safety Improvement</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Environment &amp; Sustainability Improvement', 'assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png', 'Penghargaan kepada inovasi yang memberikan dampak terbaik, terukur, dan berkelanjutan terhadap lingkungan serta penggunaan sumber daya.', '5')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Environment &amp; Sustainability Improvement', 'assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png', 'Penghargaan kepada tim yang memberikan dampak terbaik, terukur, dan berkelanjutan terhadap lingkungan serta penggunaan sumber daya.', '5')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png" alt="Best Environment &amp; Sustainability" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -557,7 +592,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Environment &amp; Sustainability Improvement</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Technology &amp; Digital Innovation', 'assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png', 'Penghargaan kepada inovasi yang paling tepat, efektif, andal, dan relevan dalam memanfaatkan teknologi atau solusi digital untuk meningkatkan proses kerja.', '6')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Technology &amp; Digital Innovation', 'assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png', 'Penghargaan kepada inovasi yang paling tepat, efektif, andal, dan relevan dalam memanfaatkan teknologi atau solusi digital untuk meningkatkan proses kerja.', '6')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png" alt="Best Technology &amp; Digital Innovation" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -565,7 +600,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Technology &amp; Digital Innovation</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Proven Financial Benefit', 'assets/img/Icon Mockup Board juara/Best Finance Benefit.png', 'Penghargaan kepada inovasi dengan manfaat finansial bersih terbesar yang telah terealisasi, terukur, dapat ditelusuri, dan terverifikasi.', '7')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Proven Financial Benefit', 'assets/img/Icon Mockup Board juara/Best Finance Benefit.png', 'Penghargaan kepada inovasi dengan manfaat finansial bersih terbesar yang telah terealisasi, terukur, dapat ditelusuri, dan terverifikasi.', '7')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Finance Benefit.png" alt="Best Proven Financial Benefit" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -573,7 +608,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Proven Financial Benefit</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Collaboration', 'assets/img/Icon Mockup Board juara/Best Collaboration.png', 'Penghargaan kepada tim yang paling kuat menunjukkan kolaborasi lintas satuan kerja, fungsi, unit, atau anak perusahaan dan stake holder lainnya diluar perusahaan dalam pembentukan dan pelaksanaan inovasi.', '8')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Collaboration', 'assets/img/Icon Mockup Board juara/Best Collaboration.png', 'Penghargaan kepada tim yang paling kuat menunjukkan kolaborasi lintas satuan kerja, fungsi, unit, atau anak perusahaan dan stakeholder lainnya dalam pembentukan dan pelaksanaan inovasi.', '8')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Collaboration.png" alt="Best Collaboration" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -581,7 +616,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Collaboration</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Transformation Behaviour', 'assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png', 'Penghargaan kepada tim yang proses inovasinya paling kuat dan paling nyata mencerminkan minimal 6 dari 8 Key Behaviours Transformasi ANTAM.', '9')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Transformation Behaviour', 'assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png', 'Penghargaan kepada tim yang proses inovasinya paling kuat dan paling nyata mencerminkan minimal 6 dari 8 Key Behaviours Transformasi ANTAM.', '9')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png" alt="Best Transformation Behaviour" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -589,7 +624,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Transformation Behaviour</h4>
                 </div>
               </div>
-              <div class="an-award-card" onclick="openAwardModal('Best Replication Potential', 'assets/img/Icon Mockup Board juara/Best replication potential.png', 'Penghargaan kepada inovasi yang paling layak, mudah, dan bernilai untuk diterapkan pada lingkup kerja, unit, atau anak perusahaan lainnya atau lingkungan sekitar wilayah operasi.', '10')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+              <div class="an-award-card" onclick="toggleAwardInline('Best Replication Potential', 'assets/img/Icon Mockup Board juara/Best replication potential.png', 'Penghargaan kepada inovasi yang paling layak, mudah, dan bernilai untuk diterapkan pada lingkup kerja, unit, atau anak perusahaan lainnya atau lingkungan sekitar wilayah operasi.', '10')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
                 <div style="height: 180px; background: #f8fafc;">
                   <img src="assets/img/Icon Mockup Board juara/Best replication potential.png" alt="Best Replication Potential" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -612,7 +647,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                 </div>
                 <span>B. SPECIAL ENGAGEMENT AWARD</span>
               </div>
-              <div class="an-special-card animate-on-scroll delay-100" onclick="openAwardModal('Best Team Spirit', 'assets/img/best.team.png', 'Penghargaan engagement untuk kekompakan, kreativitas, autentisitas, dan semangat tim.', '11')" role="button" tabindex="0">
+              <div class="an-special-card animate-on-scroll delay-100" onclick="toggleAwardInline('Best Team Spirit', 'assets/img/best.team.png', 'Penghargaan engagement untuk kekompakan, kreativitas, autentisitas, dan semangat tim.', '11')" role="button" tabindex="0">
                 <div class="an-special-num">11</div>
                 <div class="an-special-info">
                   <h4>Best Team Spirit</h4>
@@ -747,11 +782,15 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
 <section id="presentasi" class="slide section" style="background-color: #F5F7F7;">
       <div class="slide-scroll-wrapper">
         <div class="container" style="padding-top: 50px; padding-bottom: 70px;">
-          <div class="section-header animate-on-scroll">
+          <div class="section-header dd-header presentasi-header animate-on-scroll">
+            <div class="dd-num-large">07</div>
+            <div class="dd-title-wrap">
             <p class="eyebrow">AGENDA PRESENTASI</p>
-            <h2 class="section-title">Jadwal Presentasi</h2>
-            <div class="divider"></div>
-            
+            <h2 class="dd-title-display">JADWAL PRESENTASI<br><span>GUGUS</span></h2>
+            <p class="dd-subtitle">KMA XXV 2026</p>
+            <div class="an-gold-bar"></div>
+            <p class="dd-desc">Jadwal presentasi per stream dan gugus. Klik masing-masing jadwal untuk melihat materi visual lengkap.</p>
+            </div>
           </div>          <div id="jadwalPresentasiTables" class="deep-dive-grid-modern animate-on-scroll delay-100" style="margin-top: 40px; margin-bottom: 100px;"></div>
         </div>
       </div>
@@ -875,6 +914,11 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <span class="ed-hero-subtitle">KMA XXV 2026</span>
             <h2 class="ed-hero-title">PANITIA</h2>
             <div class="ed-hero-number">06</div>
+          </div>
+
+          <div class="panitia-visual-band animate-on-scroll" aria-hidden="true">
+            <img src="assets/img/tugu_malang.jpg" alt="">
+            <div><strong>KMA XXV</strong><span>Malang · 2026</span></div>
           </div>
 
           <div class="ed-profile-grid animate-on-scroll delay-100">
@@ -1033,50 +1077,47 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <h2 class="section-title">Lokasi Acara</h2>
             <div class="divider"></div>
           </div>
-          <div class="location-grid animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/mercure.mirama.jpg'); height: 250px; background-size: cover; background-position: center;">
-                <div class="day-badge">HOTEL & CONVENTION</div>
+          <div class="venue-grid animate-on-scroll">
+            <article class="venue-card">
+              <div class="venue-photo" style="background-image: url('assets/img/mercure.mirama.jpg');">
+                <span class="venue-badge">HOTEL &amp; CONVENTION</span>
               </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Mercure Mirama Hotel</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Jl. Raden Panji Suroso No.7, Kota Malang, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/TuQjnsZZyXWNcRGx7" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              <div class="venue-body">
+                <h3>Mercure Mirama Hotel</h3>
+                <p>Jl. Raden Panji Suroso No.7, Kota Malang, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/TuQjnsZZyXWNcRGx7" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex;">Lihat Maps</a>
               </div>
-            </div>
-
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/warung%20wareg.jpg?v=20260818-3'); height: 220px;">
-                <div class="day-badge">MAKAN SIANG</div>
+            </article>
+            <article class="venue-card">
+              <div class="venue-photo" style="background-image: url('assets/img/warung%20wareg.jpg?v=20260818-3');">
+                <span class="venue-badge">MAKAN SIANG</span>
               </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Resto Warung Wareg</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Malang, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/kFcfna1EVPKxmJit5" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              <div class="venue-body">
+                <h3>Resto Warung Wareg</h3>
+                <p>Batu, Malang, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/kFcfna1EVPKxmJit5" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex;">Lihat Maps</a>
               </div>
-            </div>
-
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/pagupon.jpg?v=20260818-3'); height: 220px;">
-                <div class="day-badge">TEAM BUILDING</div>
+            </article>
+            <article class="venue-card">
+              <div class="venue-photo" style="background-image: url('assets/img/pagupon.jpg?v=20260818-3');">
+                <span class="venue-badge">TEAM BUILDING</span>
               </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Pagupon Camp</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/ADmDNfi9pxoynXcD6" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              <div class="venue-body">
+                <h3>Pagupon Camp</h3>
+                <p>Batu, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/ADmDNfi9pxoynXcD6" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex;">Lihat Maps</a>
               </div>
-            </div>
-
-            <div class="day-card location-card" style="cursor: default;">
-              <div class="day-card-img-header" style="background-image: url('assets/img/brawijaya.jpeg?v=20260818-3'); height: 220px;">
-                <div class="day-badge">OLEH-OLEH</div>
+            </article>
+            <article class="venue-card">
+              <div class="venue-photo" style="background-image: url('assets/img/brawijaya.jpeg?v=20260818-3');">
+                <span class="venue-badge">OLEH-OLEH</span>
               </div>
-              <div class="day-card-content" style="padding: 20px; pointer-events: auto;">
-                <h3 style="margin-bottom: 8px; font-size: 1.1rem;">Brawijaya Oleh Oleh</h3>
-                <p style="color: #64748b; margin-bottom: 15px; font-size: 0.9rem;">Batu, Jawa Timur</p>
-                <a href="https://maps.app.goo.gl/5bGhM3z2G2CzwC7X9" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; position: relative; z-index: 9999; cursor: pointer;">Lihat Maps</a>
+              <div class="venue-body">
+                <h3>Brawijaya Oleh Oleh</h3>
+                <p>Batu, Jawa Timur</p>
+                <a href="https://maps.app.goo.gl/5bGhM3z2G2CzwC7X9" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex;">Lihat Maps</a>
               </div>
-            </div>
+            </article>
           </div>
         </div>
 
@@ -1086,7 +1127,10 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       <div class="slide-scroll-wrapper">
         <div id="kontak-content" class="container" style="margin-bottom: 40px;">
           <div class="section-header animate-on-scroll">
-            <img src="assets/img/golnix.png?v=20260818-3" alt="Maskot GOLNIX" style="max-height: 120px; margin-bottom: 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));">
+            <div class="contact-event-mark" aria-hidden="true">
+              <img src="assets/img/gunung2.png" alt="">
+              <span>KMA XXV<br><b>MALANG · 2026</b></span>
+            </div>
             <h2 class="section-title">Kontak Panitia</h2>
             <div class="divider"></div>
             <p class="section-desc">Punya pertanyaan seputar event KMA XXV?<br>Jangan ragu untuk menghubungi kami melalui jalur di bawah ini.</p>
@@ -1144,6 +1188,10 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <h2 class="section-title">Aturan Lainnya</h2>
             <div class="divider"></div>
           </div>
+          <div class="rules-visual-band animate-on-scroll" aria-hidden="true">
+            <img src="assets/img/tugu_malang.jpg" alt="">
+            <div class="rules-visual-copy"><strong>KMA XXV</strong><span>Malang · 2026</span></div>
+          </div>
           <!-- C. Ketentuan Umum -->
         <div class="an-rules-block">
           <div class="container">
@@ -1171,10 +1219,9 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <p class="eyebrow emergency-eyebrow">HSE INFORMATION</p>
             <h2 class="section-title" style="color: #b91c1c;">Emergency & Safety</h2>
             <div class="divider" style="background: #dc2626;"></div>
-            <p class="section-desc">Informasi sementara untuk kebutuhan keselamatan peserta. Kontak final akan diperbarui oleh Tim HSE.</p>
           </div>
           <div class="emergency-grid animate-on-scroll delay-100">
-            <img src="assets/img/emergency.jpeg" alt="HSE Emergency" style="width: 100%; max-width: 800px; margin: 0 auto; display: block; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+            <img class="emergency-image" src="assets/img/emergency.jpeg" alt="HSE Emergency" style="width: 100%; max-width: 800px; margin: 0 auto; display: block; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
           </div>
         </div>
         <footer class="footer"><div class="container"><p>@KMA.XXV.2026</p></div></footer>
@@ -1214,34 +1261,6 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     </div>
   </div>
 
-  <!-- POPUP MODAL KEY HIGHLIGHTS -->
-  <div class="modal-overlay" id="highlightModal" onclick="closeHighlightModalOnOverlay(event)">
-    <div class="modal-container">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <h3 id="hlModalTitle">Detail Highlight</h3>
-          <p id="hlModalCategory">INFORMASI KMA XXV</p>
-        </div>
-        <button class="modal-close" onclick="closeHighlightModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div id="hlModalContent" style="font-size: 0.95rem; line-height: 1.7; color: #334155;"></div>
-      </div>
-    </div>
-  </div>
-  <!-- POPUP MODAL DETAIL PENGHARGAAN -->
-  <div class="award-detail-modal" id="awardDetailModal" aria-hidden="true" onclick="closeAwardModalOnOverlay(event)">
-    <div class="award-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="awardModalTitle">
-      <button class="award-detail-close" type="button" onclick="closeAwardModal()" aria-label="Tutup detail penghargaan">&times;</button>
-      <div class="award-detail-media"><img id="awardModalImg" src="" alt=""></div>
-      <div class="award-detail-body">
-        <div class="award-detail-kicker">PENGHARGAAN KMA XXV</div>
-        <h2 id="awardModalTitle">Detail Penghargaan</h2>
-        <p id="awardModalDescription"></p>
-        <div class="award-detail-number" id="awardModalNumber"></div>
-      </div>
-    </div>
-  </div>
 <script>
     const presentationData = {
       gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.JPEG?v=20260819-1", category: "GKM 1", table: false },
@@ -1264,6 +1283,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     const themeSongBtn = document.getElementById('themeSongBtn');
     const audioIcon = document.getElementById('audioIcon');
     let isPlaying = false;
+    let audioUnlockPending = false;
+    let audioUserDisabled = false;
 
     function syncAudioControls() {
       if (!jingle) return;
@@ -1287,19 +1308,40 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     function setJinglePlayback(shouldPlay) {
       if (!jingle) return;
       if (shouldPlay) {
+        audioUserDisabled = false;
+        if (audioUnlockPending || !jingle.paused) {
+          syncAudioControls();
+          return;
+        }
         jingle.muted = false;
+        audioUnlockPending = true;
         const promise = jingle.play();
-        if (promise && promise.then) promise.then(syncAudioControls).catch((err) => console.warn('Gagal memutar audio:', err));
-        else syncAudioControls();
+        if (promise && promise.then) {
+          promise.then(() => {
+            audioUnlockPending = false;
+            syncAudioControls();
+            removeAllAudioListeners();
+          }).catch((err) => {
+            audioUnlockPending = false;
+            syncAudioControls();
+            console.warn('Gagal memutar audio:', err);
+          });
+        } else {
+          audioUnlockPending = false;
+          syncAudioControls();
+          removeAllAudioListeners();
+        }
       } else {
+        audioUserDisabled = true;
+        audioUnlockPending = false;
         jingle.pause();
         syncAudioControls();
       }
     }
 
     function enableAudioOnInteraction() {
-      if (!isPlaying) setJinglePlayback(true);
-      if (isPlaying) removeAllAudioListeners();
+      if (audioUserDisabled || isPlaying || audioUnlockPending) return;
+      setJinglePlayback(true);
     }
 
     function removeAllAudioListeners() {
@@ -1322,6 +1364,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     document.addEventListener('touchstart', enableAudioOnInteraction);
     document.addEventListener('keydown', enableAudioOnInteraction);
     document.addEventListener('scroll', enableAudioOnInteraction, true);
+    setJinglePlayback(true);
 /* -----------------------------------------
        LOGIKA TOGGLE DROPDOWN MENU
     ----------------------------------------- */
@@ -1342,7 +1385,31 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       if (dropdown && !dropdown.contains(e.target)) {
         dropdown.classList.remove('active');
       }
+      const schedule = document.querySelector('.home-schedule-menu');
+      if (schedule && !schedule.contains(e.target)) {
+        schedule.classList.remove('active');
+        schedule.querySelector('.home-schedule-toggle')?.setAttribute('aria-expanded', 'false');
+      }
     });/* -----------------------------------------
+       HIGHLIGHT MODAL DATA & FUNCTIONS
+    ----------------------------------------- */
+
+    function toggleHomeSchedule(e) {
+      if (e) e.stopPropagation();
+      const schedule = document.querySelector('.home-schedule-menu');
+      if (!schedule) return;
+      const isOpen = schedule.classList.toggle('active');
+      schedule.querySelector('.home-schedule-toggle')?.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    function selectHomeSchedule(slideIndex) {
+      goToSlide(slideIndex);
+      const schedule = document.querySelector('.home-schedule-menu');
+      if (schedule) {
+        schedule.classList.remove('active');
+        schedule.querySelector('.home-schedule-toggle')?.setAttribute('aria-expanded', 'false');
+      }
+    }/* -----------------------------------------
        HIGHLIGHT MODAL DATA & FUNCTIONS
     ----------------------------------------- */
     const highlightData = {
@@ -1385,8 +1452,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
           <p>Lagu ini membawa semangat kebersamaan dan menyelaraskan energi acara dengan tema <em>25 Years of Continuous Improvement: Powering Sustainable Growth, Transforming the Future</em>.</p>
           <div class="theme-song-points"><span>Semangat kebersamaan</span><span>Energi inovasi</span><span>Transformasi berkelanjutan</span></div>
           <p style="margin-top:14px;">Notasi balok dan lirik tersedia dalam dokumen resmi berikut. Dokumen dapat dibaca langsung atau diunduh untuk latihan dan produksi acara.</p>
-          <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:14px;"><embed src="assets/JINGLE%20KMA%20-%20notasi.pdf?v=20260818-2" type="application/pdf" width="100%" height="430"></div>
-          <a class="btn btn-outline" href="assets/JINGLE%20KMA%20-%20notasi.pdf?v=20260818-2" download>Unduh Notasi & Lirik PDF</a>
+          <div class="theme-song-artwork"><img src="assets/img/lirik.jpeg" alt="Lirik Official Theme Song KMA XXV"></div>
         `
       },      5: {
         title: "ANTAM Hackathon 2026",
@@ -1402,20 +1468,6 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         `      }
     };
 
-    function openHighlightModal(id) {
-      const data = highlightData[id];
-      if (!data) return;
-
-      document.getElementById('hlModalTitle').innerText = data.title;
-      document.getElementById('hlModalCategory').innerText = data.category;
-      document.getElementById('hlModalContent').innerHTML = data.content;
-
-      document.getElementById('highlightModal').classList.add('active');
-    }
-    function closeHighlightModal() {
-      document.getElementById('highlightModal').classList.remove('active');
-    }
-
     function toggleLoContacts() {
       const panel = document.getElementById('loContacts');
       const button = document.querySelector('.lo-toggle-button');
@@ -1423,11 +1475,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       panel.hidden = !panel.hidden;
       if (button) { button.setAttribute('aria-expanded', String(!panel.hidden)); button.querySelector('.clist-arrow').textContent = panel.hidden ? '›' : '⌃'; }
     }
-    function closeHighlightModalOnOverlay(e) {
-      if (e.target.id === 'highlightModal') {
-        closeHighlightModal();
-      }
-    }/* -----------------------------------------
+    /* -----------------------------------------
        RUNDOWN MODAL DATA & FUNCTIONS
     ----------------------------------------- */
     const rundownData = {
@@ -1580,22 +1628,18 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         const num = String(idx + 1).padStart(2, '0');
         const isRightAligned = idx % 2 !== 0;
         
-        return `<article class="dd-ticket ${isRightAligned ? 'dd-ticket-right' : ''}" style="margin-bottom: 24px; border-radius: 20px; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: #ffffff; position: relative; overflow: hidden;">
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #f97316, #fbbf24);"></div>
-          <div class="dd-ticket-bg" style="opacity: 0.03; font-size: 8rem; right: 20px; top: -20px; position: absolute; font-weight: 900; color: #0f172a; pointer-events: none; z-index: 1;">${num}</div>
-          <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; position: relative; z-index: 2;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                  <div style="display: inline-block; padding: 6px 12px; background: #fff7ed; color: #ea580c; border-radius: 8px; font-weight: 800; font-size: 0.9rem; margin-bottom: 12px; border: 1px solid #ffedd5;">${data.category}</div>
-                  <h3 style="font-size: 1.6rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1.2;">JADWAL PRESENTASI</h3>
-                </div>
-                <div style="padding: 10px;">
-                  <svg class="dd-chevron" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
+        return `<article class="dd-ticket event-pass event-pass--presentasi ${isRightAligned ? 'dd-ticket-right' : ''}">
+          <div class="event-pass-head dd-ticket-content">
+            <div class="event-pass-index">${num}</div>
+            <div>
+              <span class="event-pass-kicker">PRESENTASI GUGUS</span>
+              <h3>${data.category}</h3>
+              <p class="event-pass-meta"><b>Jadwal visual</b><span>Klik untuk membuka detail</span></p>
             </div>
+            <svg class="dd-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </div>
-          <div class="dd-table-wrap" style="padding: 0; background: #f8fafc; border-top: 1px solid #e2e8f0;">
-            <img src="${data.image}" alt="${data.title}" style="width: 100%; display: block; border-radius: 0 0 20px 20px;">
+          <div class="dd-table-wrap">
+            <img src="${data.image}" alt="${data.title}">
           </div>
         </article>`;
       }).join('');
@@ -1612,25 +1656,18 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         const isRightAligned = idx % 2 !== 0;
         const imgSrc = 'assets/img/jadwal deep dive/' + images[idx];
         
-        return `<article class="dd-ticket ${isRightAligned ? 'dd-ticket-right' : ''}" style="margin-bottom: 24px; border-radius: 20px; border: 1px solid #e5e7eb; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: #ffffff; position: relative; overflow: hidden;">
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #006d64, #a3e635);"></div>
-          <div class="dd-ticket-bg" style="opacity: 0.03; font-size: 8rem; right: 20px; top: -20px;">${num}</div>
-          <div class="dd-ticket-content" style="padding: 24px; cursor: pointer; position: relative; z-index: 2;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                  <div style="display: inline-block; padding: 6px 12px; background: #eef7f4; color: #006d64; border-radius: 8px; font-weight: 800; font-size: 0.9rem; margin-bottom: 12px; border: 1px solid #ccede4;">${type}</div>
-                  <h3 style="font-size: 1.6rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1.2;">${name.toUpperCase()}</h3>
-                  <div style="margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 16px;">
-                      <p style="color: #64748b; font-size: 0.95rem; margin: 0;">${stream.judges.replace(/ · /g, '<br>')}</p>
-                  </div>
-                </div>
-                <div style="padding: 10px;">
-                  <svg class="dd-chevron" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
+        return `<article class="dd-ticket event-pass event-pass--deep-dive ${isRightAligned ? 'dd-ticket-right' : ''}">
+          <div class="event-pass-head dd-ticket-content">
+            <div class="event-pass-index">${num}</div>
+            <div>
+              <span class="event-pass-kicker">${type}</span>
+              <h3>${name.toUpperCase()}</h3>
+              <p class="event-pass-meta"><b>Juri</b><span>${stream.judges}</span></p>
             </div>
+            <svg class="dd-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </div>
-          <div class="dd-table-wrap" style="padding: 0; background: #f8fafc; display: none;">
-            <img src="${imgSrc}" style="width: 100%; border-radius: 0 0 20px 20px; border-top: 1px solid #e2e8f0; display: block;">
+          <div class="dd-table-wrap">
+            <img src="${imgSrc}" alt="${stream.title}">
           </div>
         </article>`;
       }).join('');
@@ -1658,11 +1695,29 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
 
             renderDeepDiveTables();
       renderJadwalPresentasiTables();
+
+      document.querySelectorAll('.kh-item-toggle').forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          const item = toggle.closest('.kh-item');
+          if (!item) return;
+          document.querySelectorAll('#highlights .kh-item.is-open').forEach((openItem) => {
+            if (openItem !== item) {
+              openItem.classList.remove('is-open');
+              openItem.querySelector('.kh-item-toggle')?.setAttribute('aria-expanded', 'false');
+            }
+          });
+          const isOpen = item.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', String(isOpen));
+        });
+      });
                   
       // Generic delegation for dd-ticket (Tentang KMA, Deep Dive, Awards)
       document.body.addEventListener('click', function(e) {
          const ticket = e.target.closest('.dd-ticket');
          if (ticket) {
+          ticket.parentElement?.querySelectorAll(':scope > .dd-ticket.open').forEach((openTicket) => {
+            if (openTicket !== ticket) openTicket.classList.remove('open');
+          });
             ticket.classList.toggle('open');
          }
       });
@@ -1711,15 +1766,12 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           closeModal();
-          closeHighlightModal();
         } else if (e.key === 'ArrowRight' || e.key === 'Space') {
-          if (!document.getElementById('rundownModal').classList.contains('active') &&
-              !document.getElementById('highlightModal').classList.contains('active')) {
+          if (!document.getElementById('rundownModal').classList.contains('active')) {
             nextSlide();
           }
         } else if (e.key === 'ArrowLeft') {
-          if (!document.getElementById('rundownModal').classList.contains('active') &&
-              !document.getElementById('highlightModal').classList.contains('active')) {
+          if (!document.getElementById('rundownModal').classList.contains('active')) {
             prevSlide();
           }
         }
@@ -1831,9 +1883,23 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
           oldBody.querySelector('h4').textContent = data.title;
           oldBody.querySelector('p').textContent = data.description;
         }
+        const detail = document.createElement('div');
+        detail.className = 'award-inline-panel';
+        detail.hidden = true;
+        detail.innerHTML = renderAwardGuide(awardGuideSections[number] || data.description);
+        detail.addEventListener('click', (event) => event.stopPropagation());
+        card.appendChild(detail);
       });
+      const specialCard = document.querySelector('#penghargaan .an-special-card');
+      if (specialCard) {
+        const detail = document.createElement('div');
+        detail.className = 'award-inline-panel';
+        detail.hidden = true;
+        detail.innerHTML = renderAwardGuide(awardGuideSections['11'] || 'Penghargaan engagement untuk kekompakan, kreativitas, autentisitas, dan semangat tim.');
+        detail.addEventListener('click', (event) => event.stopPropagation());
+        specialCard.appendChild(detail);
+      }
     }
-    buildAwardCardPresentation();
     const awardGuideSections = {};
     const awardGuideHeader = /\*\*\[(\d+)\.\s*([^\]]+)\]\{\.mark\}\*\*/g;
     let awardGuideMatch;
@@ -1846,6 +1912,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     }
     if (awardGuidePrevious) awardGuideSections[awardGuidePrevious.number] = awardGuideMarkdown.slice(awardGuidePrevious.end).trim();
 
+    buildAwardCardPresentation();
+
     function escapeAwardText(value) {
       return String(value || '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
     }
@@ -1853,43 +1921,67 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       return String(title || '').toUpperCase().replace(/&AMP;/g, '&').replace(/\s+IMPROVEMENT$/, '').trim();
     }
     function renderAwardGuide(raw) {
-      const clean = String(raw || '')
-        .replace(/\r/g, '')
-        .replace(/\*\*\[([^\]]+)\]\{\.mark\}\*\*/g, '$1')
-        .replace(/\*\*(.*?)\*\*/g, '$1')
-        .replace(/^\s*[-*]\s+/gm, '• ')
-        .replace(/^\s*\d+\.\s+/gm, (line) => line.trim() + ' ')
-        .trim();
-      const paragraphs = clean.split(/\n\s*\n/).map((part) => '<p>' + escapeAwardText(part).replace(/\n/g, '<br>') + '</p>').join('');
-      return '<div class="award-guide-content">' + paragraphs + '</div>';
+      const lines = String(raw || '').replace(/\r/g, '').split('\n');
+      const output = [];
+      let paragraph = [];
+      let listType = null;
+      let listItems = [];
+
+      const inline = (value) => escapeAwardText(value)
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>');
+      const flushParagraph = () => {
+        if (paragraph.length) output.push('<p>' + inline(paragraph.join(' ')) + '</p>');
+        paragraph = [];
+      };
+      const flushList = () => {
+        if (!listItems.length) return;
+        output.push('<' + listType + '>' + listItems.map((item) => '<li>' + inline(item) + '</li>').join('') + '</' + listType + '>');
+        listItems = [];
+        listType = null;
+      };
+
+      lines.forEach((line) => {
+        const value = line.trim();
+        const heading = value.match(/^\*\*\[([^\]]+)\]\{\.mark\}\*\*$/);
+        const subheading = value.match(/^\*\*(.+?)\*\*$/);
+        const bullet = value.match(/^[-*]\s+(.*)$/);
+        const numbered = value.match(/^\d+\.\s+(.*)$/);
+        if (!value) { flushParagraph(); flushList(); return; }
+        if (heading) { flushParagraph(); flushList(); output.push('<h3>' + inline(heading[1]) + '</h3>'); return; }
+        if (subheading) { flushParagraph(); flushList(); output.push('<h4>' + inline(subheading[1]) + '</h4>'); return; }
+        if (bullet || numbered) {
+          flushParagraph();
+          const nextType = bullet ? 'ul' : 'ol';
+          if (listType && listType !== nextType) flushList();
+          listType = nextType;
+          listItems.push((bullet || numbered)[1]);
+          return;
+        }
+        if (listItems.length) {
+          listItems[listItems.length - 1] += ' ' + value;
+          return;
+        }
+        flushList();
+        paragraph.push(value);
+      });
+      flushParagraph();
+      flushList();
+      return '<div class="award-guide-content">' + output.join('') + '</div>';
     }
 
-    function openAwardModal(title, image, description, number) {
-      const modal = document.getElementById('awardDetailModal');
-      const img = document.getElementById('awardModalImg');
-      const titleEl = document.getElementById('awardModalTitle');
-      const descEl = document.getElementById('awardModalDescription');
-      const numberEl = document.getElementById('awardModalNumber');
-      if (!modal || !img || !titleEl || !descEl) return;
-      const guideNumber = String(number || '').replace(/^0+/, '') || String(number || '');
-      const guide = awardGuideSections[guideNumber];
-      titleEl.textContent = title;
-      descEl.innerHTML = guide ? renderAwardGuide(guide) : '<p>' + escapeAwardText(description) + '</p>';
-      img.src = image;
-      img.alt = title;
-      if (numberEl) numberEl.textContent = number ? String(number).padStart(2, '0') : '';
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('award-modal-open');
-    }    function closeAwardModal() {
-      const modal = document.getElementById('awardDetailModal');
-      if (!modal) return;
-      modal.classList.remove('is-open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('award-modal-open');
-    }
-    function closeAwardModalOnOverlay(e) {
-      if (e.target && e.target.id === 'awardDetailModal') closeAwardModal();
+    function toggleAwardInline(title, image, description, number) {
+      const itemNumber = String(number || '').replace(/^0+/, '') || String(number || '');
+      const cards = document.querySelectorAll('#penghargaan .an-awards-grid .an-award-card');
+      const card = itemNumber === '11' ? document.querySelector('#penghargaan .an-special-card') : cards[Number(itemNumber) - 1];
+      if (!card) return;
+      const panel = card.querySelector('.award-inline-panel');
+      if (!panel) return;
+      const isOpen = panel.hidden;
+      document.querySelectorAll('#penghargaan .award-inline-panel').forEach((item) => { item.hidden = true; item.closest('.an-award-card, .an-special-card')?.classList.remove('is-open'); });
+      panel.hidden = !isOpen;
+      card.classList.toggle('is-open', isOpen);
+      if (isOpen) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
     function toggleThemeSong(e) {
       if (e) e.stopPropagation();

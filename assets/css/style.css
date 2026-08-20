@@ -2572,22 +2572,8 @@ body.presentation-mode {
   #penghargaan .an-hero-mascot img,
   #penghargaan .an-trophy-img { max-height: 300px !important; transform: none; }
 }
-/* Award detail interaction modal */
-.award-modal-open { overflow: hidden; }
-.award-detail-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(15,23,42,.68); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s ease, visibility .22s ease; }
-.award-detail-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
-.award-detail-dialog { position: relative; display: grid; grid-template-columns: minmax(240px, .9fr) minmax(280px, 1.1fr); width: min(860px, 100%); max-height: min(680px, 92vh); overflow: hidden; border: 1px solid rgba(255,255,255,.3); border-radius: 24px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.28); transform: translateY(14px) scale(.98); transition: transform .22s ease; }
-.award-detail-modal.is-open .award-detail-dialog { transform: translateY(0) scale(1); }
-.award-detail-media { min-height: 320px; display: flex; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(145deg,#e6f4f1,#f8fafc); }
-.award-detail-media img { display: block; width: 100%; max-height: 520px; object-fit: contain; border-radius: 18px; box-shadow: 0 16px 30px rgba(15,23,42,.14); }
-.award-detail-body { position: relative; padding: 46px 42px 38px; align-self: center; }
-.award-detail-kicker { margin-bottom: 12px; color: #d97706; font-size: .76rem; font-weight: 800; letter-spacing: .14em; }
-.award-detail-body h2 { margin: 0 0 18px; color: #0f172a; font-size: clamp(1.8rem,3vw,2.6rem); line-height: 1.15; }
-.award-detail-body p { margin: 0; color: #475569; font-size: 1.05rem; line-height: 1.75; }
-.award-detail-number { position: absolute; right: 28px; bottom: 10px; color: rgba(15,118,110,.10); font-size: 7rem; font-weight: 900; line-height: 1; }
-.award-detail-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 38px; height: 38px; border: 0; border-radius: 50%; color: #0f766e; background: #e6f4f1; font-size: 1.7rem; line-height: 1; cursor: pointer; }
-.award-detail-close:hover { background: #ccede4; }
-@media (max-width: 700px) { .award-detail-dialog { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; } .award-detail-media { min-height: 220px; padding: 18px 52px 18px 18px; } .award-detail-body { padding: 26px 24px 34px; } .award-detail-body p { font-size: .95rem; } }.award-guide-content { max-height: min(52vh, 420px); overflow-y: auto; padding-right: 8px; }
+/* Award guide content */
+.award-guide-content { max-height: min(52vh, 420px); overflow-y: auto; padding-right: 8px; }
 .award-guide-content p { margin: 0 0 14px; }
 .award-guide-content p:last-child { margin-bottom: 0; }
 /* KMA REFERENCE POLISH */
@@ -2667,4 +2653,1171 @@ body.presentation-mode {
   #penghargaan .award-card-horizontal .award-card-icon { flex-basis: 70px; width: 70px; height: 70px !important; }
   #penghargaan .award-card-horizontal .an-card-title { font-size: .96rem !important; }
   #penghargaan .award-card-horizontal .an-card-description { font-size: .78rem; }
+}
+
+/* =========================================
+   KMA EVENT UI — scoped section polish
+========================================= */
+#tentang .tentang-container { max-width: 980px; }
+#tentang .tentang-container > .dd-ticket.kma-feature {
+  padding: 0 !important;
+  border: 0 !important;
+  background: #fff !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, .08) !important;
+  overflow: hidden;
+}
+#tentang .tentang-container > .dd-ticket.kma-feature::before { display: none; }
+#tentang .kma-feature .dd-ticket-content { padding: 0 !important; }
+#tentang .kma-feature .dd-table-wrap {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: #0b3d38 !important;
+}
+#tentang .tentang-container > .dd-ticket.kma-feature img,
+#tentang .kma-feature img { max-height: none; width: 100%; height: auto; object-fit: contain; display: block; background: #fff; }
+
+.kma-feature-head {
+  display: grid;
+  grid-template-columns: 148px 1fr auto;
+  gap: 18px;
+  align-items: stretch;
+  min-height: 148px;
+  cursor: pointer;
+}
+.kma-feature-visual {
+  position: relative;
+  overflow: hidden;
+  background: #e8f4f1;
+}
+.kma-feature-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.kma-feature-visual::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 40%;
+  background: linear-gradient(transparent, rgba(6, 61, 54, .35));
+  pointer-events: none;
+}
+.kma-feature-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px 4px 18px 0;
+  min-width: 0;
+}
+.kma-feature-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: #d97706;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+.kma-feature-kicker b {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  color: #fff;
+  background: #006d64;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: 0;
+}
+.kma-feature-copy h3 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.kma-feature-copy p {
+  margin: 0;
+  color: #64748b;
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.kma-feature-chevron {
+  display: grid;
+  place-items: center;
+  padding: 0 18px;
+  color: #94a3b8;
+}
+.kma-feature.open { transform: none !important; }
+.kma-feature.open .dd-chevron { transform: rotate(180deg); }
+.kma-feature:hover { transform: translateY(-3px) !important; }
+.kma-feature--logo .kma-feature-kicker b { background: #d97706; }
+.kma-feature--mascot .kma-feature-kicker b { background: #0f766e; }
+.kma-feature--mind .kma-feature-kicker b { background: #115e59; }
+@media (max-width: 680px) {
+  .kma-feature-head { grid-template-columns: 96px 1fr auto; min-height: 112px; }
+  .kma-feature-copy { padding: 12px 0; }
+  .kma-feature-copy h3 { font-size: 1.12rem; }
+  .kma-feature-copy p { display: none; }
+}
+
+.kh-item {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
+}
+.kh-item + .kh-item { margin-top: 18px; }
+.kh-item-toggle {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr minmax(140px, 32%);
+  gap: 18px;
+  padding: 22px;
+  border: 0;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.kh-item-toggle:hover { background: #f8fafc; }
+.kh-item.is-open .kh-item-toggle { border-bottom: 1px solid #e2e8f0; }
+.kh-item-media {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f1f5f9;
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+}
+.kh-item-media img {
+  width: 100%;
+  height: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  display: block;
+}
+.kh-item-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: #006d64;
+  font-size: .8rem;
+  font-weight: 800;
+}
+.kh-item.is-open .kh-item-hint span { display: none; }
+.kh-item.is-open .kh-item-hint::after { content: 'Tutup materi'; }
+.kh-item-panel {
+  display: none;
+  padding: 8px 28px 32px;
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 48px);
+}
+.kh-item.is-open .kh-item-panel { display: block; animation: fadeIn .28s ease; }
+.hl-article {
+  max-width: 860px;
+  color: #334155;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+.hl-article h3, .hl-article h4 {
+  margin: 1.35em 0 .45em;
+  color: #0f172a;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.hl-article h3 { font-size: 1.2rem; color: #006d64; }
+.hl-article h4 { font-size: 1.02rem; }
+.hl-article p { margin: 0 0 1em; }
+.hl-article .hl-lead { font-size: 1.08rem; }
+.hl-article ul, .hl-article ol { margin: 0 0 1.1em; padding-left: 1.25em; }
+.hl-article li { margin: 0 0 .45em; }
+.hl-article strong { color: #0f172a; font-weight: 700; }
+.hl-article em { color: #475569; }
+.hl-article .theme-song-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 16px;
+}
+.hl-article .theme-song-points span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #006d64;
+  font-size: .8rem;
+  font-weight: 700;
+}
+.hackathon-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 8px 0 0;
+}
+.hackathon-gallery figure {
+  margin: 0;
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0b3d38;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, .12);
+}
+.hackathon-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  background: #fff;
+}
+.hackathon-gallery figcaption { display: none; }
+@media (min-width: 900px) {
+  .hackathon-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .kh-item-toggle { grid-template-columns: 1fr; }
+  .kh-item-panel { padding: 4px 16px 22px; }
+}
+
+#penghargaan .an-awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+#penghargaan .an-award-card.award-card-horizontal {
+  align-items: stretch !important;
+  gap: 0 !important;
+  min-height: 220px !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+#penghargaan .award-card-horizontal .award-card-icon {
+  flex: 0 0 46% !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 220px;
+  padding: 10px;
+  background: #f4fbf9 !important;
+  border-radius: 0 !important;
+}
+#penghargaan .award-card-horizontal .award-card-icon img {
+  width: 100%;
+  height: 100%;
+  max-height: 240px;
+  object-fit: contain !important;
+  object-position: center;
+}
+#penghargaan .award-card-horizontal .award-card-copy {
+  padding: 22px 22px 22px 8px !important;
+  justify-content: center;
+}
+#penghargaan .an-awards-grid .an-award-card > div:first-child { height: auto !important; }
+#penghargaan .an-awards-grid .an-award-card > div:first-child::after { display: none; }
+.award-detail-media { padding: 10px !important; background: #f4fbf9 !important; }
+.award-detail-media img { max-height: 560px; object-fit: contain; }
+.award-guide-content { max-height: min(64vh, 560px); }
+.award-guide-content h4 {
+  margin: 1.15em 0 .4em;
+  color: #006d64;
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.award-guide-content h4:first-child { margin-top: 0; }
+.award-guide-content p { margin: 0 0 12px; line-height: 1.7; }
+.award-guide-content ul, .award-guide-content ol { margin: 0 0 14px; padding-left: 1.2em; color: #334155; }
+.award-guide-content li { margin: 0 0 .4em; line-height: 1.6; }
+.award-guide-content strong { color: #0f172a; }
+@media (max-width: 900px) {
+  #penghargaan .an-awards-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 600px) {
+  #penghargaan .an-award-card.award-card-horizontal { flex-direction: column !important; min-height: 0 !important; }
+  #penghargaan .award-card-horizontal .award-card-icon {
+    flex-basis: auto !important;
+    width: 100% !important;
+    min-height: 200px;
+    height: 200px !important;
+  }
+  #penghargaan .award-card-horizontal .award-card-copy { padding: 16px 18px 20px !important; }
+}
+
+.event-pass {
+  padding: 0 !important;
+  border: 0 !important;
+  background: #fff !important;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, .08) !important;
+}
+.event-pass:hover { transform: translateY(-4px); }
+.event-pass-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 22px 22px 22px 0 !important;
+  cursor: pointer;
+}
+.event-pass-index {
+  width: 86px;
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(180deg, #006d64, #0b3d38);
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.event-pass-kicker {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: #d97706;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.event-pass h3 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+.event-pass-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 0;
+  color: #475569;
+  font-size: .92rem;
+}
+.event-pass-meta b { color: #006d64; }
+.event-pass .dd-table-wrap {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: #0b3d38;
+}
+.event-pass .dd-table-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  background: #fff;
+}
+@media (max-width: 640px) {
+  .event-pass-head { grid-template-columns: 64px 1fr; padding-right: 16px !important; }
+  .event-pass-head .dd-chevron { display: none; }
+  .event-pass h3 { font-size: 1.15rem; }
+}
+
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.venue-card {
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, .08);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.venue-card:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(15, 23, 42, .12); }
+.venue-photo {
+  position: relative;
+  height: 230px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+.venue-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(11, 61, 56, .55));
+}
+.venue-badge {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  z-index: 1;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(0, 109, 100, .92);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.venue-body { padding: 18px 20px 22px; }
+.venue-body h3 { margin: 0 0 6px; font-size: 1.15rem; }
+.venue-body p { margin: 0 0 14px; color: #64748b; font-size: .92rem; line-height: 1.5; }
+.venue-body .btn { pointer-events: auto; }
+@media (max-width: 760px) {
+  .venue-grid { grid-template-columns: 1fr; }
+}
+
+/* KMA XXV event-focused section polish */
+#tentang .tentang-container > .kma-feature {
+  border: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, .09);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+#tentang .tentang-container > .kma-feature:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, .14);
+}
+#tentang .kma-feature-head {
+  grid-template-columns: 190px 1fr auto;
+  min-height: 190px;
+  background: linear-gradient(105deg, #f3fbf8 0%, #fff 62%);
+}
+#tentang .kma-feature-visual {
+  min-height: 190px;
+  background: #dcefe9;
+}
+#tentang .kma-feature-visual img { object-fit: cover; }
+#tentang .kma-feature--logo .kma-feature-visual { background: #fff4d8; }
+#tentang .kma-feature--mascot .kma-feature-visual { background: #eaf5f2; }
+#tentang .kma-feature--mind .kma-feature-visual { background: #e7eef5; }
+#tentang .kma-feature--mascot .kma-feature-visual img { object-fit: contain; padding: 16px; }
+#tentang .kma-feature-copy { padding: 24px 10px 24px 2px; }
+#tentang .kma-feature-copy h3 { font-size: clamp(1.35rem, 2.3vw, 1.8rem); }
+#tentang .kma-feature-copy p { max-width: 560px; font-size: .98rem; }
+#tentang .kma-feature-kicker { letter-spacing: .16em; }
+#tentang .kma-feature .dd-table-wrap { background: #f7fbfa !important; }
+#tentang .kma-feature .dd-table-wrap img { max-height: 620px; object-fit: contain; }
+
+#highlights .kh-item {
+  border: 1px solid #d7e7e2;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .06);
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+#highlights .kh-item:hover { border-color: #f5b041; transform: translateY(-3px); }
+#highlights .kh-item.is-open { border-color: #006d64; box-shadow: 0 18px 38px rgba(0, 109, 100, .12); }
+#highlights .kh-item-toggle { padding: 26px; background: linear-gradient(110deg, #fff 0%, #fbfdfc 100%); }
+#highlights .kh-item-media { min-height: 148px; background: #edf7f4; }
+#highlights .kh-item-panel { padding: 12px clamp(20px, 5vw, 56px) 38px; }
+#highlights .hl-article { max-width: 980px; margin: 0 auto; }
+#highlights .hl-article h3 { font-size: 1.4rem; }
+#highlights .hl-article h4 { color: #006d64; }
+
+#penghargaan .award-card-horizontal .award-card-icon {
+  flex-basis: 50% !important;
+  min-height: 250px;
+  padding: 0 !important;
+  background: #eef8f5 !important;
+}
+#penghargaan .award-card-horizontal .award-card-icon img {
+  max-height: 270px;
+  object-fit: contain !important;
+  padding: 4px;
+}
+#penghargaan .award-card-horizontal .award-card-copy { padding: 26px 24px !important; }
+#penghargaan .award-guide-content { color: #334155; font-size: .98rem; line-height: 1.72; }
+#penghargaan .award-guide-content h3 { margin: 0 0 14px; color: #006d64; font-size: 1.18rem; }
+#penghargaan .award-guide-content h4 { margin-top: 22px; }
+#penghargaan .award-guide-content p { margin-bottom: 14px; }
+#penghargaan .award-guide-content ul,
+#penghargaan .award-guide-content ol { padding-left: 1.35rem; margin-bottom: 16px; }
+
+.event-pass { margin-bottom: 24px; border-radius: 22px !important; }
+.event-pass-head { min-height: 112px; }
+.event-pass-index { width: 96px; }
+.event-pass .dd-chevron { color: #94a3b8; transition: transform .25s ease, color .25s ease; }
+.event-pass.open .dd-chevron { transform: rotate(180deg); color: #d97706; }
+.event-pass--deep-dive { border-top: 4px solid #006d64 !important; }
+.event-pass .dd-table-wrap { margin-top: 0 !important; padding-top: 0 !important; }
+.event-pass .dd-table-wrap img { border-radius: 0 0 22px 22px; }
+
+.venue-card { border: 1px solid #d7e7e2; border-radius: 18px; }
+.venue-photo { height: 250px; }
+.venue-body { padding: 22px 22px 24px; border-top: 4px solid #006d64; }
+.venue-card:nth-child(even) .venue-body { border-top-color: #d97706; }
+.venue-body h3 { font-size: 1.28rem; }
+.venue-body .btn { border-radius: 999px; }
+
+@media (max-width: 680px) {
+  #tentang .kma-feature-head { grid-template-columns: 104px 1fr auto; min-height: 120px; }
+  #tentang .kma-feature-visual { min-height: 120px; }
+  #tentang .kma-feature-copy { padding: 14px 4px; }
+  #tentang .kma-feature-copy h3 { font-size: 1.15rem; }
+  #tentang .kma-feature-copy p { display: block; font-size: .82rem; }
+  #highlights .kh-item-toggle { padding: 18px; }
+  .event-pass-head { grid-template-columns: 68px 1fr auto; gap: 12px; padding-right: 14px !important; }
+  .event-pass-index { width: 68px; font-size: 1.3rem; }
+  .event-pass h3 { font-size: 1.15rem; }
+  .event-pass-meta { font-size: .8rem; }
+}
+
+/* Targeted follow-up revision */
+#tentang .kma-feature-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 150px;
+}
+#tentang .kma-feature-copy { grid-column: 1; padding-left: 30px; }
+#tentang .kma-feature-chevron { grid-column: 2; }
+#tentang .kma-feature-copy p { max-width: 720px; }
+
+#highlights .kh-item-toggle {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 44%);
+  align-items: stretch;
+}
+#highlights .kh-item-media {
+  min-height: 230px;
+  align-self: stretch;
+  border-radius: 16px;
+  padding: 0;
+}
+#highlights .kh-item-media img {
+  width: 100%;
+  height: 100%;
+  max-height: 270px;
+  object-fit: contain;
+  padding: 0;
+}
+#highlights .kh-item--hackathon .kh-item-toggle {
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 50%);
+}
+#highlights .kh-item--hackathon .kh-item-media { min-height: 280px; }
+#highlights .kh-item--hackathon .kh-item-media img { max-height: 330px; }
+#highlights .hackathon-gallery { gap: 18px; }
+#highlights .hackathon-gallery img { width: 100%; max-height: none; object-fit: contain; }
+
+#penghargaan .an-hero-inner {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 1fr) minmax(300px, 1.15fr) minmax(220px, 1fr);
+  align-items: end !important;
+  gap: clamp(16px, 3vw, 48px);
+}
+#penghargaan .an-hero-mascot,
+#penghargaan .an-hero-img {
+  min-width: 0 !important;
+  max-width: none;
+  width: 100%;
+  justify-content: center !important;
+}
+#penghargaan .an-hero-mascot { grid-column: 1; grid-row: 1; }
+#penghargaan .an-hero-text {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0 !important;
+  padding: 0 0 30px;
+  text-align: center;
+  align-items: center;
+}
+#penghargaan .an-hero-text .an-gold-bar { margin-left: auto !important; margin-right: auto !important; }
+#penghargaan .an-hero-img { grid-column: 3; grid-row: 1; }
+#penghargaan .an-hero-mascot img { max-height: 460px !important; transform: translateY(10px); }
+#penghargaan .an-trophy-img {
+  width: min(100%, 390px);
+  max-height: 500px !important;
+  transform: translateY(4px);
+  mix-blend-mode: normal;
+}
+#penghargaan .an-trophy-glow { width: 360px !important; height: 360px !important; }
+#penghargaan .award-card-horizontal .award-card-icon {
+  flex-basis: 50% !important;
+  min-height: 250px;
+  padding: 0 !important;
+}
+#penghargaan .award-card-horizontal .award-card-icon img {
+  width: 100%;
+  height: 100%;
+  max-height: 280px;
+  padding: 0;
+  object-fit: contain !important;
+}
+
+#presentasi .event-pass--presentasi,
+#jadwalPresentasiTables .event-pass--presentasi {
+  border-top-color: #006d64 !important;
+}
+#presentasi .event-pass--presentasi .event-pass-index,
+#jadwalPresentasiTables .event-pass--presentasi .event-pass-index {
+  background: linear-gradient(180deg, #006d64, #0b3d38) !important;
+}
+#presentasi .event-pass-kicker,
+#jadwalPresentasiTables .event-pass-kicker { color: #006d64; }
+#presentasi .event-pass .dd-chevron,
+#jadwalPresentasiTables .event-pass .dd-chevron { color: #006d64; }
+
+#aturan .rules-visual-band {
+  position: relative;
+  height: 150px;
+  max-width: 980px;
+  margin: 0 auto 28px;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #0b3d38;
+  box-shadow: 0 16px 34px rgba(15, 118, 110, .12);
+}
+#aturan .rules-visual-band img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 60%;
+  opacity: .48;
+}
+#aturan .rules-visual-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3, 39, 34, .88), rgba(3, 39, 34, .22) 70%, rgba(217, 119, 6, .16));
+}
+#aturan .rules-visual-copy {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 30px;
+  color: #fff;
+}
+#aturan .rules-visual-copy strong { font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: .06em; }
+#aturan .rules-visual-copy span { color: #f5b041; font: 700 .82rem var(--font-mono); letter-spacing: .18em; text-transform: uppercase; }
+#aturan .an-rules-block { padding-top: 28px; }
+
+@media (max-width: 700px) {
+  #tentang .kma-feature-head { grid-template-columns: minmax(0, 1fr) auto; min-height: 126px; }
+  #tentang .kma-feature-copy { padding: 18px 4px 18px 22px; }
+  #tentang .kma-feature-copy p { display: block; font-size: .86rem; }
+  #highlights .kh-item-toggle,
+  #highlights .kh-item--hackathon .kh-item-toggle { grid-template-columns: 1fr; }
+  #highlights .kh-item-media,
+  #highlights .kh-item--hackathon .kh-item-media { min-height: 280px; }
+  #highlights .kh-item-media img,
+  #highlights .kh-item--hackathon .kh-item-media img { max-height: 360px; }
+  #penghargaan .an-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: center !important;
+  }
+  #penghargaan .an-hero-mascot,
+  #penghargaan .an-hero-text,
+  #penghargaan .an-hero-img { grid-column: 1; grid-row: auto; }
+  #penghargaan .an-hero-mascot { order: 1; }
+  #penghargaan .an-hero-text { order: 2; padding: 10px 0 24px; }
+  #penghargaan .an-hero-img { order: 3; }
+  #penghargaan .an-hero-mascot img { max-height: 330px !important; }
+  #penghargaan .an-trophy-img { max-height: 390px !important; }
+  #aturan .rules-visual-band { height: 128px; margin-bottom: 20px; }
+}
+
+/* Latest targeted refinements */
+#tentang .kma-feature--logo .kma-feature-kicker b { background: #006d64; }
+#tentang .kma-feature--logo .kma-feature-copy { background: linear-gradient(105deg, #f3fbf8, #fff); }
+#tentang .kma-feature--logo { border-color: #cfe8e2 !important; }
+
+#highlights .kh-item-media,
+#highlights .kh-item--hackathon .kh-item-media {
+  min-height: 0;
+  height: auto;
+  align-items: center;
+  justify-items: stretch;
+}
+#highlights .kh-item-media img,
+#highlights .kh-item--hackathon .kh-item-media img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+  padding: 0;
+  margin: 0;
+  object-fit: contain !important;
+  object-position: center;
+}
+#highlights .kh-item--hackathon .kh-item-media { min-width: 0; }
+#highlights .theme-song-artwork {
+  width: 100%;
+  margin: 14px 0 0;
+  overflow: hidden;
+  border: 1px solid #d7e7e2;
+  border-radius: 14px;
+  background: #fff;
+}
+#highlights .theme-song-artwork img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+}
+
+#penghargaan .an-hero-inner {
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+  align-items: center !important;
+}
+#penghargaan .an-hero-text { grid-column: 1; text-align: left; align-items: flex-start; }
+#penghargaan .an-hero-text .an-gold-bar { margin-left: 0 !important; margin-right: 0 !important; }
+#penghargaan .an-hero-img { grid-column: 2; }
+#penghargaan .an-hero-img img { max-height: 470px !important; }
+#penghargaan .an-award-card.award-card-horizontal {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  cursor: pointer;
+}
+#penghargaan .award-inline-panel {
+  flex: 0 0 100%;
+  width: 100%;
+  margin-top: 18px;
+  padding: 20px 22px 24px;
+  border-top: 1px solid #d7e7e2;
+  background: linear-gradient(180deg, #f5fbf9, #fff);
+  cursor: default;
+}
+#penghargaan .award-inline-panel[hidden] { display: none; }
+#penghargaan .award-inline-panel .award-guide-content { max-height: none; padding: 0; }
+#penghargaan .an-award-card.is-open { border-color: #8bcfc3 !important; box-shadow: 0 18px 36px rgba(15, 118, 110, .13) !important; }
+#penghargaan .an-special-card { flex-wrap: wrap; cursor: pointer; }
+#penghargaan .an-special-card .award-inline-panel { flex-basis: 100%; }
+
+#penghargaan .an-hero-mascot { display: none !important; }
+@media (max-width: 700px) {
+  #penghargaan .an-hero-inner {
+    grid-template-columns: minmax(0, 1.25fr) minmax(112px, .75fr);
+    gap: 10px;
+    align-items: center !important;
+  }
+  #penghargaan .an-hero-text { grid-column: 1; grid-row: 1; padding: 8px 0 18px; }
+  #penghargaan .an-hero-img { grid-column: 2; grid-row: 1; }
+  #penghargaan .an-hero-img img { max-height: 250px !important; width: 100%; }
+  #penghargaan .an-trophy-glow { width: 190px !important; height: 190px !important; }
+  #penghargaan .an-hero-title { font-size: clamp(1.35rem, 6vw, 2rem) !important; }
+  #penghargaan .an-hero-sub { font-size: .82rem !important; }
+  #penghargaan .award-inline-panel { padding: 16px; }
+}
+
+#presentasi .presentasi-header { display: flex; text-align: left; align-items: flex-start; margin-bottom: 42px; }
+#presentasi .presentasi-header .dd-title-wrap { position: relative; z-index: 1; }
+#presentasi .presentasi-header .dd-title-display span { color: #006d64; }
+#presentasi .presentasi-header .eyebrow { color: #006d64; margin-bottom: 10px; }
+#presentasi .presentasi-header .an-gold-bar { width: 60px; height: 5px; margin: 20px 0; background: #d97706; }
+
+#kontak .contact-event-mark {
+  position: relative;
+  width: min(520px, 100%);
+  height: 112px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #0b3d38;
+  box-shadow: 0 14px 30px rgba(15, 118, 110, .14);
+}
+#kontak .contact-event-mark img { width: 100%; height: 100%; object-fit: cover; opacity: .42; }
+#kontak .contact-event-mark::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,39,34,.88), rgba(3,39,34,.22)); }
+#kontak .contact-event-mark span { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: 20px 26px; text-align: left; color: #fff; font: 800 clamp(1.25rem, 4vw, 2rem)/1.1 Inter,sans-serif; letter-spacing: .08em; }
+#kontak .contact-event-mark b { margin-top: 6px; color: #f5b041; font: 700 .72rem var(--font-mono); letter-spacing: .18em; }
+
+/* Final focused revision: readability, full-frame media, and inline interactions. */
+.hl-article,
+.award-guide-content,
+#tentang .an-award-card > div:last-child,
+#aturan .an-rule-item p,
+.day-card li {
+  text-align: justify;
+  text-justify: inter-word;
+}
+.hl-article h3,
+.hl-article h4,
+.award-guide-content h3,
+.award-guide-content h4,
+.day-card h3 { text-align: left; }
+.hl-article p,
+.award-guide-content p,
+.award-guide-content li { max-width: 78ch; }
+.hl-article p { margin-bottom: 1.15em; }
+
+#highlights .theme-song-artwork {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #f8fafc;
+}
+#highlights .theme-song-artwork img {
+  width: 100%;
+  max-width: 1120px;
+  height: auto;
+  object-fit: contain;
+}
+#highlights .hackathon-gallery {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#highlights .hackathon-gallery figure { background: #f8fafc; }
+
+#penghargaan .an-hero-text {
+  position: relative;
+  isolation: isolate;
+  padding: 24px 28px 28px !important;
+}
+#penghargaan .an-hero-text::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-left: 4px solid #d97706;
+  border-radius: 0 18px 18px 0;
+  background: linear-gradient(90deg, rgba(255,255,255,.94), rgba(255,255,255,.58), transparent);
+  box-shadow: 0 12px 28px rgba(15,23,42,.08);
+}
+#penghargaan .an-hero-sub { color: #0f172a; text-shadow: 0 1px 0 #fff; }
+#penghargaan .an-trophy-img {
+  opacity: .88;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 18px 28px rgba(15,23,42,.16));
+}
+#penghargaan .an-awards-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+#penghargaan .an-award-card.award-card-horizontal {
+  display: grid !important;
+  grid-template-columns: minmax(300px, 44%) minmax(0, 1fr);
+  align-items: stretch !important;
+  min-height: 330px !important;
+  padding: 0 !important;
+}
+#penghargaan .award-card-horizontal .award-card-icon {
+  width: auto !important;
+  min-height: 330px;
+  padding: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #eef8f5, #fff8e8) !important;
+}
+#penghargaan .award-card-horizontal .award-card-icon img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 390px;
+  object-fit: contain !important;
+}
+#penghargaan .award-card-horizontal .award-card-copy { padding: 34px 34px 30px !important; }
+#penghargaan .award-inline-panel {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  text-align: left;
+}
+#penghargaan .award-inline-panel .award-guide-content { text-align: justify; }
+
+.event-pass-head { text-align: left; }
+.event-pass-right .event-pass-head,
+.dd-ticket-right .event-pass-head {
+  text-align: right;
+  grid-template-columns: auto 1fr auto;
+}
+.event-pass-right .event-pass-meta,
+.dd-ticket-right .event-pass-meta { justify-content: flex-end; }
+.event-pass-right .event-pass-index,
+.dd-ticket-right .event-pass-index { order: 3; }
+.event-pass-right .dd-chevron,
+.dd-ticket-right .dd-chevron { order: 2; }
+.event-pass-right .event-pass-head > div:nth-child(2),
+.dd-ticket-right .event-pass-head > div:nth-child(2) { order: 1; }
+.event-pass-right .dd-table-wrap,
+.dd-ticket-right .dd-table-wrap { text-align: right; }
+
+#panitia .panitia-visual-band {
+  position: relative;
+  height: 190px;
+  margin: -12px auto 48px;
+  max-width: 1040px;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #0b3d38;
+  box-shadow: 0 16px 34px rgba(15,118,110,.12);
+}
+#panitia .panitia-visual-band img { width: 100%; height: 100%; object-fit: cover; opacity: .48; }
+#panitia .panitia-visual-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3,39,34,.9), rgba(3,39,34,.2) 76%, rgba(217,119,6,.18));
+}
+#panitia .panitia-visual-band > div {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 34px;
+  color: #fff;
+}
+#panitia .panitia-visual-band strong { font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: .06em; color: #fff; }
+#panitia .panitia-visual-band span { color: #f5b041; font: 700 .82rem var(--font-mono); letter-spacing: .18em; text-transform: uppercase; }
+
+#aturan .rules-visual-band { height: 210px; }
+#aturan .an-rules-block { background: linear-gradient(180deg, #fff, #f8fbfa); }
+#aturan .an-rules-head { max-width: 980px; margin-left: auto; margin-right: auto; }
+#aturan .an-rules-grid,
+#aturan .an-footer-note,
+#aturan .rules-download-panel { max-width: 980px; margin-left: auto; margin-right: auto; }
+#aturan .an-rule-item p { line-height: 1.7; }
+
+#emergency .emergency-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1040px;
+}
+#emergency .emergency-image {
+  width: min(100%, 900px) !important;
+  margin: 0 auto !important;
+  object-fit: contain;
+}
+
+.menu-group { position: relative; }
+.menu-group-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-dark);
+  font: 500 .9rem Inter, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+.menu-group-toggle:hover { color: var(--primary-color); background: #f8fafc; }
+.menu-submenu { display: none; background: #f8fafc; }
+.menu-group.active .menu-submenu { display: block; }
+.menu-group.active .menu-group-toggle > span { transform: rotate(90deg); }
+.menu-submenu a { padding-left: 30px; font-size: .84rem; background: #f8fafc; }
+.menu-submenu a:hover { background: #eef8f5; }
+
+@media (max-width: 700px) {
+  #penghargaan .an-award-card.award-card-horizontal {
+    grid-template-columns: 1fr;
+    min-height: 0 !important;
+  }
+  #penghargaan .award-card-horizontal .award-card-icon { min-height: 250px; }
+  #penghargaan .award-card-horizontal .award-card-copy { padding: 22px 20px !important; }
+  #penghargaan .an-hero-text { padding: 18px 20px 22px !important; }
+  #panitia .panitia-visual-band { height: 150px; margin-bottom: 34px; }
+  #aturan .rules-visual-band { height: 160px; }
+  .event-pass-right .event-pass-head,
+  .dd-ticket-right .event-pass-head { text-align: right; }
+}
+
+/* Clarified navigation and responsive follow-up. */
+.home-schedule-menu {
+  position: relative;
+  display: inline-flex;
+  z-index: 20;
+}
+.home-schedule-toggle { gap: 8px; }
+.home-schedule-toggle > span {
+  display: inline-block;
+  transition: transform .2s ease;
+}
+.home-schedule-menu.active .home-schedule-toggle > span { transform: rotate(90deg); }
+.home-schedule-options {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  width: min(300px, calc(100vw - 32px));
+  transform: translate(-50%, 8px);
+  padding: 8px;
+  border: 1px solid rgba(226,232,240,.95);
+  border-radius: 14px;
+  background: rgba(255,255,255,.98);
+  box-shadow: 0 14px 30px rgba(15,23,42,.14);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+.home-schedule-menu.active .home-schedule-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.home-schedule-options a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 9px;
+  color: #0f172a;
+  font-size: .84rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+}
+.home-schedule-options a:hover,
+.home-schedule-options a:focus-visible { color: #006d64; background: #eef8f5; outline: none; }
+
+#penghargaan .an-hero {
+  box-shadow: 0 12px 28px rgba(15,23,42,.07);
+}
+#penghargaan .an-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -18px;
+  height: 42px;
+  background: linear-gradient(180deg, rgba(15,23,42,.08), transparent);
+  filter: blur(12px);
+  opacity: .45;
+  pointer-events: none;
+}
+#penghargaan .an-trophy-img {
+  opacity: .8;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 14px 24px rgba(15,23,42,.13));
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+}
+#penghargaan .an-trophy-glow {
+  background: radial-gradient(circle, rgba(255,255,255,.62) 0%, rgba(245,176,65,.13) 36%, transparent 72%) !important;
+  opacity: .7;
+}
+
+#deepDiveTables,
+#jadwalPresentasiTables {
+  width: 100% !important;
+  max-width: 1120px !important;
+}
+#deepDiveTables .event-pass,
+#jadwalPresentasiTables .event-pass {
+  width: min(100%, 980px);
+  margin-left: 0;
+  margin-right: auto;
+}
+#deepDiveTables .event-pass.dd-ticket-right,
+#jadwalPresentasiTables .event-pass.dd-ticket-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+#deepDiveTables .event-pass-right .event-pass-head,
+#jadwalPresentasiTables .event-pass-right .event-pass-head,
+#deepDiveTables .dd-ticket-right .event-pass-head,
+#jadwalPresentasiTables .dd-ticket-right .event-pass-head {
+  justify-items: end;
+}
+
+.venue-card {
+  position: relative;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #fff, #f6fbfa);
+  box-shadow: 0 14px 30px rgba(15,23,42,.07);
+}
+.venue-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  width: 58px;
+  height: 4px;
+  background: linear-gradient(90deg, #006d64, #f5b041);
+  border-radius: 0 0 5px 5px;
+  z-index: 2;
+}
+.venue-card:nth-child(even)::before { background: linear-gradient(90deg, #d97706, #006d64); }
+.venue-photo { height: 270px; }
+.venue-body { background: rgba(255,255,255,.82); }
+.venue-body h3 { letter-spacing: -.01em; }
+.venue-body p { text-align: left; }
+.venue-body .btn { box-shadow: 0 6px 14px rgba(0,109,100,.14); }
+
+.footer p {
+  font-family: Arial, sans-serif;
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: none;
+  color: #f8fafc;
+}
+
+@media (max-width: 700px) {
+  .home-schedule-menu { width: 100%; }
+  .home-schedule-toggle { width: 100% !important; }
+  .home-schedule-options {
+    bottom: auto;
+    top: calc(100% + 10px);
+    width: min(300px, calc(100vw - 32px));
+    transform: translate(-50%, -8px);
+  }
+  .home-schedule-menu.active .home-schedule-options { transform: translate(-50%, 0); }
+  #deepDiveTables .event-pass,
+  #jadwalPresentasiTables .event-pass,
+  #deepDiveTables .event-pass.dd-ticket-right,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #deepDiveTables .dd-ticket-right .event-pass-head,
+  #jadwalPresentasiTables .dd-ticket-right .event-pass-head {
+    padding-left: 14px !important;
+  }
+  .venue-photo { height: 220px; }
+  .venue-card::before { left: 16px; }
+}
+/* REVISION RESPONSIVE FINAL AUDIT */
+/* Award hero: readable copy with a soft integrated overlay, not a dashboard card. */
+#penghargaan .an-hero { box-shadow: none !important; }
+#penghargaan .an-hero::after { height: 34px; bottom: -16px; background: linear-gradient(180deg,rgba(255,255,255,.2),transparent); filter: blur(10px); opacity: .28; }
+#penghargaan .an-hero-text::before { border-left: 3px solid rgba(217,119,6,.72); border-radius: 0 16px 16px 0; background: linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,.46),transparent); box-shadow: none !important; }
+#penghargaan .an-hero-sub { color: #173b3a !important; text-shadow: 0 1px 2px rgba(255,255,255,.8) !important; }
+/* Excellent Awards: no tilt/rotation; retain only a calm shadow transition. */
+#penghargaan .an-award-card { transform: none !important; transition: box-shadow .25s ease, border-color .25s ease, background-color .25s ease !important; }
+#penghargaan .an-award-card:hover { transform: translateY(-2px) !important; }
+#penghargaan .an-award-card * { transform: none; }
+/* Deep Dive point 2 and point 4 share one exact right-aligned composition. */
+#deepDiveTables .event-pass.dd-ticket-right,
+#deepDiveTables .event-pass.dd-ticket-right .event-pass-head { align-items: center; }
+#deepDiveTables .event-pass.dd-ticket-right .event-pass-head { grid-template-columns: auto minmax(0,1fr) auto; }
+#deepDiveTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2) { width: 100%; min-width: 0; }
+#deepDiveTables .event-pass.dd-ticket-right .event-pass-meta { justify-content: flex-end; }
+/* Panitia/juri photos stay visible in the mobile composition. */
+#panitia .ed-profile-img-wrap,
+#juri .ed-profile-img-wrap { display: flex; align-items: center; justify-content: center; min-width: 0; }
+#panitia .ed-profile-img,
+#juri .ed-profile-img { display: block !important; visibility: visible !important; opacity: 1 !important; width: 100%; max-width: 100%; }
+/* Footer typography */
+.footer p { font-family: Inter, sans-serif; font-size: .78rem; font-weight: 400; line-height: 1.5; letter-spacing: .16em; opacity: .76; }
+/* Shared viewport safety without hiding structural overflow problems. */
+.slide-scroll-wrapper, .container, .section { max-width: 100%; }
+img, svg, video, iframe { max-width: 100%; }
+.dropdown-content { max-width: calc(100vw - 24px); }
+@media (max-width: 700px) {
+  html, body { overflow-x: hidden; }
+  .header-inner { min-width: 0; }
+  .nav { min-width: 0; flex-wrap: wrap; }
+  .nav-audio-btn { max-width: 48vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dropdown-content { right: 0; left: auto; min-width: min(270px, calc(100vw - 24px)); }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head { grid-template-columns: 64px minmax(0,1fr); text-align: left; justify-items: start; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2),
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2) { order: 2; text-align: left; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-index,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-index { order: 1; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-meta,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-meta { justify-content: flex-start; }
+  #panitia .ed-profile-img-wrap,
+  #juri .ed-profile-img-wrap { width: 100%; min-height: 250px; }
+  #panitia .ed-profile-img,
+  #juri .ed-profile-img { height: 250px; object-fit: contain; }
+  .footer { padding-bottom: 112px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
