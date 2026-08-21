@@ -20,7 +20,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=91">
+  <link rel="stylesheet" href="assets/css/style.css?v=92">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -523,18 +523,19 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <div class="an-hero-inner" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
               
               <!-- Tengah: Teks -->
-              <div class="an-hero-text animate-on-scroll delay-100" style="flex: 1.2; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
+              <div class="an-hero-text animate-on-scroll delay-100" style="flex: 1.2; min-width: 300px; display: flex; flex-direction: column; justify-content: center; position: relative;">
+                <div style="position: absolute; top: -20%; left: -20%; right: -20%; bottom: -20%; background: radial-gradient(ellipse at center left, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0) 80%); z-index: -1; pointer-events: none;"></div>
                 <div class="an-gold-bar" style="width: 45px; height: 5px; background: #d97706; border-radius: 3px; margin-bottom: 16px;"></div>
                 <h2 class="an-hero-title" style="font-size: clamp(2.2rem, 3.5vw, 3rem); font-weight: 800; color: #0f172a; line-height: 1.15; margin: 0 0 20px 0;">
                   Rekap<br>Kategori<br><span class="an-title-green" style="color: #006d64;">Penghargaan<br>Lainnya</span>
                 </h2>
-                <p class="an-hero-sub" style="font-size: 1.15rem; color: #475569; line-height: 1.6; max-width: 400px; margin: 0; font-weight: 500;">Apresiasi untuk inovasi, kolaborasi, dan dedikasi terbaik insan ANTAM.</p>
+                <p class="an-hero-sub" style="font-size: 1.15rem; color: #1e293b; line-height: 1.6; max-width: 400px; margin: 0; font-weight: 600;">Apresiasi untuk inovasi, kolaborasi, dan dedikasi terbaik insan ANTAM.</p>
               </div>
 
               <!-- Kanan: Piala/Trophy -->
               <div class="an-hero-img animate-on-scroll delay-200" style="flex: 1; min-width: 250px; display: flex; justify-content: flex-start; position: relative;">
-                <div class="an-trophy-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%); z-index: 0; border-radius: 50%;"></div>
-                <img src="assets/img/trophy-transparent.png" alt="Trophy KMA XXV 2026" class="an-trophy-img" style="max-height: 400px; object-fit: contain; z-index: 1; position: relative; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));">
+                <div class="an-trophy-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 350px; height: 350px; background: radial-gradient(circle, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 70%); z-index: 0; border-radius: 50%; filter: blur(15px);"></div>
+                <img src="assets/img/trophy-transparent.png" alt="Trophy KMA XXV 2026" class="an-trophy-img" style="max-height: 400px; object-fit: contain; z-index: 1; position: relative; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.12)) drop-shadow(0 0 20px rgba(255,255,255,0.4));">
               </div>
 
             </div>
@@ -814,7 +815,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 1 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dodi Pramadi.png" alt="Dodi Pramadi" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Dodi Pramadi.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Dodi Pramadi.png') ?>" alt="Dodi Pramadi" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
@@ -826,7 +827,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 2 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Eko Pudji.png" alt="Eko Pudji" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Eko Pudji.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Eko Pudji.png') ?>" alt="Eko Pudji" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">02</div>
@@ -838,7 +839,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 3 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Sri Prahyoto.png" alt="Sri Prahyoto" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Sri Prahyoto.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Sri Prahyoto.png') ?>" alt="Sri Prahyoto" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">03</div>
@@ -850,7 +851,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 4 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Susan Kustiwan.png" alt="Susan Kustiwan" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Susan Kustiwan.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Susan Kustiwan.png') ?>" alt="Susan Kustiwan" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">04</div>
@@ -862,7 +863,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 5 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dialah Hokosuja.png" alt="Dialah Hokosuja" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Dialah Hokosuja.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Dialah Hokosuja.png') ?>" alt="Dialah Hokosuja" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">05</div>
@@ -874,7 +875,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 6 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Evi Sabrina.png" alt="Evi Sabrina" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Evi Sabrina.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Evi Sabrina.png') ?>" alt="Evi Sabrina" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">06</div>
@@ -886,7 +887,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 7 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Muhammad Amri.png" alt="Muhammad Amri" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Muhammad Amri.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Muhammad Amri.png') ?>" alt="Muhammad Amri" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">07</div>
@@ -898,7 +899,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 8 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Yudhistira.png" alt="Yudhistira" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Yudhistira.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Yudhistira.png') ?>" alt="Yudhistira" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">08</div>
@@ -920,16 +921,13 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <div class="ed-hero-number">06</div>
           </div>
 
-          <div class="panitia-visual-band animate-on-scroll" aria-hidden="true">
-            <img src="assets/img/tugu_malang.jpg" alt="">
-            <div><strong>KMA XXV</strong><span>Malang · 2026</span></div>
-          </div>
+          <!-- Removed panitia-visual-band to align with Dewan Juri design system -->
 
           <div class="ed-profile-grid animate-on-scroll delay-100">
             <!-- Panitia 1 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Agus Pajrin.png" alt="Agus Pajrin" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Agus Pajrin.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Agus Pajrin.png') ?>" alt="Agus Pajrin" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
@@ -941,7 +939,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 2 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Agus Sugiharto.jpeg" alt="Agus Sugiharto" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Agus Sugiharto.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Agus Sugiharto.png') ?>" alt="Agus Sugiharto" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">02</div>
@@ -953,7 +951,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 3 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Bella Sakina.png" alt="Bella Sakina" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Bella Sakina.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Bella Sakina.png') ?>" alt="Bella Sakina" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">03</div>
@@ -965,7 +963,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 4 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Dedi Sunjaya.png" alt="Dedi Sunjaya" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Dedi Sunjaya.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Dedi Sunjaya.png') ?>" alt="Dedi Sunjaya" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">04</div>
@@ -977,7 +975,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 5 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Munif Hadi.png" alt="Munif Hadi" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Munif Hadi.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Munif Hadi.png') ?>" alt="Munif Hadi" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">05</div>
@@ -989,7 +987,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 6 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Oni Setia Himawan.png" alt="Oni Setia Himawan" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Oni Setia Himawan.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Oni Setia Himawan.png') ?>" alt="Oni Setia Himawan" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">06</div>
@@ -1001,7 +999,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 7 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Ruri Pitaloka.png" alt="Ruri Pitaloka" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Ruri Pitaloka.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Ruri Pitaloka.png') ?>" alt="Ruri Pitaloka" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">07</div>
@@ -1013,7 +1011,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 8 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Satriya Alrizki.png" alt="Satriya Alrizki" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Satriya Alrizki.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Satriya Alrizki.png') ?>" alt="Satriya Alrizki" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">08</div>
@@ -1025,7 +1023,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 9 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Sofian.png" alt="Sofian" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Sofian.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Sofian.png') ?>" alt="Sofian" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">09</div>
@@ -1037,7 +1035,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 10 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Utiah Sukarini.png" alt="Utiah Sukarini" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Utiah Sukarini.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Utiah Sukarini.png') ?>" alt="Utiah Sukarini" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">10</div>
@@ -1049,7 +1047,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 11 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Yosafat Simanjuntak.png" alt="Yosafat Simanjuntak" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Yosafat Simanjuntak.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Yosafat Simanjuntak.png') ?>" alt="Yosafat Simanjuntak" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">11</div>
@@ -1061,7 +1059,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 12 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Zakaria Budi.png" alt="Zakaria Budi" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Zakaria Budi.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Zakaria Budi.png') ?>" alt="Zakaria Budi" class="ed-profile-img" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">12</div>
