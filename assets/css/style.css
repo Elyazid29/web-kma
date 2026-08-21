@@ -3885,3 +3885,24 @@ img, svg, video, iframe { max-width: 100%; }
 .day-four .day-card-img-header { height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; padding: 0 !important; background: #f8fafc !important; }
 .day-four .day-card-image-element { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; object-position: center; }
 @media (max-width: 700px) { .day-four .day-card-image-element { width: 100%; height: auto; } }
+/* REVISION 2026-08-21 TOP SPACING / INTRINSIC MEDIA */
+/* Keep the first content row below the header on every slide without a fixed pixel offset. */
+.slide-scroll-wrapper { scroll-padding-top: clamp(12px, 2vw, 28px); }
+.slide-scroll-wrapper > .container { box-sizing: border-box; }
+@media (min-width: 701px) {
+  .slide-scroll-wrapper > .container { padding-top: clamp(18px, 2.4vw, 42px); }
+}
+@media (max-width: 700px) {
+  .slide-scroll-wrapper { padding-top: clamp(14px, 3vw, 24px) !important; }
+  .slide-scroll-wrapper > .container { padding-left: 14px; padding-right: 14px; }
+}
+/* Award icon scale: visible but balanced with the copy beside it. */
+#penghargaan .award-card-horizontal .award-card-icon { min-height: 230px; }
+#penghargaan .award-card-horizontal .award-card-icon img { max-height: 230px; object-fit: contain !important; }
+@media (max-width: 700px) {
+  #penghargaan .award-card-horizontal .award-card-icon { min-height: 190px; }
+  #penghargaan .award-card-horizontal .award-card-icon img { height: 190px; max-height: 190px; }
+}
+/* All activity cards use intrinsic image height; no crop, square forcing, or stretch. */
+.day-card-img-header { height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; background: #f8fafc !important; padding: 0 !important; }
+.day-card-img-header .day-card-image-element { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; object-position: center; }

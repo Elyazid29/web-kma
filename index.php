@@ -20,7 +20,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=89">
+  <link rel="stylesheet" href="assets/css/style.css?v=90">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -699,7 +699,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
 
           <div class="days-grid">
             <div class="day-card animate-on-scroll" onclick="openModal(1)">
-              <div class="day-card-img-header" style="background-image: url('assets/img/kedatangan.png?v=20260818-2');">
+              <div class="day-card-img-header">
+                <img src="assets/img/kedatangan.png?v=20260818-2" alt="Rangkaian Kegiatan kedatangan" class="day-card-image-element">
               </div>
               <div class="day-card-content">
                 <h3 style="margin-bottom: 2px;">Selasa, 1 September 2026</h3>
@@ -715,7 +716,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             </div>
 
             <div class="day-card animate-on-scroll delay-100" onclick="openModal(2)">
-              <div class="day-card-img-header" style="background-image: url('assets/img/convention.png?v=20260818-2');">
+              <div class="day-card-img-header">
+                <img src="assets/img/convention.png?v=20260818-2" alt="Rangkaian Kegiatan convention" class="day-card-image-element">
               </div>
               <div class="day-card-content">
                 <h3 style="margin-bottom: 2px;">Rabu, 2 September 2026</h3>
@@ -731,7 +733,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             </div>
 
             <div class="day-card animate-on-scroll delay-200" onclick="openModal(3)">
-              <div class="day-card-img-header" style="background-image: url('assets/img/team.building.png?v=20260818-2');">
+              <div class="day-card-img-header">
+                <img src="assets/img/team.building.png?v=20260818-2" alt="Rangkaian Kegiatan team.building" class="day-card-image-element">
               </div>
               <div class="day-card-content">
                 <h3 style="margin-bottom: 2px;">Kamis, 3 September 2026</h3>
