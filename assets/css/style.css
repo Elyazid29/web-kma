@@ -3906,3 +3906,14 @@ img, svg, video, iframe { max-width: 100%; }
 /* All activity cards use intrinsic image height; no crop, square forcing, or stretch. */
 .day-card-img-header { height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; background: #f8fafc !important; padding: 0 !important; }
 .day-card-img-header .day-card-image-element { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; object-position: center; }
+/* REVISION ROOT CAUSE FLEX DECK */
+/* Header remains in normal flow; the deck fills the actual remaining viewport instead of assuming 64px. */
+html, body.presentation-mode { height: 100dvh !important; }
+body.presentation-mode { min-height: 0; }
+.slide-deck { height: auto !important; min-height: 0 !important; flex: 1 1 auto; }
+.slide { min-height: 0; }
+/* Balanced award media: reduce empty backdrop while keeping the source ratio intact. */
+#penghargaan .award-card-horizontal .award-card-icon { min-height: 210px; height: 210px !important; padding: 8px !important; }
+#penghargaan .award-card-horizontal .award-card-icon img { width: 100%; height: 100%; max-height: none; object-fit: contain !important; object-position: center; }
+@media (min-width: 901px) { #penghargaan .award-card-horizontal .award-card-icon { min-height: 230px; height: 230px !important; } }
+@media (max-width: 700px) { #penghargaan .award-card-horizontal .award-card-icon { min-height: 180px; height: 180px !important; } }
