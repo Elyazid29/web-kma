@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <img src="assets/img/logo.kma.png" alt="Logo KMA">
       <h1>KMA XXV 2026<br><span style="font-weight: 500; color: #64748b;">ANTAM BestMIND</span></h1>
     </div>
-    <p class="eyebrow">Akses Internal ANTAM</p>
     <h2>Masuk ke Website</h2>
     <p class="intro">Gunakan email dan password internal yang telah diberikan panitia.</p>
     <?php if ($error !== ''): ?><p class="error" role="alert"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p><?php endif; ?>
@@ -68,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input id="password" name="password" type="password" autocomplete="current-password" required>
       <button type="submit">Masuk</button>
     </form>
-    <p class="note">Khusus untuk penggunaan internal ANTAM.</p>
-  </main>
+    </main>
 </body>
 </html>

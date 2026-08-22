@@ -1,4 +1,4 @@
-1. **Best Presenter**  
+﻿1. **Best Presenter**  
    Individu yang mampu menyampaikan, menjelaskan, dan mempertahankan materi inovasi dengan sangat baik.
 
 2. **Best Makalah**  

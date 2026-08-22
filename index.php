@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/auth_config.php';
 if (!isAuthenticated()) {
     header('Location: login.php');
@@ -20,7 +20,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=92">
+  <link rel="stylesheet" href="assets/css/style.css?v=96">
   <style>
     /* Custom Override CSS untuk Banner Full Width */
     #highlights.kh-section {
@@ -102,14 +102,54 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
 </style>
 
     <style>
-      /* Header fixes */
+      /* Responsive header: keep every control available without overflow. */
+      .header { height: clamp(68px, 4.8vw, 76px); }
+      .logo-img { width: clamp(34px, 3vw, 42px); height: auto; }
+      .logo-text { font-size: clamp(1rem, 1.3vw, 1.2rem); }
+      .nav-audio-btn { width: auto !important; min-width: 0 !important; height: 36px; padding: 7px 10px !important; gap: 5px !important; justify-content: center; white-space: nowrap; }
+      .nav-audio-btn span { display: inline !important; }
+      .hero-overlay { z-index: 0 !important; pointer-events: none; }
+      .slide > .slide-scroll-wrapper { position: relative; z-index: 1; }
+      .slide > .slide-scroll-wrapper > .container { position: relative; z-index: 2; }
+      .nav-audio-btn:not(.playing) { background: #f1f5f9 !important; border: 1px solid #cbd5e1 !important; color: #64748b !important; box-shadow: none !important; }
+      .nav-audio-btn.playing { background: #006d64 !important; border-color: #006d64 !important; color: #fff !important; }
+      .pill-nav-counter { flex: 0 0 auto; min-width: 58px; white-space: nowrap; text-align: center; letter-spacing: .06em !important; }
       @media (max-width: 768px) {
-        .header-inner { flex-wrap: wrap; justify-content: space-between; align-items: center; }
-        .logo-text { font-size: 0.9rem; margin-top: 4px; }
-        .nav { width: 100%; justify-content: flex-end; margin-top: 10px; gap: 6px !important; }
-        .nav-audio-btn { padding: 4px 8px; font-size: 0.75rem; }
-        .nav-logout { padding: 4px 8px !important; font-size: 0.75rem !important; }
-        .dropbtn { padding: 4px 8px; font-size: 0.75rem; }
+        .header { height: auto !important; min-height: 52px; }
+        .header-inner { width: 100%; height: 52px; min-height: 52px; flex-direction: row !important; flex-wrap: nowrap !important; gap: 6px; padding: 6px 10px !important; }
+        .logo { width: auto; min-width: 0; max-width: 42%; flex: 0 1 42%; gap: 6px; }
+        .logo-img { width: 30px !important; height: 30px !important; flex: 0 0 30px; }
+        .logo-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .72rem; }
+        .nav { width: auto; min-width: 0; flex: 1 1 58%; display: grid !important; grid-template-columns: minmax(0, 1fr) 38px 54px; align-items: center; gap: 4px !important; margin: 0 !important; }
+        .nav-audio-btn { width: 100% !important; min-width: 0 !important; max-width: none; height: 34px; justify-content: center; padding: 5px 5px !important; font-size: .62rem; overflow: hidden; }
+        .nav-audio-btn span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .dropbtn { width: 38px; min-width: 38px; height: 34px; padding: 6px !important; justify-content: center; }
+        .dropbtn > span:last-child { display: none; }
+        .nav-logout { width: 54px; min-width: 54px; height: 34px; padding: 5px 6px !important; font-size: .68rem !important; white-space: nowrap; justify-content: center; }
+        .slide-nav-controls.pill-nav { width: calc(100% - 16px) !important; max-width: 480px; padding: 4px !important; gap: 4px !important; }
+        .pill-nav .nav-btn { min-width: 0 !important; flex: 1 1 auto; height: 36px; padding: 0 7px !important; font-size: .7rem; white-space: nowrap; }
+        .pill-nav-counter { min-width: 54px; font-size: .78rem !important; letter-spacing: .02em !important; }
+      }
+      @media (max-width: 400px) {
+        .logo { max-width: 38%; flex-basis: 38%; }
+        .logo-text { font-size: .66rem; }
+        .nav { grid-template-columns: minmax(82px, 1fr) 34px 48px; gap: 3px !important; }
+        .nav-audio-btn { width: 100% !important; min-width: 0 !important; padding: 5px 4px !important; font-size: .58rem; }
+        .nav-audio-btn span { display: inline !important; }
+        .dropbtn { width: 34px; min-width: 34px; }
+        .nav-logout { width: 48px; min-width: 48px; font-size: .6rem !important; }
+      }
+      @media (max-width: 380px) {
+        .header-inner { padding-left: 7px !important; padding-right: 7px !important; gap: 4px; }
+        .logo { max-width: 34%; flex-basis: 34%; }
+        .logo-img { width: 26px !important; height: 26px !important; flex-basis: 26px; }
+        .pill-nav .nav-btn { font-size: .66rem; padding-left: 5px !important; padding-right: 5px !important; }
+        .pill-nav-counter { min-width: 50px; }
+      }
+      .dropdown-content { max-width: calc(100vw - 16px); }
+      @media (max-width: 768px) {
+        .dropdown-content { right: 0 !important; left: auto !important; width: min(250px, calc(100vw - 16px)) !important; min-width: 0 !important; max-height: min(62vh, 420px); overflow-y: auto; border-radius: 9px; }
+        .dropdown-content a { padding: 9px 11px; font-size: .78rem; line-height: 1.25; }
       }
       /* Bottom Nav (Pill style) */
       .slide-nav-controls.pill-nav {
@@ -144,6 +184,15 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         color: white !important;
       }
       .pill-nav .nav-btn.next-btn:hover { background: #00524a !important; }
+      @media (max-width: 768px) {
+        .slide-nav-controls.pill-nav { width: calc(100% - 16px) !important; max-width: 480px !important; gap: 4px !important; padding: 4px !important; }
+        .pill-nav .nav-btn { min-width: 0 !important; flex: 1 1 0; height: 36px; padding: 0 7px !important; font-size: .7rem; white-space: nowrap; }
+        .pill-nav-counter { flex: 0 0 auto !important; min-width: 54px !important; white-space: nowrap !important; font-size: .78rem !important; letter-spacing: .02em !important; }
+      }
+      @media (max-width: 380px) {
+        .pill-nav .nav-btn { font-size: .66rem; padding-left: 5px !important; padding-right: 5px !important; }
+        .pill-nav-counter { min-width: 50px !important; }
+      }
       .pill-nav-counter {
         color: #f8fafc !important;
         font-size: 0.9rem !important;
@@ -167,21 +216,76 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       .dd-ticket.open .dd-table-wrap { display: block; }
 </style>
     
+<style>
+/* CRITICAL FIX FOR TOP HEADER OVERFLOW & TRANSPARENT ELEMENT CUTOFF */
+html, body.presentation-mode {
+  height: 100vh !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.presentation-mode {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.header {
+  flex: 0 0 auto !important;
+  position: relative !important;
+  z-index: 1000 !important;
+  height: 68px !important;
+  background-color: #ffffff !important;
+}
+
+.slide-deck {
+  flex: 1 1 auto !important;
+  position: relative !important;
+  width: 100% !important;
+  height: calc(100vh - 68px) !important;
+  overflow: visible !important;
+}
+
+.slide {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.slide-scroll-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-top: 20px !important;
+  padding-bottom: 120px !important;
+  scroll-padding-top: 0 !important;
+}
+
+.slide-scroll-wrapper > .container {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Remove any unwanted absolute top overlays swallowing the content */
+.hero-overlay {
+  pointer-events: none !important;
+}
+</style>
 </head>
 <body class="presentation-mode">
 
   <!-- Element Audio Update Path ke jingle.wav -->
   <audio id="bgJingle" loop playsinline preload="auto">
     <source src="assets/audio/jingle.wav" type="audio/wav">
-    <source src="assets/jingle.wav" type="audio/wav">
-    <source src="jingle.wav" type="audio/wav">
   </audio>
 
   <!-- Header / Navbar -->
   <header class="header">
     <div class="container header-inner">
       <div class="logo">
-        <img src="assets/img/logo.kma.png" alt="Logo KMA" class="logo-img">
+        <img src="assets/img/logo.kma.png" alt="Logo KMA" class="logo-img" loading="lazy">
         <span class="logo-text">KMA XXV 2026</span>
       </div>
       <nav class="nav" style="display: flex; align-items: center; gap: 10px;">
@@ -275,7 +379,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
 
           <div class="hero-cta animate-on-scroll delay-300" style="flex-direction: row; justify-content: center; margin-top: 25px;">
             <div class="home-schedule-menu">
-              <button type="button" class="btn btn-outline home-schedule-toggle" aria-expanded="false" onclick="toggleHomeSchedule(event)">Lihat Jadwal <span aria-hidden="true">›</span></button>
+              <button type="button" class="btn btn-outline home-schedule-toggle" aria-expanded="false" onclick="toggleHomeSchedule(event)">Lihat Jadwal <span aria-hidden="true">â€º</span></button>
               <div class="home-schedule-options" role="menu">
                 <a href="#" onclick="selectHomeSchedule(5); return false;" role="menuitem">Jadwal Deep Dive Gugus</a>
                 <a href="#" onclick="selectHomeSchedule(6); return false;" role="menuitem">Jadwal Presentasi Gugus</a>
@@ -298,7 +402,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
               
               <div style="position: relative; z-index: 2; padding: 40px; flex: 1 1 300px;">
                   <h1 style="font-size: 2.8rem; font-weight: 900; color: #0f172a; margin: 0; line-height: 1; letter-spacing: -1px;">KMA XXV</h1>
-                  <h2 style="font-size: 1.6rem; font-weight: 800; color: #006d64; margin: 0 0 20px 0;">MALANG <span style="color: #f97316;">• 2026</span></h2>
+                  <h2 style="font-size: 1.6rem; font-weight: 800; color: #006d64; margin: 0 0 20px 0;">MALANG <span style="color: #f97316;">â€¢ 2026</span></h2>
                   <div style="width: 40px; height: 3px; background: #f97316; margin-bottom: 24px;"></div>
                   <p style="font-size: 1.05rem; color: #334155; max-width: 320px; line-height: 1.6; font-style: italic;">
                       25 Years of Continuous Improvement:<br>Powering Sustainable Growth, Transforming the Future.
@@ -306,7 +410,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
               </div>
               
               <div style="position: relative; z-index: 2; flex: 1 1 250px; display: flex; align-items: flex-end; justify-content: center; padding: 20px 40px 0 40px;">
-                  <img src="assets/img/golnix.png" alt="Mascot GOLNIX" style="max-height: 300px; width: auto; object-fit: contain; filter: drop-shadow(-5px 10px 15px rgba(0,0,0,0.1)); display: block; margin-bottom: 0; transform: translateY(18px);">
+                  <img src="assets/img/golnix.png" alt="Mascot GOLNIX" style="max-height: 300px; width: auto; object-fit: contain; filter: drop-shadow(-5px 10px 15px rgba(0,0,0,0.1)); display: block; margin-bottom: 0; transform: translateY(18px);" loading="lazy">
               </div>
           </div>
 
@@ -330,7 +434,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                 </div>
                 <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap"><img src="assets/img/TEMA.KMA.JPEG" alt="Tema KMA"></div>
+            <div class="dd-table-wrap"><img src="assets/img/TEMA.KMA.JPEG" alt="Tema KMA" loading="lazy"></div>
         </article>
         <article class="dd-ticket kma-feature kma-feature--logo animate-on-scroll delay-200">
             <div class="dd-ticket-content kma-feature-head">
@@ -341,7 +445,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                 </div>
                 <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap"><img src="assets/img/logo.penjelasan.jpeg" alt="Filosofi Logo KMA"></div>
+            <div class="dd-table-wrap"><img src="assets/img/logo.penjelasan.jpeg" alt="Filosofi Logo KMA" loading="lazy"></div>
         </article>
         <article class="dd-ticket kma-feature kma-feature--mascot animate-on-scroll delay-300">
             <div class="dd-ticket-content kma-feature-head">
@@ -352,7 +456,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                 </div>
                 <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap"><img src="assets/img/penjelasan.maskot.jpeg" alt="Filosofi Maskot KMA"></div>
+            <div class="dd-table-wrap"><img src="assets/img/penjelasan.maskot.jpeg" alt="Filosofi Maskot KMA" loading="lazy"></div>
         </article>
         <article class="dd-ticket kma-feature kma-feature--mind animate-on-scroll delay-400">
             <div class="dd-ticket-content kma-feature-head">
@@ -363,7 +467,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                 </div>
                 <div class="kma-feature-chevron"><svg class="dd-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
             </div>
-            <div class="dd-table-wrap"><img src="assets/img/antamBest.jpeg" alt="ANTAM BestMIND"></div>
+            <div class="dd-table-wrap"><img src="assets/img/antamBest.jpeg" alt="ANTAM BestMIND" loading="lazy"></div>
         </article>
     </div>
         </div>
@@ -380,7 +484,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <div class="kh-banner-left">
               <div class="kh-sub-header">
                 <span class="kh-sub-text">KEY HIGHLIGHTS OF</span>
-                <span class="kh-diamond">◆</span>
+                <span class="kh-diamond">â—†</span>
                 <span class="kh-line"></span>
               </div>
               <h2 class="kh-main-title">
@@ -389,11 +493,11 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
               </h2>
               <div class="kh-location-badge">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>KMA XXV – MALANG</span>
+                <span>KMA XXV â€“ MALANG</span>
               </div>
             </div>
             <div class="kh-banner-right">
-              <img src="assets/img/gunung2.png" alt="Gunung Malang KMA XXV" class="kh-gunung-img">
+              <img src="assets/img/gunung2.png" alt="Gunung Malang KMA XXV" class="kh-gunung-img" loading="lazy">
             </div>
           </div>
         </div>
@@ -412,20 +516,20 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <span class="kh-item-hint"><span>Baca materi lengkap</span></span>
                 </div>
                 <div class="kh-item-media">
-                  <img src="assets/img/25tahun.png" alt="Logo KMA 25 Tahun">
+                  <img src="assets/img/25tahun.png" alt="Logo KMA 25 Tahun" loading="lazy">
                 </div>
               </button>
               <div class="kh-item-panel">
                 <div class="hl-article">
                   <h3>Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</h3>
-                  <p class="hl-lead">Merekam perjalanan panjang di balik setiap sumber daya dan cadangan mineral ANTAM—perjalanan yang dibangun dari ketekunan, dedikasi, dan mental tangguh untuk menapaki wilayah yang belum terjamah, membaca tanda-tanda geologi, serta mengubah potensi menjadi keyakinan geologi yang bernilai bagi perusahaan dan negeri.</p>
+                  <p class="hl-lead">Merekam perjalanan panjang di balik setiap sumber daya dan cadangan mineral ANTAMâ€”perjalanan yang dibangun dari ketekunan, dedikasi, dan mental tangguh untuk menapaki wilayah yang belum terjamah, membaca tanda-tanda geologi, serta mengubah potensi menjadi keyakinan geologi yang bernilai bagi perusahaan dan negeri.</p>
                   <h4>Unit Geomin</h4>
                   <p>Unit Geomin telah hadir sejak 1974 dan menjadi ujung tombak ANTAM dalam mencari, menemukan, membuktikan, serta mengembangkan sumber daya dan cadangan mineral. Dari Sumatra hingga Papua, jejak Insan Geomin terbentang melintasi pegunungan, hutan, sungai, pesisir, dan wilayah terpencil Nusantara.</p>
-                  <h4>Bingkai editorial 2000–2025</h4>
-                  <p>Rentang <strong>2000–2025</strong> dipilih sebagai bingkai editorial untuk merefleksikan seperempat abad perjalanan eksplorasi kontemporer Unit Geomin sekaligus menyelaraskannya dengan momentum Silver Jubilee KMA XXV. Periode ini menjadi ruang untuk melihat kembali perjalanan, mengambil pembelajaran, dan menyiapkan pijakan berikutnya.</p>
+                  <h4>Bingkai editorial 2000â€“2025</h4>
+                  <p>Rentang <strong>2000â€“2025</strong> dipilih sebagai bingkai editorial untuk merefleksikan seperempat abad perjalanan eksplorasi kontemporer Unit Geomin sekaligus menyelaraskannya dengan momentum Silver Jubilee KMA XXV. Periode ini menjadi ruang untuk melihat kembali perjalanan, mengambil pembelajaran, dan menyiapkan pijakan berikutnya.</p>
                   <p>Ratusan sampel, jutaan rekaman data geologi, dan ribuan hari kerja lapangan merangkai cerita tentang bauksit, emas, nikel, serta potensi mineral lain yang dicari, dikenali, diuji, dan dibuktikan hingga menjadi sumber daya serta cadangan yang menopang keberlanjutan bisnis ANTAM.</p>
                   <h4>Rekam ingatan organisasi</h4>
-                  <p>Buku ini menjadi rekam ingatan organisasi, dokumentasi pengetahuan eksplorasi, sekaligus penghormatan kepada generasi Insan Geomin. Lebih dari sekadar mengenang masa lalu, buku ini menjadi jembatan pengetahuan antargenerasi—agar pengalaman lapangan menjadi pembelajaran, inspirasi, dan pijakan bagi generasi eksplorasi berikutnya.</p>
+                  <p>Buku ini menjadi rekam ingatan organisasi, dokumentasi pengetahuan eksplorasi, sekaligus penghormatan kepada generasi Insan Geomin. Lebih dari sekadar mengenang masa lalu, buku ini menjadi jembatan pengetahuan antargenerasiâ€”agar pengalaman lapangan menjadi pembelajaran, inspirasi, dan pijakan bagi generasi eksplorasi berikutnya.</p>
                   <p><em>Eksplorasi tidak pernah sekadar mencari mineral. Ia adalah keberanian mencari kemungkinan, membuktikan harapan, dan menyiapkan masa depan.</em></p>
                 </div>
               </div>
@@ -441,7 +545,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <span class="kh-item-hint"><span>Baca materi lengkap</span></span>
                 </div>
                 <div class="kh-item-media">
-                  <img src="assets/img/prosiding.png" alt="Prosiding Inovasi">
+                  <img src="assets/img/prosiding.png" alt="Prosiding Inovasi" loading="lazy">
                 </div>
               </button>
               <div class="kh-item-panel">
@@ -451,7 +555,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <h4>Skala inovasi</h4>
                   <p>Dalam kurun waktu 25 tahun, <strong>lebih dari 332 inovasi</strong> lahir dari berbagai insan, unit, dan fungsi di ANTAM. Setiap inovasi merepresentasikan upaya nyata untuk meningkatkan produktivitas, efisiensi, keselamatan, kualitas proses, pemanfaatan teknologi, serta nilai tambah yang mendukung keberlanjutan bisnis.</p>
                   <h4>Rekam jejak budaya inovasi</h4>
-                  <p>Lebih dari sekadar kumpulan karya, prosiding ini menjadi <strong>rekam jejak kematangan budaya inovasi ANTAM</strong>—budaya yang terus dikembangkan untuk mendukung transformasi menuju organisasi yang adaptif, kolaboratif, digital, kompetitif, dan berorientasi pada <em>sustainable growth</em>.</p>
+                  <p>Lebih dari sekadar kumpulan karya, prosiding ini menjadi <strong>rekam jejak kematangan budaya inovasi ANTAM</strong>â€”budaya yang terus dikembangkan untuk mendukung transformasi menuju organisasi yang adaptif, kolaboratif, digital, kompetitif, dan berorientasi pada <em>sustainable growth</em>.</p>
                   <p>Melalui inovasi yang terus tumbuh dan direplikasi, ANTAM tidak hanya memperbaiki cara bekerja hari ini, tetapi juga membangun fondasi masa depan yang lebih efisien, resilient, bertanggung jawab, dan berkelanjutan.</p>
                   <p><strong>Dari ide menjadi solusi, dari solusi menjadi transformasi, dan dari transformasi menjadi pertumbuhan ANTAM yang berkelanjutan.</strong></p>
                   <p><a href="assets/Antam - Proceeding Inovasi 2025 - Hiress.pdf" download class="btn btn-primary" style="display: inline-block; padding: 10px 20px; background: #006d64; color: white; text-decoration: none; border-radius: 8px; font-weight: 700;">Unduh Prosiding (PDF)</a></p>
@@ -469,7 +573,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <span class="kh-item-hint"><span>Baca materi lengkap</span></span>
                 </div>
                 <div class="kh-item-media">
-                  <img src="assets/img/theme.song.png" alt="Official Theme Song">
+                  <img src="assets/img/theme.song.png" alt="Official Theme Song" loading="lazy">
                 </div>
               </button>
               <div class="kh-item-panel">
@@ -480,7 +584,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <div class="theme-song-points"><span>Semangat kebersamaan</span><span>Energi inovasi</span><span>Transformasi berkelanjutan</span></div>
                   <h4>Notasi dan lirik</h4>
                   <p>Lirik dan notasi visual Official Theme Song KMA XXV dapat dibaca langsung pada gambar berikut.</p>
-                  <div class="theme-song-artwork"><img src="assets/img/lirik.jpeg" alt="Lirik Official Theme Song KMA XXV"></div>
+                  <div class="theme-song-artwork"><img src="assets/img/lirik.jpeg" alt="Lirik Official Theme Song KMA XXV" loading="lazy"></div>
                 </div>
               </div>
             </article>
@@ -495,17 +599,17 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                   <span class="kh-item-hint"><span>Lihat materi visual</span></span>
                 </div>
                 <div class="kh-item-media">
-                  <img src="assets/img/hackaton.png?v=20260818-2" alt="ANTAM Hackathon">
+                  <img src="assets/img/hackaton.png?v=20260818-2" alt="ANTAM Hackathon" loading="lazy">
                 </div>
               </button>
               <div class="kh-item-panel">
                 <div class="hl-article">
                   <p class="hl-lead">ANTAM Hackathon 2026 menampilkan rangkaian informasi kompetisi, tantangan, dan hasil kegiatan secara berurutan.</p>
                   <div class="hackathon-gallery" aria-label="Materi ANTAM Hackathon">
-                    <figure><img src="assets/img/hackaton/hk1.jpeg" alt="ANTAM Hackathon"></figure>
-                    <figure><img src="assets/img/hackaton/hk2.jpeg" alt="ANTAM Hackathon"></figure>
-                    <figure><img src="assets/img/hackaton/hk3.jpeg" alt="ANTAM Hackathon"></figure>
-                    <figure><img src="assets/img/hackaton/hk4.jpeg" alt="ANTAM Hackathon"></figure>
+                    <figure><img src="assets/img/hackaton/hk1.jpeg" alt="ANTAM Hackathon" loading="lazy"></figure>
+                    <figure><img src="assets/img/hackaton/hk2.jpeg" alt="ANTAM Hackathon" loading="lazy"></figure>
+                    <figure><img src="assets/img/hackaton/hk3.jpeg" alt="ANTAM Hackathon" loading="lazy"></figure>
+                    <figure><img src="assets/img/hackaton/hk4.jpeg" alt="ANTAM Hackathon" loading="lazy"></figure>
                   </div>
                 </div>
               </div>
@@ -535,7 +639,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
               <!-- Kanan: Piala/Trophy -->
               <div class="an-hero-img animate-on-scroll delay-200" style="flex: 1; min-width: 250px; display: flex; justify-content: flex-start; position: relative;">
                 <div class="an-trophy-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 350px; height: 350px; background: radial-gradient(circle, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 70%); z-index: 0; border-radius: 50%; filter: blur(15px);"></div>
-                <img src="assets/img/trophy-transparent.png" alt="Trophy KMA XXV 2026" class="an-trophy-img" style="max-height: 400px; object-fit: contain; z-index: 1; position: relative; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.12)) drop-shadow(0 0 20px rgba(255,255,255,0.4));">
+                <img src="assets/img/trophy-transparent.png" alt="Trophy KMA XXV 2026" class="an-trophy-img" style="max-height: 400px; object-fit: contain; z-index: 1; position: relative; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.12)) drop-shadow(0 0 20px rgba(255,255,255,0.4));" loading="lazy">
               </div>
 
             </div>
@@ -552,82 +656,82 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
               <span>A. EXCELLENCE AWARDS</span>
             </div>
 
-            <div class="an-awards-grid animate-on-scroll delay-100">
+            <div class="an-awards-grid compact-awards-grid animate-on-scroll delay-100">
               <div class="an-award-card" onclick="toggleAwardInline('Best Presenter', 'assets/img/Icon Mockup Board juara/Best Presenter.png', 'Penghargaan kepada tim yang paling mampu menyampaikan, menjelaskan, dan mempertahankan materi inovasi secara jelas, sistematis, meyakinkan, serta profesional.', '1')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Presenter.png" alt="Best Presenter" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Presenter.png" alt="Best Presenter" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Presenter</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Makalah', 'assets/img/Icon Mockup Board juara/Best Makalah.png', 'Penghargaan kepada karya inovasi GKM atau SS dengan dokumen makalah yang paling berkualitas dari sisi struktur, substansi, metodologi, alur PDCA, penyajian data, keterbacaan, dan kualitas visual dokumen.', '2')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Makalah.png" alt="Best Makalah" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Makalah.png" alt="Best Makalah" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Makalah</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Visual Communication', 'assets/img/Icon Mockup Board juara/Best Visual Communication.png', 'Penghargaan kepada tim yang paling efektif dan kreatif dalam memvisualisasikan inovasi selama presentasi sehingga masalah, solusi, proses, dan hasil inovasi dapat dipahami dengan mudah oleh juri dan audiens.', '3')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Visual Communication.png" alt="Best Visual Communication" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Visual Communication.png" alt="Best Visual Communication" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Visual Communication</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Safety Improvement', 'assets/img/Icon Mockup Board juara/Best Safety Improvement.png', 'Penghargaan kepada inovasi yang memberikan peningkatan paling kuat, nyata, dan berkelanjutan terhadap keselamatan kerja serta pengendalian risiko.', '4')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Safety Improvement.png" alt="Best Safety Improvement" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Safety Improvement.png" alt="Best Safety Improvement" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Safety Improvement</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Environment &amp; Sustainability Improvement', 'assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png', 'Penghargaan kepada tim yang memberikan dampak terbaik, terukur, dan berkelanjutan terhadap lingkungan serta penggunaan sumber daya.', '5')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png" alt="Best Environment &amp; Sustainability" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Environment & Sustainability.png" alt="Best Environment &amp; Sustainability" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Environment &amp; Sustainability Improvement</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Technology &amp; Digital Innovation', 'assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png', 'Penghargaan kepada inovasi yang paling tepat, efektif, andal, dan relevan dalam memanfaatkan teknologi atau solusi digital untuk meningkatkan proses kerja.', '6')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png" alt="Best Technology &amp; Digital Innovation" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Technology & Digital Innovation.png" alt="Best Technology &amp; Digital Innovation" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Technology &amp; Digital Innovation</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Proven Financial Benefit', 'assets/img/Icon Mockup Board juara/Best Finance Benefit.png', 'Penghargaan kepada inovasi dengan manfaat finansial bersih terbesar yang telah terealisasi, terukur, dapat ditelusuri, dan terverifikasi.', '7')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Finance Benefit.png" alt="Best Proven Financial Benefit" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Finance Benefit.png" alt="Best Proven Financial Benefit" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Proven Financial Benefit</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Collaboration', 'assets/img/Icon Mockup Board juara/Best Collaboration.png', 'Penghargaan kepada tim yang paling kuat menunjukkan kolaborasi lintas satuan kerja, fungsi, unit, atau anak perusahaan dan stakeholder lainnya dalam pembentukan dan pelaksanaan inovasi.', '8')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Collaboration.png" alt="Best Collaboration" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Collaboration.png" alt="Best Collaboration" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Collaboration</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Transformation Behaviour', 'assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png', 'Penghargaan kepada tim yang proses inovasinya paling kuat dan paling nyata mencerminkan minimal 6 dari 8 Key Behaviours Transformasi ANTAM.', '9')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png" alt="Best Transformation Behaviour" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best Transformation Behaviour.png" alt="Best Transformation Behaviour" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Transformation Behaviour</h4>
                 </div>
               </div>
               <div class="an-award-card" onclick="toggleAwardInline('Best Replication Potential', 'assets/img/Icon Mockup Board juara/Best replication potential.png', 'Penghargaan kepada inovasi yang paling layak, mudah, dan bernilai untuk diterapkan pada lingkup kerja, unit, atau anak perusahaan lainnya atau lingkungan sekitar wilayah operasi.', '10')" style="cursor: pointer; padding: 0; overflow: hidden; border-radius: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                <div style="height: 180px; background: #f8fafc;">
-                  <img src="assets/img/Icon Mockup Board juara/Best replication potential.png" alt="Best Replication Potential" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="an-award-img-wrap">
+                  <img src="assets/img/Icon Mockup Board juara/Best replication potential.png" alt="Best Replication Potential" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <div style="padding: 20px; text-align: center; flex: 1; display: flex; align-items: center; justify-content: center;">
                   <h4 class="an-card-title" style="margin: 0; font-size: 1.1rem; color: #0f172a;">Best Replication Potential</h4>
@@ -698,70 +802,63 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <p class="section-desc">Klik pada kartu hari di bawah ini untuk melihat rincian rundown lengkap.</p>
           </div>
 
-          <div class="days-grid">
-            <div class="day-card animate-on-scroll" onclick="openModal(1)">
-              <div class="day-card-img-header">
-                <img src="assets/img/kedatangan.png?v=20260818-2" alt="Rangkaian Kegiatan kedatangan" class="day-card-image-element">
+          <div class="days-grid-modern" id="daysGridContainer">
+            <!-- Day 1 -->
+            <div class="day-card-modern animate-on-scroll" onclick="toggleRundown(1, this)">
+              <div class="day-modern-img">
+                <img src="assets/img/kedatangan.png?v=20260818-2" alt="Kedatangan" loading="lazy">
               </div>
-              <div class="day-card-content">
-                <h3 style="margin-bottom: 2px;">Selasa, 1 September 2026</h3>
-                <p style="font-size: 0.9rem; color: #006d64; font-weight: 600; margin-bottom: 12px;">Kedatangan Peserta</p>
-                <ul style="padding-left: 20px;">
-                  <li>Penjemputan Peserta KMA XXV di Bandara Abdul Rachman Saleh</li>
-                  <li>Makan Siang di Resto Warung Wareg</li>
-                  <li>Check in Hotel, Registrasi & Pengambilan Souvenir Peserta KMA XXV</li>
-                  <li>Welcoming Dinner</li>
-                  <li>Performance Unit Bisnis dan Anak Perusahaan</li>
-                </ul>
+              <div class="day-modern-content">
+                <h3>Selasa, 1 Sept 2026</h3>
+                <p>Kedatangan Peserta</p>
+                <div class="day-modern-indicator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+              </div>
+            </div>
+            <!-- Day 2 -->
+            <div class="day-card-modern animate-on-scroll delay-100" onclick="toggleRundown(2, this)">
+              <div class="day-modern-img">
+                <img src="assets/img/convention.png?v=20260818-2" alt="Convention" loading="lazy">
+              </div>
+              <div class="day-modern-content">
+                <h3>Rabu, 2 Sept 2026</h3>
+                <p>Convention & Presentasi</p>
+                <div class="day-modern-indicator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+              </div>
+            </div>
+            <!-- Day 3 -->
+            <div class="day-card-modern animate-on-scroll delay-200" onclick="toggleRundown(3, this)">
+              <div class="day-modern-img">
+                <img src="assets/img/team.building.png?v=20260818-2" alt="Team Building" loading="lazy">
+              </div>
+              <div class="day-modern-content">
+                <h3>Kamis, 3 Sept 2026</h3>
+                <p>Team Building & Awarding</p>
+                <div class="day-modern-indicator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+              </div>
+            </div>
+            <!-- Day 4 -->
+            <div class="day-card-modern animate-on-scroll delay-300" onclick="toggleRundown(4, this)">
+              <div class="day-modern-img">
+                <img src="assets/img/penutupan.png?v=20260818-2" alt="Penutupan" loading="lazy">
+              </div>
+              <div class="day-modern-content">
+                <h3>Jumat, 4 Sept 2026</h3>
+                <p>Penutupan & Kepulangan</p>
+                <div class="day-modern-indicator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
               </div>
             </div>
 
-            <div class="day-card animate-on-scroll delay-100" onclick="openModal(2)">
-              <div class="day-card-img-header">
-                <img src="assets/img/convention.png?v=20260818-2" alt="Rangkaian Kegiatan convention" class="day-card-image-element">
-              </div>
-              <div class="day-card-content">
-                <h3 style="margin-bottom: 2px;">Rabu, 2 September 2026</h3>
-                <p style="font-size: 0.9rem; color: #006d64; font-weight: 600; margin-bottom: 12px;">Convention & Presentasi</p>
-                <ul style="padding-left: 20px;">
-                  <li>Opening ANTAM BestMIND KMA XXV 2026</li>
-                  <li>Launching Buku Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</li>
-                  <li>Leaders Talk: Jejak Langkah Eksplorasi Unit Geomin</li>
-                  <li>Launching Official Theme Song KMA XXV</li>
-                  <li>Presentasi Gugus</li>
-                </ul>
-              </div>
+            <!-- Detail Panel container (will be moved around by JS) -->
+            <div id="rundownDetailPanel" class="rundown-detail-panel" style="display: none;">
+                <div class="rundown-detail-header">
+                    <h4 id="rundownDetailTitle">DAY</h4>
+                    <span id="rundownDetailDate">Date</span>
+                </div>
+                <div id="rundownDetailContent" class="rundown-detail-body">
+                    <!-- Items injected here -->
+                </div>
             </div>
 
-            <div class="day-card animate-on-scroll delay-200" onclick="openModal(3)">
-              <div class="day-card-img-header">
-                <img src="assets/img/team.building.png?v=20260818-2" alt="Rangkaian Kegiatan team.building" class="day-card-image-element">
-              </div>
-              <div class="day-card-content">
-                <h3 style="margin-bottom: 2px;">Kamis, 3 September 2026</h3>
-                <p style="font-size: 0.9rem; color: #006d64; font-weight: 600; margin-bottom: 12px;">Team Building & Awarding</p>
-                <ul style="padding-left: 20px;">
-                  <li>Team Building</li>
-                  <li>Wisata Oleh-Oleh</li>
-                  <li>Closing & Awarding Night</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="day-card day-four animate-on-scroll delay-300" onclick="openModal(4)">
-              <div class="day-card-img-header">
-                <img src="assets/img/penutupan.png?v=20260818-2" alt="Penutupan dan Kepulangan KMA XXV" class="day-card-image-element">
-              </div>
-              <div class="day-card-content">
-                <h3 style="margin-bottom: 2px;">Jumat, 4 September 2026</h3>
-                <p style="font-size: 0.9rem; color: #006d64; font-weight: 600; margin-bottom: 12px;">Penutupan & Kepulangan</p>
-                <ul style="padding-left: 20px;">
-                  <li>Check-out Hotel (Maks 11:00 WIB)</li>
-                  <li>Pengantaran Bandara Abdul Rachman Saleh</li>
-                  <li>Perjalanan Kembali ke Unit Masing-masing</li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -815,7 +912,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 1 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dodi Pramadi.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Dodi Pramadi.png') ?>" alt="Dodi Pramadi" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Dodi Pramadi.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Dodi Pramadi.png') ?>" alt="Dodi Pramadi" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
@@ -827,7 +924,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 2 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Eko Pudji.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Eko Pudji.png') ?>" alt="Eko Pudji" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Eko Pudji.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Eko Pudji.png') ?>" alt="Eko Pudji" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">02</div>
@@ -839,7 +936,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 3 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Sri Prahyoto.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Sri Prahyoto.png') ?>" alt="Sri Prahyoto" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Sri Prahyoto.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Sri Prahyoto.png') ?>" alt="Sri Prahyoto" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">03</div>
@@ -851,7 +948,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 4 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Susan Kustiwan.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Susan Kustiwan.png') ?>" alt="Susan Kustiwan" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Susan Kustiwan.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Susan Kustiwan.png') ?>" alt="Susan Kustiwan" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">04</div>
@@ -863,7 +960,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 5 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Dialah Hokosuja.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Dialah Hokosuja.png') ?>" alt="Dialah Hokosuja" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Dialah Hokosuja.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Dialah Hokosuja.png') ?>" alt="Dialah Hokosuja" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">05</div>
@@ -875,7 +972,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 6 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Evi Sabrina.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Evi Sabrina.png') ?>" alt="Evi Sabrina" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Evi Sabrina.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Evi Sabrina.png') ?>" alt="Evi Sabrina" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">06</div>
@@ -887,7 +984,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 7 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Muhammad Amri.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Muhammad Amri.png') ?>" alt="Muhammad Amri" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Muhammad Amri.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Muhammad Amri.png') ?>" alt="Muhammad Amri" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">07</div>
@@ -899,7 +996,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Juri 8 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/juri/Yudhistira.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Yudhistira.png') ?>" alt="Yudhistira" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/juri/Yudhistira.png?v=<?= filemtime(__DIR__ . '/assets/img/juri/Yudhistira.png') ?>" alt="Yudhistira" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">08</div>
@@ -911,13 +1008,14 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         </div>
       </div>
     </section>
-<section id="panitia" class="slide section section-white">
+<section id="panitia" class="slide section section-light">
       <div class="slide-scroll-wrapper">
         <div class="container">
           
           <div class="ed-hero animate-on-scroll">
             <span class="ed-hero-subtitle">KMA XXV 2026</span>
             <h2 class="ed-hero-title">PANITIA</h2>
+            <p class="ed-hero-desc">Tim tangguh di balik kelancaran dan kesuksesan penyelenggaraan Konvensi Mutu ANTAM XXV.</p>
             <div class="ed-hero-number">06</div>
           </div>
 
@@ -927,7 +1025,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 1 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Agus Pajrin.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Agus Pajrin.png') ?>" alt="Agus Pajrin" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Agus Pajrin.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Agus Pajrin.png') ?>" alt="Agus Pajrin" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">01</div>
@@ -939,7 +1037,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 2 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Agus Sugiharto.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Agus Sugiharto.png') ?>" alt="Agus Sugiharto" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Agus Sugiharto.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Agus Sugiharto.png') ?>" alt="Agus Sugiharto" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">02</div>
@@ -951,7 +1049,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 3 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Bella Sakina.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Bella Sakina.png') ?>" alt="Bella Sakina" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Bella Sakina.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Bella Sakina.png') ?>" alt="Bella Sakina" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">03</div>
@@ -963,7 +1061,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 4 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Dedi Sunjaya.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Dedi Sunjaya.png') ?>" alt="Dedi Sunjaya" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Dedi Sunjaya.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Dedi Sunjaya.png') ?>" alt="Dedi Sunjaya" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">04</div>
@@ -975,7 +1073,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 5 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Munif Hadi.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Munif Hadi.png') ?>" alt="Munif Hadi" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Munif Hadi.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Munif Hadi.png') ?>" alt="Munif Hadi" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">05</div>
@@ -987,7 +1085,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 6 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Oni Setia Himawan.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Oni Setia Himawan.png') ?>" alt="Oni Setia Himawan" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Oni Setia Himawan.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Oni Setia Himawan.png') ?>" alt="Oni Setia Himawan" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">06</div>
@@ -999,7 +1097,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 7 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Ruri Pitaloka.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Ruri Pitaloka.png') ?>" alt="Ruri Pitaloka" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Ruri Pitaloka.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Ruri Pitaloka.png') ?>" alt="Ruri Pitaloka" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">07</div>
@@ -1011,7 +1109,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 8 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Satriya Alrizki.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Satriya Alrizki.png') ?>" alt="Satriya Alrizki" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Satriya Alrizki.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Satriya Alrizki.png') ?>" alt="Satriya Alrizki" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">08</div>
@@ -1023,7 +1121,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 9 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Sofian.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Sofian.png') ?>" alt="Sofian" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Sofian.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Sofian.png') ?>" alt="Sofian" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">09</div>
@@ -1035,7 +1133,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 10 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Utiah Sukarini.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Utiah Sukarini.png') ?>" alt="Utiah Sukarini" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Utiah Sukarini.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Utiah Sukarini.png') ?>" alt="Utiah Sukarini" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">10</div>
@@ -1047,7 +1145,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 11 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Yosafat Simanjuntak.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Yosafat Simanjuntak.png') ?>" alt="Yosafat Simanjuntak" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Yosafat Simanjuntak.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Yosafat Simanjuntak.png') ?>" alt="Yosafat Simanjuntak" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">11</div>
@@ -1059,7 +1157,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <!-- Panitia 12 -->
             <div class="ed-profile">
               <div class="ed-profile-img-wrap">
-                <img src="assets/img/FOTO PANITIA/Zakaria Budi.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Zakaria Budi.png') ?>" alt="Zakaria Budi" class="ed-profile-img" style="border-radius: 16px;">
+                <img src="assets/img/FOTO PANITIA/Zakaria Budi.png?v=<?= filemtime(__DIR__ . '/assets/img/FOTO PANITIA/Zakaria Budi.png') ?>" alt="Zakaria Budi" class="ed-profile-img" loading="eager" decoding="async" style="border-radius: 16px;">
               </div>
               <div class="ed-profile-info">
                 <div class="ed-profile-number">12</div>
@@ -1081,7 +1179,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
           </div>
           <div class="venue-grid animate-on-scroll">
             <article class="venue-card">
-              <div class="venue-photo" style="background-image: url('assets/img/mercure.mirama.jpg');">
+              <div class="venue-photo" style="background-image: url('assets/img/mercure.mirama.png');">
                 <span class="venue-badge">HOTEL &amp; CONVENTION</span>
               </div>
               <div class="venue-body">
@@ -1111,7 +1209,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
               </div>
             </article>
             <article class="venue-card">
-              <div class="venue-photo" style="background-image: url('assets/img/brawijaya.jpeg?v=20260818-3');">
+              <div class="venue-photo" style="background-image: url('assets/img/brawijaya.png?v=20260818-3');">
                 <span class="venue-badge">OLEH-OLEH</span>
               </div>
               <div class="venue-body">
@@ -1130,8 +1228,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         <div id="kontak-content" class="container" style="margin-bottom: 40px;">
           <div class="section-header animate-on-scroll">
             <div class="contact-event-mark" aria-hidden="true">
-              <img src="assets/img/gunung2.png" alt="">
-              <span>KMA XXV<br><b>MALANG · 2026</b></span>
+              <img src="assets/img/gunung2.png" alt="" loading="lazy">
+              <span>KMA XXV<br><b>MALANG Â· 2026</b></span>
             </div>
             <h2 class="section-title">Kontak Panitia</h2>
             <div class="divider"></div>
@@ -1139,43 +1237,27 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
           </div>
 
           <div class="contact-list animate-on-scroll delay-100">
-            <a href="https://instagram.com/antam_official" target="_blank" rel="noopener noreferrer" class="clist-item">
-              <div class="clist-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
-              <div class="clist-info">
-                <span class="clist-label">Instagram</span>
-                <span class="clist-value">@antam_official</span>
-              </div>
-              <div class="clist-arrow">›</div>
-            </a>
             
-            <a href="mailto:kma25@antam.com" class="clist-item">
-              <div class="clist-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              </div>
-              <div class="clist-info">
-                <span class="clist-label">Email</span>
-                <span class="clist-value">kma25@antam.com</span>
-              </div>
-              <div class="clist-arrow">›</div>
-            </a>
+            
+            
 
-            <button type="button" class="clist-item lo-toggle-button" onclick="toggleLoContacts()" aria-expanded="false" aria-controls="loContacts"><div class="clist-icon clist-wa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div><div class="clist-info"><span class="clist-label">WhatsApp</span><span class="clist-value">Tanya KMA (LO Unit)</span></div><div class="clist-arrow">›</div></button>
+            <button type="button" class="clist-item lo-toggle-button" onclick="toggleLoContacts()" aria-expanded="false" aria-controls="loContacts"><div class="clist-icon clist-wa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div><div class="clist-info"><span class="clist-label">WhatsApp</span><span class="clist-value">Tanya KMA (LO Unit)</span></div><div class="clist-arrow">â€º</div></button>
           <div id="loContacts" class="lo-contact-section animate-on-scroll delay-200" hidden>
             <h3>Kontak LO Peserta</h3>
             <p class="lo-contact-intro">Pilih unit peserta untuk menghubungi LO melalui WhatsApp.</p>
             <div class="lo-contact-grid">
-              <a href="https://wa.me/6287874643444" target="_blank" rel="noopener"><strong>Unit Kolaka</strong><span>Utiah Sukarini · 0878 7464 3444</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6287974633444" target="_blank" rel="noopener"><strong>Unit Konawe Utara</strong><span>Utiah Sukarini · 0879 7464 3444</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281293272929" target="_blank" rel="noopener"><strong>Unit Kalimantan Barat</strong><span>Yosafat Simanjuntak · 0812 9327 2929</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281393272929" target="_blank" rel="noopener"><strong>PT ICA</strong><span>Yosafat Simanjuntak · 0813 9327 2929</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281281802944" target="_blank" rel="noopener"><strong>Unit Pongkor</strong><span>Agus Sugiharto · 0812 8180 2944</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281242234684" target="_blank" rel="noopener"><strong>Unit Maluku Utara</strong><span>Dedi Sunjaya · 0812 4223 4684</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281340611919" target="_blank" rel="noopener"><strong>Unit Logam Mulia</strong><span>Bella Sakina · 0813 4061 1919</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6285258221237" target="_blank" rel="noopener"><strong>PT GAG Nikel</strong><span>Zakaria · 0852 5822 1237</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6282125149788" target="_blank" rel="noopener"><strong>PT SDA</strong><span>Oni Setia Himawan · 0821 2514 9788</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6282225149788" target="_blank" rel="noopener"><strong>PT NKA</strong><span>Oni Setia Himawan · 0822 2514 9788</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6281910022602" target="_blank" rel="noopener"><strong>Kantor Pusat</strong><span>Ruri Pitaloka · 0819 1002 2602</span><b>WhatsApp</b></a>
-              <a href="https://wa.me/6282010022602" target="_blank" rel="noopener"><strong>Unit Geomin</strong><span>Ruri Pitaloka · 0820 1002 2602</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6287874643444" target="_blank" rel="noopener"><strong>Unit Kolaka</strong><span>Utiah Sukarini Â· 0878 7464 3444</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6287874643444" target="_blank" rel="noopener"><strong>Unit Konawe Utara</strong><span>Utiah Sukarini Â· 0878 7464 3444</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281293272929" target="_blank" rel="noopener"><strong>Unit Kalimantan Barat</strong><span>Yosafat Simanjuntak Â· 0812 9327 2929</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281393272929" target="_blank" rel="noopener"><strong>PT ICA</strong><span>Yosafat Simanjuntak Â· 0813 9327 2929</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281281802944" target="_blank" rel="noopener"><strong>Unit Pongkor</strong><span>Agus Sugiharto Â· 0812 8180 2944</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281242234684" target="_blank" rel="noopener"><strong>Unit Maluku Utara</strong><span>Dedi Sunjaya Â· 0812 4223 4684</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281340611919" target="_blank" rel="noopener"><strong>Unit Logam Mulia</strong><span>Bella Sakina Â· 0813 4061 1919</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6285258221237" target="_blank" rel="noopener"><strong>PT GAG Nikel</strong><span>Zakaria Â· 0852 5822 1237</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6282125149788" target="_blank" rel="noopener"><strong>PT SDA</strong><span>Oni Setia Himawan Â· 0821 2514 9788</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6282125149788" target="_blank" rel="noopener"><strong>PT NKA</strong><span>Oni Setia Himawan Â· 0821 2514 9788</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281910022602" target="_blank" rel="noopener"><strong>Kantor Pusat</strong><span>Ruri Pitaloka Â· 0819 1002 2602</span><b>WhatsApp</b></a>
+              <a href="https://wa.me/6281910022602" target="_blank" rel="noopener"><strong>Unit Geomin</strong><span>Ruri Pitaloka Â· 0819 1002 2602</span><b>WhatsApp</b></a>
             </div>
           </div>          </div>
         </div>
@@ -1185,14 +1267,14 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     <section id="aturan" class="slide section section-white">
       <div class="slide-scroll-wrapper">
         <div class="container" style="padding-top: 50px;">
+          <div class="rules-visual-band animate-on-scroll" aria-hidden="true" style="margin-bottom: 24px;">
+            <img src="assets/img/tugu_malang.jpg" alt="" loading="lazy">
+            <div class="rules-visual-copy"><strong>KMA XXV</strong><span>Malang Â· 2026</span></div>
+          </div>
           <div class="section-header animate-on-scroll">
             <p class="eyebrow">KETENTUAN UMUM</p>
             <h2 class="section-title">Aturan Lainnya</h2>
             <div class="divider"></div>
-          </div>
-          <div class="rules-visual-band animate-on-scroll" aria-hidden="true">
-            <img src="assets/img/tugu_malang.jpg" alt="">
-            <div class="rules-visual-copy"><strong>KMA XXV</strong><span>Malang · 2026</span></div>
           </div>
           <!-- C. Ketentuan Umum -->
         <div class="an-rules-block">
@@ -1206,9 +1288,11 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
                 <div class="an-gold-line"></div>
               </div>
         </div>
-          <div class="rules-download-panel animate-on-scroll" aria-label="Download dokumen ketentuan">
-            <div><strong>Dokumen ketentuan KMA XXV</strong><span>Unduh file resmi untuk dibaca atau dibagikan kepada peserta.</span></div>
-            <a class="rules-download-btn" href="assets/Ketentuan Lainnya_KMA XXV MALANG_2026.pdf" download>Unduh PDF</a>
+          <div class="rules-download-panel animate-on-scroll" aria-label="Download dokumen ketentuan" style="display: flex; flex-direction: column; align-items: flex-start; gap: 20px;">
+            <p style="font-size: 0.95rem; line-height: 1.6; color: #475569; margin: 0; text-align: left; max-width: 800px; font-weight: 400;">
+              Panduan penting bagi seluruh peserta untuk memastikan rangkaian kegiatan KMA XXV berjalan tertib, aman, dan profesional. Informasi dalam dokumen ini mencakup ketentuan dress code dan atribut kontingen, pelaksanaan performance, mekanisme Deep Dive Interview, format makalah, presentasi gugus, ketentuan teknis pendukung kegiatan, hingga ketentuan poster.
+            </p>
+            <a class="rules-download-btn" href="assets/Ketentuan Lainnya_KMA XXV MALANG_2026.pdf" download style="align-self: flex-start;">Unduh PDF</a>
           </div>
           </div>
         </div>
@@ -1222,11 +1306,54 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <h2 class="section-title" style="color: #b91c1c;">Emergency & Safety</h2>
             <div class="divider" style="background: #dc2626;"></div>
           </div>
-          <div class="emergency-grid animate-on-scroll delay-100">
-            <img class="emergency-image" src="assets/img/emergency.jpeg" alt="HSE Emergency" style="width: 100%; max-width: 800px; margin: 0 auto; display: block; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+          <div class="emergency-content animate-on-scroll delay-100">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <img class="emergency-image" src="assets/img/emergency.jpeg" alt="HSE Emergency" style="width: 100%; max-width: 600px; margin: 0 auto; display: block; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);" loading="lazy">
+                <a href="assets/img/emergency.jpeg" download class="em-download-btn" style="margin-top: 16px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  Unduh Kontak Darurat
+                </a>
+            </div>
+
+            <div class="em-contacts-grid">
+              <a href="https://wa.me/6285710791785" target="_blank" rel="noopener" class="em-card">
+                <div class="em-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                <div class="em-info">
+                  <strong>Pak Duduk Sumargono</strong>
+                  <span>PIC Emergency / Koordinasi</span>
+                  <b>+62 857-1079-1785</b>
+                </div>
+              </a>
+              <a href="https://wa.me/6282192838818" target="_blank" rel="noopener" class="em-card">
+                <div class="em-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                <div class="em-info">
+                  <strong>dr. Dani</strong>
+                  <span>Dokter</span>
+                  <b>0821-9283-8818</b>
+                </div>
+              </a>
+              <a href="https://wa.me/6281259039277" target="_blank" rel="noopener" class="em-card">
+                <div class="em-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                <div class="em-info">
+                  <strong>Nur Akmala Dewi</strong>
+                  <span>Paramedis</span>
+                  <b>+62 812-5903-9277</b>
+                </div>
+              </a>
+              <a href="https://wa.me/6281233872829" target="_blank" rel="noopener" class="em-card">
+                <div class="em-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                <div class="em-info">
+                  <strong>Qonita</strong>
+                  <span>Medical Emergency Support</span>
+                  <b>+62 812-3387-2829</b>
+                </div>
+              </a>
+            </div>
+            
           </div>
         </div>
-        <footer class="footer"><div class="container"><p>@KMA.XXV.2026</p></div></footer>
+      </div>
+      <footer class="footer"><div class="container"><p>@KMA.XXV.2026</p></div></footer>
       </div>
     </section>
   </main>
@@ -1238,7 +1365,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       <span class="nav-text">Sebelumnya</span>
     </button>
     <div class="pill-nav-counter" id="pillNavCounter" style="font-weight: 700; color: #0f172a; font-size: 0.95rem; letter-spacing: 2px;">
-      01 / 12
+      01 / 13
     </div>
     <button class="nav-btn next-btn" id="nextBtn" onclick="nextSlide()">
       <span class="nav-text">Selanjutnya</span>
@@ -1267,8 +1394,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     const presentationData = {
       gkm1: { title: "Jadwal Presentasi GKM 1", image: "assets/img/jadwal%20presentasi/GKM1.JPEG?v=20260819-1", category: "GKM 1", table: false },
       gkm2: { title: "Jadwal Presentasi GKM 2", image: "assets/img/jadwal%20presentasi/GKM2.JPEG?v=20260819-1", category: "GKM 2", table: false },
-      ss1: { title: "Jadwal Presentasi SS 1", category: "SS 1 · STREAM BROMO", image: "assets/img/jadwal%20presentasi/SS1.JPEG?v=20260819-2", table: false },
-      ss2: { title: "Jadwal Presentasi SS 2", category: "SS 2 · STREAM SEMERU", image: "assets/img/jadwal%20presentasi/SS2.JPEG?v=20260819-2", table: false }
+      ss1: { title: "Jadwal Presentasi SS 1", category: "SS 1 Â· STREAM BROMO", image: "assets/img/jadwal%20presentasi/SS1.JPEG?v=20260819-2", table: false },
+      ss2: { title: "Jadwal Presentasi SS 2", category: "SS 2 Â· STREAM SEMERU", image: "assets/img/jadwal%20presentasi/SS2.JPEG?v=20260819-2", table: false }
     };    
 /* -----------------------------------------
        LOGIKA ACCORDION ANTAM BestMIND (SLIDE 2)
@@ -1299,7 +1426,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         btn.classList.toggle('playing', isPlaying);
         btn.setAttribute('aria-pressed', String(isPlaying));
         const label = btn.querySelector('span');
-        if (label) label.textContent = btn.id === 'themeSongBtn' ? (isPlaying ? 'Theme Song KMA (ON)' : 'Theme Song KMA (OFF)') : 'Musik';
+        if (label) label.textContent = btn.id === 'themeSongBtn' ? 'Theme Song KMA' : 'Musik';
         if (btn.id === 'themeSongBtn') {
           btn.style.background = isPlaying ? '#006d64' : '#64748b';
           btn.title = isPlaying ? 'Matikan Theme Song KMA' : 'Nyalakan Theme Song KMA';
@@ -1430,11 +1557,11 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       1: {
         title: "Jejak Langkah 25 Tahun Eksplorasi Unit Geomin",
         category: "LAUNCHING BUKU",
-        content: `<p><strong>Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</strong><br><br>Merekam perjalanan panjang di balik setiap sumber daya dan cadangan mineral ANTAM—perjalanan yang dibangun dari ketekunan, dedikasi, dan mental tangguh untuk menapaki wilayah yang belum terjamah, membaca tanda-tanda geologi, serta mengubah potensi menjadi keyakinan geologi yang bernilai bagi perusahaan dan negeri.</p>
+        content: `<p><strong>Jejak Langkah 25 Tahun Eksplorasi Unit Geomin</strong><br><br>Merekam perjalanan panjang di balik setiap sumber daya dan cadangan mineral ANTAMâ€”perjalanan yang dibangun dari ketekunan, dedikasi, dan mental tangguh untuk menapaki wilayah yang belum terjamah, membaca tanda-tanda geologi, serta mengubah potensi menjadi keyakinan geologi yang bernilai bagi perusahaan dan negeri.</p>
           <p><br><br>Unit Geomin telah hadir sejak 1974 dan menjadi ujung tombak ANTAM dalam mencari, menemukan, membuktikan, serta mengembangkan sumber daya dan cadangan mineral. Dari Sumatra hingga Papua, jejak Insan Geomin terbentang melintasi pegunungan, hutan, sungai, pesisir, dan wilayah terpencil Nusantara.</p>
-          <p>Rentang <strong>2000–2025</strong> dipilih sebagai bingkai editorial untuk merefleksikan seperempat abad perjalanan eksplorasi kontemporer Unit Geomin sekaligus menyelaraskannya dengan momentum Silver Jubilee KMA XXV. Periode ini menjadi ruang untuk melihat kembali perjalanan, mengambil pembelajaran, dan menyiapkan pijakan berikutnya.</p>
+          <p>Rentang <strong>2000â€“2025</strong> dipilih sebagai bingkai editorial untuk merefleksikan seperempat abad perjalanan eksplorasi kontemporer Unit Geomin sekaligus menyelaraskannya dengan momentum Silver Jubilee KMA XXV. Periode ini menjadi ruang untuk melihat kembali perjalanan, mengambil pembelajaran, dan menyiapkan pijakan berikutnya.</p>
           <p>Ratusan sampel, jutaan rekaman data geologi, dan ribuan hari kerja lapangan merangkai cerita tentang bauksit, emas, nikel, serta potensi mineral lain yang dicari, dikenali, diuji, dan dibuktikan hingga menjadi sumber daya serta cadangan yang menopang keberlanjutan bisnis ANTAM.</p>
-          <p>Buku ini menjadi rekam ingatan organisasi, dokumentasi pengetahuan eksplorasi, sekaligus penghormatan kepada generasi Insan Geomin. Lebih dari sekadar mengenang masa lalu, buku ini menjadi jembatan pengetahuan antargenerasi—agar pengalaman lapangan menjadi pembelajaran, inspirasi, dan pijakan bagi generasi eksplorasi berikutnya.</p>
+          <p>Buku ini menjadi rekam ingatan organisasi, dokumentasi pengetahuan eksplorasi, sekaligus penghormatan kepada generasi Insan Geomin. Lebih dari sekadar mengenang masa lalu, buku ini menjadi jembatan pengetahuan antargenerasiâ€”agar pengalaman lapangan menjadi pembelajaran, inspirasi, dan pijakan bagi generasi eksplorasi berikutnya.</p>
           <p><em>Eksplorasi tidak pernah sekadar mencari mineral. Ia adalah keberanian mencari kemungkinan, membuktikan harapan, dan menyiapkan masa depan.</em></p>`
       },
       'prosiding': {
@@ -1442,7 +1569,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         category: "REFLEKSI PERJALANAN INOVASI",
         content: `<p><strong>Prosiding Inovasi 25 Tahun</strong> hadir sebagai dokumentasi perjalanan budaya mutu, kreativitas, dan <em>continuous improvement</em> di ANTAM. Disusun dalam momentum <strong>Silver Jubilee KMA XXV</strong>, prosiding ini merefleksikan konsistensi ANTAM membangun ekosistem inovasi selama seperempat abad sebagai bagian dari perjalanan transformasi perusahaan.</p>
           <p>Dalam kurun waktu 25 tahun, <strong>lebih dari 332 inovasi</strong> lahir dari berbagai insan, unit, dan fungsi di ANTAM. Setiap inovasi merepresentasikan upaya nyata untuk meningkatkan produktivitas, efisiensi, keselamatan, kualitas proses, pemanfaatan teknologi, serta nilai tambah yang mendukung keberlanjutan bisnis.</p>
-          <p>Lebih dari sekadar kumpulan karya, prosiding ini menjadi <strong>rekam jejak kematangan budaya inovasi ANTAM</strong>—budaya yang terus dikembangkan untuk mendukung transformasi menuju organisasi yang adaptif, kolaboratif, digital, kompetitif, dan berorientasi pada <em>sustainable growth</em>.</p>
+          <p>Lebih dari sekadar kumpulan karya, prosiding ini menjadi <strong>rekam jejak kematangan budaya inovasi ANTAM</strong>â€”budaya yang terus dikembangkan untuk mendukung transformasi menuju organisasi yang adaptif, kolaboratif, digital, kompetitif, dan berorientasi pada <em>sustainable growth</em>.</p>
           <p>Melalui inovasi yang terus tumbuh dan direplikasi, ANTAM tidak hanya memperbaiki cara bekerja hari ini, tetapi juga membangun fondasi masa depan yang lebih efisien, resilient, bertanggung jawab, dan berkelanjutan.</p>
           <p><strong>Dari ide menjadi solusi, dari solusi menjadi transformasi, dan dari transformasi menjadi pertumbuhan ANTAM yang berkelanjutan.</strong></p><br><br><a href="assets/Antam - Proceeding Inovasi 2025 - Hiress.pdf" download class="btn btn-primary" style="display: inline-block; padding: 10px 20px; background: #006d64; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Unduh Prosiding (PDF)</a>`
       },
@@ -1454,7 +1581,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
           <p>Lagu ini membawa semangat kebersamaan dan menyelaraskan energi acara dengan tema <em>25 Years of Continuous Improvement: Powering Sustainable Growth, Transforming the Future</em>.</p>
           <div class="theme-song-points"><span>Semangat kebersamaan</span><span>Energi inovasi</span><span>Transformasi berkelanjutan</span></div>
           <p style="margin-top:14px;">Notasi balok dan lirik tersedia dalam dokumen resmi berikut. Dokumen dapat dibaca langsung atau diunduh untuk latihan dan produksi acara.</p>
-          <div class="theme-song-artwork"><img src="assets/img/lirik.jpeg" alt="Lirik Official Theme Song KMA XXV"></div>
+          <div class="theme-song-artwork"><img src="assets/img/lirik.jpeg" alt="Lirik Official Theme Song KMA XXV" loading="lazy"></div>
         `
       },      5: {
         title: "ANTAM Hackathon 2026",
@@ -1462,10 +1589,10 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         content: `
           <p class="highlight-intro">ANTAM Hackathon 2026 menampilkan rangkaian informasi kompetisi, tantangan, dan hasil kegiatan secara berurutan.</p>
           <div class="hackathon-gallery" aria-label="Materi ANTAM Hackathon">
-            <figure><img src="assets/img/hackaton/hk1.jpeg" alt="ANTAM Hackathon - materi 1"><figcaption>Materi Hackathon 1</figcaption></figure>
-            <figure><img src="assets/img/hackaton/hk2.jpeg" alt="ANTAM Hackathon - materi 2"><figcaption>Materi Hackathon 2</figcaption></figure>
-            <figure><img src="assets/img/hackaton/hk3.jpeg" alt="ANTAM Hackathon - materi 3"><figcaption>Materi Hackathon 3</figcaption></figure>
-            <figure><img src="assets/img/hackaton/hk4.jpeg" alt="ANTAM Hackathon - materi 4"><figcaption>Materi Hackathon 4</figcaption></figure>
+            <figure><img src="assets/img/hackaton/hk1.jpeg" alt="ANTAM Hackathon - materi 1" loading="lazy"><figcaption>Materi Hackathon 1</figcaption></figure>
+            <figure><img src="assets/img/hackaton/hk2.jpeg" alt="ANTAM Hackathon - materi 2" loading="lazy"><figcaption>Materi Hackathon 2</figcaption></figure>
+            <figure><img src="assets/img/hackaton/hk3.jpeg" alt="ANTAM Hackathon - materi 3" loading="lazy"><figcaption>Materi Hackathon 3</figcaption></figure>
+            <figure><img src="assets/img/hackaton/hk4.jpeg" alt="ANTAM Hackathon - materi 4" loading="lazy"><figcaption>Materi Hackathon 4</figcaption></figure>
           </div>
         `      }
     };
@@ -1475,7 +1602,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       const button = document.querySelector('.lo-toggle-button');
       if (!panel) return;
       panel.hidden = !panel.hidden;
-      if (button) { button.setAttribute('aria-expanded', String(!panel.hidden)); button.querySelector('.clist-arrow').textContent = panel.hidden ? '›' : '⌃'; }
+      if (button) { button.setAttribute('aria-expanded', String(!panel.hidden)); button.querySelector('.clist-arrow').textContent = panel.hidden ? 'â€º' : 'âŒƒ'; }
     }
     /* -----------------------------------------
        RUNDOWN MODAL DATA & FUNCTIONS
@@ -1581,51 +1708,68 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     };
 
 
-    function openModal(day) {
+    let activeRundownDay = null;
+    function toggleRundown(day, element) {
+      const detailPanel = document.getElementById('rundownDetailPanel');
+      const container = document.getElementById('rundownDetailContent');
+      
+      // If clicking the currently active one, close it
+      if (activeRundownDay === day) {
+        detailPanel.style.display = 'none';
+        element.classList.remove('active');
+        activeRundownDay = null;
+        return;
+      }
+
+      // Remove active state from all cards
+      document.querySelectorAll('.day-card-modern').forEach(el => el.classList.remove('active'));
+      
+      // Populate data
       const data = rundownData[day];
       if (!data) return;
-
-      document.getElementById('modalDayTitle').innerText = data.title;
-      document.getElementById('modalDayDate').innerText = data.date;
-      document.getElementById('modalDresscode').innerHTML = data.dresscode;
-
-      const container = document.getElementById('modalRundownContent');
+      
+      document.getElementById('rundownDetailTitle').innerText = data.title;
+      document.getElementById('rundownDetailDate').innerText = data.date;
+      
       container.innerHTML = '';
-
       data.items.forEach(item => {
         const div = document.createElement('div');
-        div.className = 'rundown-item';
+        div.className = 'rundown-item-modern';
         div.innerHTML = `
-          <div class="rundown-time">${item.time}</div>
-          <div class="rundown-title">${item.title}</div>
-          <div class="rundown-desc">${item.desc}</div>
+          <div class="rundown-modern-time">${item.time}</div>
+          <div class="rundown-modern-info">
+            <div class="rundown-modern-title">${item.title}</div>
+            ${item.desc ? `<div class="rundown-modern-desc">${item.desc}</div>` : ''}
+          </div>
         `;
         container.appendChild(div);
       });
 
-      document.getElementById('rundownModal').classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('rundownModal').classList.remove('active');
-    }
-
-    function closeModalOnOverlay(e) {
-      if (e.target.id === 'rundownModal') {
-        closeModal();
-      }
+      // Move panel below the clicked element
+      // For flex/grid, we can just display it and use CSS order, OR we can append it directly in the DOM.
+      // Appending in DOM ensures it breaks the flex row exactly where we want.
+      element.parentNode.insertBefore(detailPanel, element.nextSibling);
+      
+      detailPanel.style.display = 'block';
+      element.classList.add('active');
+      activeRundownDay = day;
+      
+      // Scroll to detail slightly
+      setTimeout(() => {
+        detailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
     }/* -----------------------------------------
        SLIDE DECK NAVIGATION & COUNTDOWN LOGIC
     ----------------------------------------- */
     const deepDiveData = [
-      {title:'GKM 1 — Stream Arjuno', judges:'Sri Prahyoto · Muhammad Amri', columns:['Waktu','Gugus','Unit'], rows:[['08:00–08:25','MINOVA','GEOMIN'],['08:25–08:50','BIG TUBE','GEOMIN'],['08:50–09:15','SI-EMAS','GEOMIN'],['09:15–09:40','LRT','LM'],['09:40–10:05','MBAH LOGAM','LM'],['10:05–10:30','HSGE','LM'],['10:30–10:55','FRONT','UBPE'],['10:55–11:20','MILL','UBPE'],['11:20–11:45','RUHAY','UBPE'],['11:45–13:00','BREAK','—'],['13:00–13:25','KAMIT','KALBAR'],['13:25–13:50','BOBUBE','KALBAR'],['13:50–14:15','GREEN ENERGY TRANSFORMATION 1.0','KALBAR'],['14:15–14:40','OPTIMA','ICA'],['14:40–15:05','KING','ICA'],['15:05–15:30','STRATOR','ICA'],['15:30–15:55','PERMITRON','KP'],['15:55–16:20','GAIN','KP']]},
-      {title:'GKM 2 — Stream Welirang', judges:'Dodi Pramadi · Evi Sabrina', columns:['WIB','WIT/WITA','Zona · Gugus · Unit'], rows:[['08:00–08:25','10:00–10:25','WIT · GEOTECH GACOR · GAG'],['08:25–08:50','10:25–10:50','WIT · TOKEK BELANG · GAG'],['08:50–09:15','10:50–11:15','WIT · BNPB · GAG'],['09:15–09:40','11:15–11:40','WIT · D’COLLABS · NKA'],['09:40–10:05','11:40–12:05','WIT · SOLLUS · SDA'],['10:05–10:30','12:05–12:30','WIT · OBSIDIA TANK · SDA'],['10:30–10:55','12:30–12:55','WIT · AMIRA · MALUT'],['10:55–11:20','12:55–13:20','WIT · TORANG JUARA · MALUT'],['11:20–11:45','13:20–13:45','WIT · BEJO · MALUT'],['11:45–13:00','12:45–14:00','WITA · BREAK · —'],['13:00–13:25','14:00–14:25','WITA · GHOST BUSTER · KOLAKA'],['13:25–13:50','14:25–14:50','WITA · GACOAN · KOLAKA'],['13:50–14:15','14:50–15:15','WITA · REFRAC-LW · KOLAKA'],['14:15–14:40','15:15–15:40','WITA · EDGE ANOA · KONUT'],['14:40–15:05','15:40–16:05','WITA · PIT MASTER · KONUT'],['15:05–15:30','16:05–16:30','WITA · SATU DATA · KONUT']]},
-      {title:'SS 1 — Stream Bromo', judges:'Susan Kustiawan · Dilah Hokosuja Hutabalian', columns:['Mulai','Selesai','Gugus · Unit'], rows:[['08:00','08:20','ALIEN GAMMA · GEOMIN'],['08:20','08:40','THE RECONCILIATOR · GEOMIN'],['08:40','09:00','SILA · GEOMIN'],['09:00','09:20','DIESMAKING · LM'],['09:20','09:40','BUKAN KARYAWAN BIASA · LM'],['09:40','10:00','KUDETA · LM'],['10:00','10:20','SUNDUNG · UBPE'],['10:20','10:40','BUBULAK · UBPE'],['10:40','11:00','ZONA · UBPE'],['11:00','11:20','HELPLESS · KALBAR'],['11:20','11:40','RIBAK SUDE · KALBAR'],['11:40','12:00','SIAP · KALBAR'],['12:00','13:00','BREAK · —'],['13:00','13:20','SUPER JET MILL · ICA'],['13:20','13:40','SAFETY CAN BE FUN · ICA'],['13:40','14:00','STRATEJIK 2 · ICA'],['14:00','14:20','INTERNAL AUDIT ULTIMATE · KP'],['14:20','14:40','ULTIMA · KP'],['14:40','15:00','MIND SAFE · KP']]},
-      {title:'SS 2 — Stream Semeru', judges:'Eko Pudji Putranto · Yudhistira Sudesno', columns:['WIB','WIT/WITA','Zona · Gugus · Unit'], rows:[['08:00–08:20','10:00–10:20','WIT · PINANG COKLAT · GAG'],['08:20–08:40','10:20–10:40','WIT · KOMIKA · GAG'],['08:40–09:00','10:40–11:00','WIT · HOKI · GAG'],['09:00–09:20','11:00–11:20','WIT · SEPIA · NKA'],['09:20–09:40','11:20–11:40','WIT · ORE-GANIZED · NKA'],['09:40–10:00','11:40–12:00','WIT · FLYING DUSTMAN · NKA'],['10:00–10:20','12:00–12:20','WIT · WAYA GANI GUNA · SDA'],['10:20–10:40','12:20–12:40','WIT · DIGINOVA · SDA'],['10:40–11:00','12:40–13:00','WIT · PALUGADA · SDA'],['11:00–11:20','13:00–13:20','WIT · COWCOASTE REBORN · MALUT'],['11:20–11:40','13:20–13:40','WIT · ARMOR · MALUT'],['11:40–12:00','13:40–14:00','WIT · D’GEOL · MALUT'],['12:00–13:00','—','BREAK · —'],['13:00–13:20','14:00–14:20','WITA · KOMPARATOR · KOLAKA'],['13:20–13:40','14:20–14:40','WITA · STATERMAN · KOLAKA'],['13:40–14:00','14:40–15:00','WITA · CAPSULE · KOLAKA'],['14:00–14:20','15:00–15:20','WITA · GREEN ENVIRO · KONUT'],['14:20–14:40','15:20–15:40','WITA · ROGER · KONUT'],['14:40–15:00','15:40–16:00','WITA · LAI LAIKA · KONUT']]}
+      {title:'GKM 1 â€” Stream Arjuno', judges:'Sri Prahyoto Â· Muhammad Amri', columns:['Waktu','Gugus','Unit'], rows:[['08:00â€“08:25','MINOVA','GEOMIN'],['08:25â€“08:50','BIG TUBE','GEOMIN'],['08:50â€“09:15','SI-EMAS','GEOMIN'],['09:15â€“09:40','LRT','LM'],['09:40â€“10:05','MBAH LOGAM','LM'],['10:05â€“10:30','HSGE','LM'],['10:30â€“10:55','FRONT','UBPE'],['10:55â€“11:20','MILL','UBPE'],['11:20â€“11:45','RUHAY','UBPE'],['11:45â€“13:00','BREAK','â€”'],['13:00â€“13:25','KAMIT','KALBAR'],['13:25â€“13:50','BOBUBE','KALBAR'],['13:50â€“14:15','GREEN ENERGY TRANSFORMATION 1.0','KALBAR'],['14:15â€“14:40','OPTIMA','ICA'],['14:40â€“15:05','KING','ICA'],['15:05â€“15:30','STRATOR','ICA'],['15:30â€“15:55','PERMITRON','KP'],['15:55â€“16:20','GAIN','KP']]},
+      {title:'GKM 2 â€” Stream Welirang', judges:'Dodi Pramadi Â· Evi Sabrina', columns:['WIB','WIT/WITA','Zona Â· Gugus Â· Unit'], rows:[['08:00â€“08:25','10:00â€“10:25','WIT Â· GEOTECH GACOR Â· GAG'],['08:25â€“08:50','10:25â€“10:50','WIT Â· TOKEK BELANG Â· GAG'],['08:50â€“09:15','10:50â€“11:15','WIT Â· BNPB Â· GAG'],['09:15â€“09:40','11:15â€“11:40','WIT Â· Dâ€™COLLABS Â· NKA'],['09:40â€“10:05','11:40â€“12:05','WIT Â· SOLLUS Â· SDA'],['10:05â€“10:30','12:05â€“12:30','WIT Â· OBSIDIA TANK Â· SDA'],['10:30â€“10:55','12:30â€“12:55','WIT Â· AMIRA Â· MALUT'],['10:55â€“11:20','12:55â€“13:20','WIT Â· TORANG JUARA Â· MALUT'],['11:20â€“11:45','13:20â€“13:45','WIT Â· BEJO Â· MALUT'],['11:45â€“13:00','12:45â€“14:00','WITA Â· BREAK Â· â€”'],['13:00â€“13:25','14:00â€“14:25','WITA Â· GHOST BUSTER Â· KOLAKA'],['13:25â€“13:50','14:25â€“14:50','WITA Â· GACOAN Â· KOLAKA'],['13:50â€“14:15','14:50â€“15:15','WITA Â· REFRAC-LW Â· KOLAKA'],['14:15â€“14:40','15:15â€“15:40','WITA Â· EDGE ANOA Â· KONUT'],['14:40â€“15:05','15:40â€“16:05','WITA Â· PIT MASTER Â· KONUT'],['15:05â€“15:30','16:05â€“16:30','WITA Â· SATU DATA Â· KONUT']]},
+      {title:'SS 1 â€” Stream Bromo', judges:'Susan Kustiawan Â· Dilah Hokosuja Hutabalian', columns:['Mulai','Selesai','Gugus Â· Unit'], rows:[['08:00','08:20','ALIEN GAMMA Â· GEOMIN'],['08:20','08:40','THE RECONCILIATOR Â· GEOMIN'],['08:40','09:00','SILA Â· GEOMIN'],['09:00','09:20','DIESMAKING Â· LM'],['09:20','09:40','BUKAN KARYAWAN BIASA Â· LM'],['09:40','10:00','KUDETA Â· LM'],['10:00','10:20','SUNDUNG Â· UBPE'],['10:20','10:40','BUBULAK Â· UBPE'],['10:40','11:00','ZONA Â· UBPE'],['11:00','11:20','HELPLESS Â· KALBAR'],['11:20','11:40','RIBAK SUDE Â· KALBAR'],['11:40','12:00','SIAP Â· KALBAR'],['12:00','13:00','BREAK Â· â€”'],['13:00','13:20','SUPER JET MILL Â· ICA'],['13:20','13:40','SAFETY CAN BE FUN Â· ICA'],['13:40','14:00','STRATEJIK 2 Â· ICA'],['14:00','14:20','INTERNAL AUDIT ULTIMATE Â· KP'],['14:20','14:40','ULTIMA Â· KP'],['14:40','15:00','MIND SAFE Â· KP']]},
+      {title:'SS 2 â€” Stream Semeru', judges:'Eko Pudji Putranto Â· Yudhistira Sudesno', columns:['WIB','WIT/WITA','Zona Â· Gugus Â· Unit'], rows:[['08:00â€“08:20','10:00â€“10:20','WIT Â· PINANG COKLAT Â· GAG'],['08:20â€“08:40','10:20â€“10:40','WIT Â· KOMIKA Â· GAG'],['08:40â€“09:00','10:40â€“11:00','WIT Â· HOKI Â· GAG'],['09:00â€“09:20','11:00â€“11:20','WIT Â· SEPIA Â· NKA'],['09:20â€“09:40','11:20â€“11:40','WIT Â· ORE-GANIZED Â· NKA'],['09:40â€“10:00','11:40â€“12:00','WIT Â· FLYING DUSTMAN Â· NKA'],['10:00â€“10:20','12:00â€“12:20','WIT Â· WAYA GANI GUNA Â· SDA'],['10:20â€“10:40','12:20â€“12:40','WIT Â· DIGINOVA Â· SDA'],['10:40â€“11:00','12:40â€“13:00','WIT Â· PALUGADA Â· SDA'],['11:00â€“11:20','13:00â€“13:20','WIT Â· COWCOASTE REBORN Â· MALUT'],['11:20â€“11:40','13:20â€“13:40','WIT Â· ARMOR Â· MALUT'],['11:40â€“12:00','13:40â€“14:00','WIT Â· Dâ€™GEOL Â· MALUT'],['12:00â€“13:00','â€”','BREAK Â· â€”'],['13:00â€“13:20','14:00â€“14:20','WITA Â· KOMPARATOR Â· KOLAKA'],['13:20â€“13:40','14:20â€“14:40','WITA Â· STATERMAN Â· KOLAKA'],['13:40â€“14:00','14:40â€“15:00','WITA Â· CAPSULE Â· KOLAKA'],['14:00â€“14:20','15:00â€“15:20','WITA Â· GREEN ENVIRO Â· KONUT'],['14:20â€“14:40','15:20â€“15:40','WITA Â· ROGER Â· KONUT'],['14:40â€“15:00','15:40â€“16:00','WITA Â· LAI LAIKA Â· KONUT']]}
     ];
         function renderJadwalPresentasiTables() {
       const root = document.getElementById('jadwalPresentasiTables'); if (!root) return; 
-      root.style.gridTemplateColumns = '1fr'; root.style.maxWidth = '1000px'; root.style.margin = '0 auto';
+      
       root.innerHTML = Object.values(presentationData).map((data, idx) => {
         const num = String(idx + 1).padStart(2, '0');
         const isRightAligned = idx % 2 !== 0;
@@ -1641,7 +1785,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <svg class="dd-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </div>
           <div class="dd-table-wrap">
-            <img src="${data.image}" alt="${data.title}">
+            <img src="${data.image}" alt="${data.title}" loading="lazy">
           </div>
         </article>`;
       }).join('');
@@ -1652,7 +1796,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       const images = ['deepdive.gkm1.png', 'deepdive.gkm2.png', 'deepdive.ss1.png', 'deepdive.ss2.png'];
       root.innerHTML = deepDiveData.map((stream, idx) => {
         const num = String(idx + 1).padStart(2, '0');
-        const titleParts = stream.title.split(' — ');
+        const titleParts = stream.title.split(' â€” ');
         const type = titleParts[0];
         const name = titleParts[1] ? titleParts[1] : '';
         const isRightAligned = idx % 2 !== 0;
@@ -1669,7 +1813,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
             <svg class="dd-chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </div>
           <div class="dd-table-wrap">
-            <img src="${imgSrc}" alt="${stream.title}">
+            <img src="${imgSrc}" alt="${stream.title}" loading="lazy">
           </div>
         </article>`;
       }).join('');
@@ -1689,6 +1833,15 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         });
       }
 
+      // Hidden slides are not intersectable while inactive. Reveal their content
+      // as soon as they become active so no heading/card remains transparent.
+      function revealActiveSlide(container) {
+        container.querySelectorAll('.animate-on-scroll').forEach((el) => {
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        });
+      }
+
       const slides = document.querySelectorAll('.slide');
       const dots = document.querySelectorAll('.dot');
       const prevBtn = document.getElementById('prevBtn');
@@ -1701,13 +1854,6 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       document.querySelectorAll('.kh-item-toggle').forEach((toggle) => {
         toggle.addEventListener('click', () => {
           const item = toggle.closest('.kh-item');
-          if (!item) return;
-          document.querySelectorAll('#highlights .kh-item.is-open').forEach((openItem) => {
-            if (openItem !== item) {
-              openItem.classList.remove('is-open');
-              openItem.querySelector('.kh-item-toggle')?.setAttribute('aria-expanded', 'false');
-            }
-          });
           const isOpen = item.classList.toggle('is-open');
           toggle.setAttribute('aria-expanded', String(isOpen));
         });
@@ -1726,8 +1872,38 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     
       observeAnimations(slides[0]);
 
+      function resetExpandableState() {
+        // Reset all expandable/detail components when a slide is left.
+        document.querySelectorAll('.kh-item.is-open').forEach((item) => {
+          item.classList.remove('is-open');
+          item.querySelector('.kh-item-toggle')?.setAttribute('aria-expanded', 'false');
+        });
+        document.querySelectorAll('#penghargaan .award-inline-panel').forEach((panel) => {
+          panel.hidden = true;
+          panel.closest('.an-award-card, .an-special-card')?.classList.remove('is-open');
+        });
+        document.querySelectorAll('#deepDiveTables .dd-ticket.open, #jadwalPresentasiTables .dd-ticket.open, #tentang .dd-ticket.open').forEach((ticket) => ticket.classList.remove('open'));
+        document.querySelectorAll('.day-card-modern.active').forEach((card) => card.classList.remove('active'));
+        const rundownPanel = document.getElementById('rundownDetailPanel');
+        const daysGrid = document.getElementById('daysGridContainer');
+        if (rundownPanel) {
+          rundownPanel.style.display = 'none';
+          if (daysGrid && rundownPanel.parentElement !== daysGrid) daysGrid.appendChild(rundownPanel);
+        }
+        activeRundownDay = null;
+        document.querySelectorAll('#bestmindContent.active').forEach((content) => content.classList.remove('active'));
+        document.querySelectorAll('[onclick*="toggleBestmindAccordion"].active').forEach((button) => button.classList.remove('active'));
+        const loContacts = document.getElementById('loContacts');
+        if (loContacts) loContacts.hidden = true;
+        document.querySelector('.lo-toggle-button')?.setAttribute('aria-expanded', 'false');
+        document.querySelector('.home-schedule-menu')?.classList.remove('active');
+        document.querySelector('.home-schedule-toggle')?.setAttribute('aria-expanded', 'false');
+        document.getElementById('menuDropdown')?.classList.remove('active');
+      }
       function updateSlide(index) {
         if (index < 0 || index >= slides.length) return;
+
+        resetExpandableState();
 
         slides[currentSlide].classList.remove('active');
         if(dots.length > 0 && dots[currentSlide]) dots[currentSlide].classList.remove('active');
@@ -1743,6 +1919,7 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         }
 
         observeAnimations(slides[currentSlide]);
+        revealActiveSlide(slides[currentSlide]);
 
         const activeWrapper = slides[currentSlide].querySelector('.slide-scroll-wrapper');
         if (activeWrapper) activeWrapper.scrollTop = 0;
@@ -1897,12 +2074,52 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
         const detail = document.createElement('div');
         detail.className = 'award-inline-panel';
         detail.hidden = true;
-        detail.innerHTML = renderAwardGuide(awardGuideSections['11'] || 'Penghargaan engagement untuk kekompakan, kreativitas, autentisitas, dan semangat tim.');
+        detail.innerHTML = renderAwardGuide(awardGuideSections['11'] || teamSpiritGuide);
         detail.addEventListener('click', (event) => event.stopPropagation());
         specialCard.appendChild(detail);
       }
     }
-    const awardGuideSections = {};
+    const teamSpiritGuide = `**11. BEST TEAM SPIRIT**
+
+**Definisi**
+
+Penghargaan kepada tim yang paling kompak, kreatif, autentik, dan bersemangat dalam menampilkan identitas tim selama rangkaian KMA XXV.
+
+Kategori ini merupakan penghargaan engagement dan tidak menilai substansi teknis inovasi.
+
+**Objek yang Dinilai**
+
+- Kekompakan tim, Kostum atau atribut atau yel-yel.
+- Foto tim autentik.
+
+**Indikator Utama**
+
+- Seluruh atau sebagian besar anggota berpartisipasi aktif.
+- Tim menunjukkan kekompakan dalam penampilan.
+- Kostum atau atribut memiliki konsep yang jelas.
+- Foto menampilkan anggota tim secara autentik.
+- Penampilan tetap memperhatikan keselamatan dan kepantasan.
+
+**Bukti yang Diperhatikan**
+
+- Kostum dan atribut atau yel-yel.
+- Dokumentasi foto.
+- Keterlibatan anggota selama acara.
+
+**Tidak Layak Menjadi Pemenang Apabila**
+
+- Foto merupakan hasil full generatif AI.
+- Kostum mengganggu keselamatan atau presentasi.
+- Konsep tidak pantas atau tidak sesuai nilai perusahaan.
+- Tim tidak menunjukkan kekompakan.
+- Foto tidak merepresentasikan kondisi nyata tim.
+
+**Batas Pembeda dengan Kategori Lain**
+
+Kategori ini tidak menilai kualitas inovasi, makalah, presenter, atau media visual presentasi.
+
+Best Team Spirit fokus pada kekompakan, kreativitas identitas (foto), autentisitas, dan semangat tim.\n\n**Catatan Khusus**\n\nJangan memberikan nilai tinggi hanya karena kostum paling mahal atau paling ramai. Prioritaskan tim yang kreatif, kompak, autentik, relevan, dan mampu menghadirkan energi positif dalam acara.`;
+    const awardGuideSections = { '11': teamSpiritGuide };
     const awardGuideHeader = /\*\*\[(\d+)\.\s*([^\]]+)\]\{\.mark\}\*\*/g;
     let awardGuideMatch;
     let awardGuidePrevious = null;
@@ -1913,6 +2130,8 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       awardGuidePrevious = { number: awardGuideMatch[1], end: awardGuideHeader.lastIndex };
     }
     if (awardGuidePrevious) awardGuideSections[awardGuidePrevious.number] = awardGuideMarkdown.slice(awardGuidePrevious.end).trim();
+    // Keep the complete approved Best Team Spirit material even if an older asset exists.
+    awardGuideSections['11'] = teamSpiritGuide;
 
     buildAwardCardPresentation();
 
@@ -1985,6 +2204,9 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
       card.classList.toggle('is-open', isOpen);
       if (isOpen) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
+    window.toggleAwardInline = toggleAwardInline;
+    document.querySelectorAll('#penghargaan .an-award-card, #penghargaan .an-special-card').forEach((card) => { card.style.pointerEvents = 'auto'; });
+
     function toggleThemeSong(e) {
       if (e) e.stopPropagation();
       setJinglePlayback(!isPlaying);
@@ -1996,3 +2218,6 @@ $awardCardJson = json_encode($awardCardMarkdown, JSON_UNESCAPED_UNICODE | JSON_U
     
 </body>
 </html>
+
+
+

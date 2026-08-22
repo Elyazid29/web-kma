@@ -1252,9 +1252,9 @@ h4 {
 }
 
 .clist-icon.clist-wa {
-  background-color: #e7fceb;
+  background-color: #f0fdf4;
   border-color: #bbf7d0;
-  color: #25d366;
+  color: #15803d;
 }
 
 .clist-info {
@@ -2271,7 +2271,7 @@ body.presentation-mode {
 .lo-contact-intro { margin:0 0 16px; color:#64748b; font-size:.9rem; }
 .lo-contact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
 .lo-contact-grid a { display:flex; flex-direction:column; gap:3px; padding:13px 14px; border:1px solid #dbe4e7; border-radius:11px; text-decoration:none; background:#f8fafc; transition:transform .2s,box-shadow .2s,border-color .2s; }
-.lo-contact-grid a:hover { transform:translateY(-2px); border-color:#25d366; box-shadow:0 5px 14px rgba(37,211,102,.14); }
+.lo-contact-grid a:hover { transform:translateY(-2px); border-color:#0f766e; box-shadow:0 5px 14px rgba(15,118,110,.14); }
 .lo-contact-grid strong { color:#0f172a; font-size:.9rem; }
 .lo-contact-grid span { color:#64748b; font-size:.78rem; }
 .lo-contact-grid b { color:#128c7e; font-size:.75rem; }
@@ -2393,7 +2393,7 @@ body.presentation-mode {
   }
 }@media (max-width:700px) { .an-brand-mark { flex-basis:92px; } .an-brand-mark img:first-child { width:82px; height:56px; } .an-brand-mark img:last-child { width:62px; height:88px; } }.theme-song-points { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
 .theme-song-points span { padding:7px 10px; border-radius:999px; background:#f0fdfa; border:1px solid #99f6e4; color:#0f766e; font-size:.78rem; font-weight:700; }
-.lo-contact-grid b { display:inline-block; align-self:flex-start; padding:5px 9px; border-radius:6px; background:#dcfce7; color:#128c7e; font-size:.72rem; }.lo-toggle-button { width:100%; text-align:left; font:inherit; cursor:pointer; }
+.lo-contact-grid b { display:inline-block; align-self:flex-start; padding:5px 9px; border-radius:6px; background:#f0f9f7; color:#0f766e; font-size:.72rem; }.lo-toggle-button { width:100%; text-align:left; font:inherit; cursor:pointer; }
 .lo-toggle-button .clist-arrow { margin-left:auto; font-size:1.4rem; color:#128c7e; }
 .lo-contact-section[hidden] { display:none; }
 /* Final navigation and hero refinements */
@@ -2529,12 +2529,35 @@ body.presentation-mode {
   mix-blend-mode: multiply;
   filter: drop-shadow(0 20px 30px rgba(15, 23, 42, .22));
 }
+
 #penghargaan .an-awards-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 24px !important;
 }
+
+#penghargaan .compact-awards-grid {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#penghargaan .an-award-img-wrap {
+  aspect-ratio: 4/3;
+  width: 100%;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#penghargaan .an-award-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 #penghargaan .an-award-card {
-  min-height: 300px;
+  min-height: 260px;
   border: 1px solid #dbe4e7 !important;
   border-top: 5px solid #006d64 !important;
   border-radius: 20px !important;
@@ -2547,22 +2570,114 @@ body.presentation-mode {
 #penghargaan .an-award-card img {
   border-radius: 16px 16px 0 0;
 }
-/* Profile photos: clip the image and its wrapper so rounded corners are guaranteed. */
+/* Profile Layout Override for Juri and Panitia */
+#juri .ed-profile,
+#panitia .ed-profile {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 40px 40px;
+  margin-bottom: 60px;
+}
+
+/* SINGLE CARD BACKGROUND SPANNING ENTIRE ROW */
+#juri .ed-profile::before,
+#panitia .ed-profile::before {
+  content: '';
+  position: absolute;
+  top: 30%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(145deg, #ffffff, #f4f7fb);
+  border-radius: 24px;
+  z-index: -1;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+/* Hide original background cards completely */
+#juri .ed-profile-img-wrap::before,
+#panitia .ed-profile-img-wrap::before,
+#juri .ed-profile:nth-child(even) .ed-profile-img-wrap::before,
+#panitia .ed-profile:nth-child(even) .ed-profile-img-wrap::before {
+  display: none !important;
+}
+
 #juri .ed-profile-img-wrap,
 #panitia .ed-profile-img-wrap {
   overflow: visible;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  isolation: auto;
+  position: relative;
+  z-index: 2;
 }
+
+/* Clear card styles from image, let it be just an image */
 #juri .ed-profile-img,
 #panitia .ed-profile-img {
-  border-radius: 28px !important;
-  clip-path: inset(0 round 28px);
-  overflow: hidden;
-  background: #f8fafc;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, .10);
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  position: relative;
+  z-index: 2;
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.08));
+  transition: transform 0.3s ease;
+}
+
+#juri .ed-profile-img:hover,
+#panitia .ed-profile-img:hover {
+  transform: translateY(-8px);
+}
+
+#juri .ed-profile-info,
+#panitia .ed-profile-info {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 20px;
+}
+
+/* Mobile & Tablet layout - Stack vertical inside ONE card */
+@media (max-width: 900px) {
+  #juri .ed-profile,
+  #panitia .ed-profile {
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center !important;
+    padding: 0 20px 40px; 
+    gap: 20px;
+  }
+  #juri .ed-profile:nth-child(even),
+  #panitia .ed-profile:nth-child(even) {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  #juri .ed-profile-img,
+  #panitia .ed-profile-img {
+    max-height: 350px;
+  }
+  #juri .ed-profile::before,
+  #panitia .ed-profile::before {
+    top: 25%;
+  }
+}
+
+@media (max-width: 600px) {
+  #juri .ed-profile::before,
+  #panitia .ed-profile::before {
+    top: 20%;
+    border-radius: 20px;
+  }
+  #juri .ed-profile-img,
+  #panitia .ed-profile-img {
+    max-height: 280px;
+  }
 }
 @media (max-width: 900px) {
   #penghargaan .an-awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
@@ -3238,7 +3353,7 @@ body.presentation-mode {
 
 #presentasi .event-pass--presentasi,
 #jadwalPresentasiTables .event-pass--presentasi {
-  border-top-color: #006d64 !important;
+  border-top: 4px solid #006d64 !important;
 }
 #presentasi .event-pass--presentasi .event-pass-index,
 #jadwalPresentasiTables .event-pass--presentasi .event-pass-index {
@@ -3381,6 +3496,39 @@ body.presentation-mode {
 #penghargaan .an-award-card.is-open { border-color: #8bcfc3 !important; box-shadow: 0 18px 36px rgba(15, 118, 110, .13) !important; }
 #penghargaan .an-special-card { flex-wrap: wrap; cursor: pointer; }
 #penghargaan .an-special-card .award-inline-panel { flex-basis: 100%; }
+/* Best Team Spirit detail stays embedded in the themed engagement section. */
+#penghargaan .an-special-card .award-inline-panel {
+  margin-top: 16px;
+  padding: 18px 0 0 !important;
+  border-top: 1px solid rgba(255,255,255,.22);
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#penghargaan .an-special-card .award-guide-content {
+  color: rgba(255,255,255,.86);
+  font-size: .94rem;
+  line-height: 1.68;
+  text-align: left;
+}
+#penghargaan .an-special-card .award-guide-content h3,
+#penghargaan .an-special-card .award-guide-content h4 {
+  color: #fff;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+#penghargaan .an-special-card .award-guide-content h4 { margin-top: 20px; }
+#penghargaan .an-special-card .award-guide-content p { margin: 0 0 12px; }
+#penghargaan .an-special-card .award-guide-content ul,
+#penghargaan .an-special-card .award-guide-content ol { margin: 0 0 14px; padding-left: 1.25rem; }
+#penghargaan .an-special-card .award-guide-content li { margin-bottom: 6px; }
+#penghargaan .an-special-card .award-guide-content p,
+#penghargaan .an-special-card .award-guide-content li,
+#penghargaan .an-special-card .award-guide-content strong,
+#penghargaan .an-special-card .award-guide-content em { color: #fff !important; }
+@media (max-width: 700px) {
+  #penghargaan .an-special-card .award-inline-panel { padding-top: 14px !important; }
+  #penghargaan .an-special-card .award-guide-content { font-size: .88rem; line-height: 1.6; }
+}
 
 #penghargaan .an-hero-mascot { display: none !important; }
 @media (max-width: 700px) {
@@ -3406,9 +3554,9 @@ body.presentation-mode {
 
 #kontak .contact-event-mark {
   position: relative;
-  width: min(520px, 100%);
-  height: 112px;
-  margin: 0 auto 20px;
+  width: min(720px, 100%);
+  height: 180px;
+  margin: 0 auto 30px;
   overflow: hidden;
   border-radius: 20px;
   background: #0b3d38;
@@ -3836,7 +3984,7 @@ img, svg, video, iframe { max-width: 100%; }
 /* Keep desktop alternating cards unchanged; on mobile right-hand compositions stay right aligned but fit. */
 @media (max-width: 700px) {
   .header { height: auto !important; min-height: 58px; }
-  .header-inner { width: 100%; flex-direction: column; align-items: stretch !important; gap: 8px; padding: 10px 12px !important; }
+  .header-inner { width: 100%; flex-direction: row; flex-wrap: nowrap; align-items: center !important; gap: 6px; padding: 8px 10px !important; }
   .logo { width: 100%; justify-content: flex-start; min-width: 0; gap: 8px; }
   .logo-img { width: 38px !important; height: 38px !important; flex: 0 0 38px; }
   .logo-text { min-width: 0; font-size: .86rem !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -3874,13 +4022,6 @@ img, svg, video, iframe { max-width: 100%; }
   .slide-scroll-wrapper { min-height: 0; padding-top: 8px !important; }
 }
 /* Excellent Awards point 3: balanced desktop media, still large and proportional. */
-@media (min-width: 901px) {
-  #penghargaan .an-awards-grid .an-award-card:nth-child(3) .award-card-icon { flex-basis: 38% !important; min-height: 260px; }
-  #penghargaan .an-awards-grid .an-award-card:nth-child(3) .award-card-icon img { max-width: 92%; max-height: 280px; margin: auto; object-fit: contain !important; }
-}
-@media (max-width: 900px) {
-  #penghargaan .an-awards-grid .an-award-card:nth-child(3) .award-card-icon img { max-width: 100%; max-height: 260px; object-fit: contain !important; }
-}
 /* Activity point 4 uses the asset's intrinsic ratio instead of a square background frame. */
 .day-four .day-card-img-header { height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; padding: 0 !important; background: #f8fafc !important; }
 .day-four .day-card-image-element { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; object-position: center; }
@@ -3906,14 +4047,716 @@ img, svg, video, iframe { max-width: 100%; }
 /* All activity cards use intrinsic image height; no crop, square forcing, or stretch. */
 .day-card-img-header { height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; background: #f8fafc !important; padding: 0 !important; }
 .day-card-img-header .day-card-image-element { display: block; width: 100%; height: auto; max-width: 100%; object-fit: contain; object-position: center; }
-/* REVISION ROOT CAUSE FLEX DECK */
-/* Header remains in normal flow; the deck fills the actual remaining viewport instead of assuming 64px. */
-html, body.presentation-mode { height: 100dvh !important; }
-body.presentation-mode { min-height: 0; }
-.slide-deck { height: auto !important; min-height: 0 !important; flex: 1 1 auto; }
-.slide { min-height: 0; }
+/* FIXED FLEX DECK & VIEWPORT DISPLAY */
+html, body.presentation-mode { 
+  height: 100vh !important; 
+  overflow: hidden !important; 
+}
+body.presentation-mode { 
+  display: flex !important; 
+  flex-direction: column !important; 
+  min-height: 100vh !important;
+}
+.header {
+  flex: 0 0 auto !important;
+  z-index: 1000 !important;
+}
+.slide-deck { 
+  flex: 1 1 auto !important; 
+  position: relative !important; 
+  width: 100% !important; 
+  height: calc(100vh - 68px) !important; 
+  overflow: visible !important; 
+}
+.slide { 
+  position: absolute !important; 
+  inset: 0 !important; 
+  width: 100% !important; 
+  height: 100% !important; 
+}
+.slide-scroll-wrapper { 
+  width: 100% !important; 
+  height: 100% !important; 
+  overflow-y: auto !important; 
+  overflow-x: hidden !important; 
+  padding-top: 0 !important;
+  scroll-padding-top: 0 !important;
+}
 /* Balanced award media: reduce empty backdrop while keeping the source ratio intact. */
 #penghargaan .award-card-horizontal .award-card-icon { min-height: 210px; height: 210px !important; padding: 8px !important; }
 #penghargaan .award-card-horizontal .award-card-icon img { width: 100%; height: 100%; max-height: none; object-fit: contain !important; object-position: center; }
 @media (min-width: 901px) { #penghargaan .award-card-horizontal .award-card-icon { min-height: 230px; height: 230px !important; } }
 @media (max-width: 700px) { #penghargaan .award-card-horizontal .award-card-icon { min-height: 180px; height: 180px !important; } }
+/* HOMEPAGE SCHEDULE DROPDOWN - COMPACT */
+.home-schedule-menu {
+  padding: 8px !important;
+  gap: 4px !important;
+  min-width: 200px !important;
+}
+.home-schedule-menu a {
+  padding: 8px 12px !important;
+  font-size: 0.85rem !important;
+}
+
+/* Minimal homepage schedule picker: compact outline choices, especially on mobile. */
+.hero .home-schedule-options {
+  width: max-content;
+  min-width: 0;
+  max-width: min(270px, calc(100vw - 24px));
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 10px;
+  background: rgba(9, 38, 42, .92);
+  box-shadow: 0 10px 22px rgba(0,0,0,.16);
+}
+.hero .home-schedule-options a {
+  display: block;
+  margin: 2px 0;
+  padding: 7px 10px !important;
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 7px;
+  color: #fff;
+  font-size: .74rem !important;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.hero .home-schedule-options a:hover,
+.hero .home-schedule-options a:focus-visible {
+  border-color: rgba(255,255,255,.8);
+  background: transparent;
+  color: #fff;
+}
+@media (max-width: 700px) {
+  .hero .home-schedule-menu { width: auto; max-width: 100%; }
+  .hero .home-schedule-toggle { width: auto !important; min-width: 0; padding: 9px 13px !important; }
+  .hero .home-schedule-options {
+    left: 0;
+    right: auto;
+    max-width: calc(100vw - 24px);
+    transform: translateY(-8px);
+  }
+  .hero .home-schedule-menu.active .home-schedule-options { transform: translateY(0); }
+  .hero .home-schedule-options a { white-space: normal; }
+}
+
+/* EMERGENCY CONTACTS GRID */
+.em-contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.em-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #fca5a5;
+  border-left: 5px solid #dc2626;
+  padding: 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.em-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.15);
+}
+.em-icon {
+  width: 48px;
+  height: 48px;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.em-info {
+  display: flex;
+  flex-direction: column;
+}
+.em-info strong {
+  color: #0f172a;
+  font-size: 1.05rem;
+  margin-bottom: 2px;
+}
+.em-info span {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+.em-info b {
+  color: #dc2626;
+  font-size: 0.95rem;
+}
+.em-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  margin-top: 16px;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+.em-download-btn:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .em-contacts-grid { grid-template-columns: 1fr; }
+}
+
+/* RANGKAIAN KEGIATAN MODERN (EXPANDABLE) */
+.days-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.day-card-modern {
+  background: #ffffff;
+  border: 1px solid #dbe4e7;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.day-card-modern:hover {
+  border-color: #006d64;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 109, 100, 0.1);
+}
+.day-card-modern.active {
+  border-color: #006d64;
+  background: #f0f9f7;
+  box-shadow: 0 10px 25px rgba(0, 109, 100, 0.1);
+}
+.day-modern-img {
+  height: 140px;
+  width: 100%;
+}
+.day-modern-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.day-modern-content {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.day-modern-content h3 {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+.day-modern-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #006d64;
+  font-weight: 600;
+}
+.day-modern-indicator {
+  margin-top: 12px;
+  color: #94a3b8;
+  transition: transform 0.3s;
+}
+.day-card-modern.active .day-modern-indicator {
+  color: #006d64;
+  transform: rotate(180deg);
+}
+
+.rundown-detail-panel {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  border: 1px solid #006d64;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 4px;
+  box-shadow: 0 15px 35px rgba(0, 109, 100, 0.08);
+  animation: slideDown 0.3s ease;
+}
+.rundown-detail-header {
+  border-bottom: 2px dashed #d1e9e6;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+.rundown-detail-header h4 {
+  font-size: 1.4rem;
+  color: #006d64;
+  margin: 0 0 4px;
+}
+.rundown-detail-header span {
+  font-size: 0.95rem;
+  color: #475569;
+}
+.rundown-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rundown-item-modern {
+  display: flex;
+  gap: 20px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+.rundown-modern-time {
+  font-weight: 700;
+  color: #0f766e;
+  font-size: 0.95rem;
+  min-width: 120px;
+}
+.rundown-modern-title {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.rundown-modern-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .days-grid-modern { grid-template-columns: repeat(2, 1fr); }
+  .rundown-modern-time { min-width: 100px; }
+}
+@media (max-width: 600px) {
+  .days-grid-modern { grid-template-columns: 1fr; }
+  .day-modern-img { height: 160px; }
+  .rundown-item-modern { flex-direction: column; gap: 8px; }
+}
+
+
+/* --- GLOBAL RESPONSIVE SAFEGUARDS --- */
+
+html, body {
+
+  max-width: 100vw;
+
+  overflow-x: hidden;
+
+}
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+img, video, canvas, svg {
+
+  max-width: 100%;
+
+  height: auto;
+
+}
+
+.container, .section, .slide, .slide-scroll-wrapper {
+
+  max-width: 100vw;
+
+  box-sizing: border-box;
+
+}
+
+/* Ensure text wrapping everywhere */
+
+p, h1, h2, h3, h4, h5, h6, span, a, div {
+
+  overflow-wrap: break-word;
+
+  word-wrap: break-word;
+
+}
+
+
+
+
+
+/* --- FINAL REVISION 2 --- */
+
+/* 1. RANGKAIAN KEGIATAN */
+.day-card-modern {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.day-modern-img {
+  width: 100% !important;
+  height: auto !important;
+  position: static !important;
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.day-modern-img img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  position: static !important;
+  object-fit: contain !important;
+}
+.day-modern-content {
+  background: #ffffff !important;
+  position: static !important;
+}
+
+/* 2. JADWAL DEEP DIVE & PRESENTASI (ZIG ZAG) */
+/* Internal spacing, overflow prevention, and layout logic */
+
+/* Base internal setup for ALL cards */
+#deepDiveTables .event-pass,
+#jadwalPresentasiTables .event-pass {
+  position: relative !important;
+  z-index: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* Ensure background giant number does not cover text */
+#deepDiveTables .event-pass .dd-ticket-bg,
+#jadwalPresentasiTables .event-pass .dd-ticket-bg {
+  z-index: 0 !important;
+}
+
+/* Ensure header content stays above background and doesn't overlap */
+#deepDiveTables .event-pass .event-pass-head,
+#jadwalPresentasiTables .event-pass .event-pass-head {
+  position: relative !important;
+  z-index: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+/* The colored index rectangle */
+#deepDiveTables .event-pass .event-pass-index,
+#jadwalPresentasiTables .event-pass .event-pass-index {
+  width: auto !important;
+  min-width: 86px !important;
+  height: auto !important;
+  min-height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px 20px !important;
+  margin: 0 !important;
+  align-self: stretch !important;
+}
+
+/* The text wrapper */
+#deepDiveTables .event-pass .event-pass-head > div:nth-child(2),
+#jadwalPresentasiTables .event-pass .event-pass-head > div:nth-child(2) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 24px 20px !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+}
+
+/* Strip internal margins on text elements to rely strictly on gap */
+#deepDiveTables .event-pass .event-pass-kicker,
+#jadwalPresentasiTables .event-pass .event-pass-kicker,
+#deepDiveTables .event-pass h3,
+#jadwalPresentasiTables .event-pass h3,
+#deepDiveTables .event-pass .event-pass-meta,
+#jadwalPresentasiTables .event-pass .event-pass-meta {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* DESKTOP (min-width: 701px) */
+@media (min-width: 701px) {
+  /* Left Aligned (Default, Point 1 & 3) */
+  #deepDiveTables .event-pass .event-pass-head,
+  #jadwalPresentasiTables .event-pass .event-pass-head {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) 48px !important;
+    align-items: stretch !important;
+    text-align: left !important;
+  }
+  #deepDiveTables .event-pass .event-pass-index,
+  #jadwalPresentasiTables .event-pass .event-pass-index { 
+    order: 1 !important; 
+  }
+  #deepDiveTables .event-pass .event-pass-head > div:nth-child(2),
+  #jadwalPresentasiTables .event-pass .event-pass-head > div:nth-child(2) {
+    order: 2 !important;
+    text-align: left !important;
+  }
+  #deepDiveTables .event-pass .dd-chevron,
+  #jadwalPresentasiTables .event-pass .dd-chevron { 
+    order: 3 !important; 
+    align-self: center !important; 
+  }
+  #deepDiveTables .event-pass .event-pass-meta,
+  #jadwalPresentasiTables .event-pass .event-pass-meta { 
+    justify-content: flex-start !important; 
+  }
+
+  /* Right Aligned (Point 2 & 4) */
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head {
+    display: grid !important;
+    grid-template-columns: 48px minmax(0, 1fr) auto !important;
+    align-items: stretch !important;
+    text-align: right !important;
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .dd-chevron,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .dd-chevron { 
+    order: 1 !important; 
+    align-self: center !important;
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2),
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2) {
+    order: 2 !important;
+    text-align: right !important;
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-index,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-index { 
+    order: 3 !important; 
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-meta,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-meta { 
+    justify-content: flex-end !important; 
+  }
+}
+
+/* MOBILE (max-width: 700px) */
+@media (max-width: 700px) {
+  /* Reset Width & Margins for Right Cards so they don't break the layout */
+  #deepDiveTables .event-pass.dd-ticket-right,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right { 
+    width: 100% !important; 
+    margin-left: 0 !important; 
+    margin-right: 0 !important; 
+  }
+  
+  /* Left Aligned (Default, Point 1 & 3) */
+  #deepDiveTables .event-pass .event-pass-head,
+  #jadwalPresentasiTables .event-pass .event-pass-head {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) 36px !important;
+    align-items: stretch !important;
+    text-align: left !important;
+  }
+  
+  #deepDiveTables .event-pass .event-pass-index,
+  #jadwalPresentasiTables .event-pass .event-pass-index { 
+    order: 1 !important; 
+    min-width: 60px !important;
+    padding: 12px 10px !important;
+  }
+  
+  #deepDiveTables .event-pass .event-pass-head > div:nth-child(2),
+  #jadwalPresentasiTables .event-pass .event-pass-head > div:nth-child(2) {
+    order: 2 !important;
+    text-align: left !important;
+    padding: 16px 14px !important;
+  }
+  
+  #deepDiveTables .event-pass .dd-chevron,
+  #jadwalPresentasiTables .event-pass .dd-chevron { 
+    order: 3 !important; 
+    align-self: center !important;
+    width: 24px !important; 
+    height: 24px !important; 
+  }
+  
+  #deepDiveTables .event-pass .event-pass-meta,
+  #jadwalPresentasiTables .event-pass .event-pass-meta { 
+    justify-content: flex-start !important; 
+  }
+
+  /* Right Aligned (Point 2 & 4) */
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head {
+    display: grid !important;
+    grid-template-columns: 36px minmax(0, 1fr) auto !important;
+    align-items: stretch !important;
+    text-align: right !important;
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .dd-chevron,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .dd-chevron { 
+    order: 1 !important; 
+    align-self: center !important;
+    width: 24px !important; 
+    height: 24px !important; 
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2),
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2) {
+    order: 2 !important;
+    text-align: right !important;
+    padding: 16px 14px !important;
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-index,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-index { 
+    order: 3 !important; 
+    min-width: 60px !important;
+    padding: 12px 10px !important;
+  }
+  
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-meta,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-meta { 
+    justify-content: flex-end !important; 
+  }
+}
+
+/* Best Team Spirit: expand the detail panel on desktop only when opened. */
+@media (min-width: 701px) {
+  #penghargaan .an-special-left:has(.an-special-card.is-open) {
+    width: min(100%, 980px);
+    max-width: 980px;
+  }
+  #penghargaan .an-special-card.is-open {
+    width: 100%;
+  }
+  #penghargaan .an-special-card.is-open .award-inline-panel {
+    width: 100%;
+    flex-basis: 100%;
+  }
+}
+@media (max-width: 700px) {
+  #penghargaan .an-special-left,
+  #penghargaan .an-special-card,
+  #penghargaan .an-special-card .award-inline-panel {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+/* Mobile schedule keeps the requested alternating left/right composition. */
+@media (max-width: 700px) {
+  #deepDiveTables .event-pass.dd-ticket-right,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right {
+    width: calc(100% - 12px) !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head {
+    grid-template-columns: minmax(0, 1fr) 60px 24px !important;
+    text-align: right !important;
+  }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2),
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-head > div:nth-child(2) {
+    order: 1 !important;
+    text-align: right !important;
+    padding: 16px 10px 16px 14px !important;
+  }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-index,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-index {
+    order: 2 !important;
+    min-width: 60px !important;
+  }
+  #deepDiveTables .event-pass.dd-ticket-right .dd-chevron,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .dd-chevron { order: 3 !important; }
+  #deepDiveTables .event-pass.dd-ticket-right .event-pass-meta,
+  #jadwalPresentasiTables .event-pass.dd-ticket-right .event-pass-meta {
+    justify-content: flex-end !important;
+    text-align: right !important;
+  }
+}
+/* Location photos: preserve the full source ratio on desktop. */
+@media (min-width: 761px) {
+  #lokasi .venue-photo {
+    height: clamp(300px, 30vw, 380px);
+    background-size: contain !important;
+    background-position: center !important;
+    background-color: #f8fafc;
+  }
+}
+/* Location photos: fill the desktop frame while using a taller 4:3 crop. */
+@media (min-width: 761px) {
+  #lokasi .venue-photo {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-color: transparent;
+  }
+}
+/* Keep location cards compact on laptop/desktop screens. */
+@media (min-width: 761px) {
+  #lokasi .venue-grid {
+    width: min(100%, 1120px);
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 18px;
+  }
+}
+/* Fix slide container top alignment */
+#tentang.slide .slide-scroll-wrapper {
+  padding-top: 20px !important;
+}
+#tentang .container {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+.header {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
+}
+
+/* Keep full-area decorative layers behind their section content. */
+.hero-overhaul,
+.an-special-block {
+  isolation: isolate;
+}
+.hero-overhaul::before,
+.an-special-overlay {
+  pointer-events: none;
+  z-index: 0 !important;
+}
+.hero-wrapper-overhaul,
+.an-special-content {
+  position: relative;
+  z-index: 1;
+}
+#kontak .contact-event-mark::after,
+#aturan .rules-visual-band::after,
+.venue-photo::after,
+.kma-feature-visual::after,
+#penghargaan .an-hero::after,
+.header::after {
+  pointer-events: none;
+}
+/* Shared slide parent must not clip the top/content bounds; each slide wrapper owns scrolling. */
+body.presentation-mode > .slide-deck {
+  overflow: visible;
+}
